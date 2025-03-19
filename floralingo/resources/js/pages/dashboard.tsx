@@ -1,11 +1,13 @@
 import { Component as ChartAreaInteractive } from '@/components/chart-area-interactive';
+import { DataTable } from '@/components/data-table';
 import { ProgressChart } from '@/components/progresschart';
 import { SectionCards } from '@/components/section-cards';
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { useIsMobile } from '@/hooks/use-mobile';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+
+import data from './data.json';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -30,10 +32,7 @@ export default function Dashboard() {
                         <ProgressChart />
                     </div>
                 </div>
-
-                <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                </div>
+                <DataTable data={data} />
             </div>
         </AppLayout>
     );

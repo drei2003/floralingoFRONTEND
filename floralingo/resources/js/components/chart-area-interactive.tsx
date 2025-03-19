@@ -2,10 +2,9 @@
 
 import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
-
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 const chartData = [
     { date: '2024-04-01', desktop: 222, mobile: 150 },
     { date: '2024-04-02', desktop: 97, mobile: 180 },
@@ -138,22 +137,13 @@ export function Component() {
                     <CardTitle>Area Chart - Interactive</CardTitle>
                     <CardDescription>Showing total visitors for the last 3 months</CardDescription>
                 </div>
-                <Select value={timeRange} onValueChange={setTimeRange}>
-                    <SelectTrigger className="w-[160px] rounded-lg sm:ml-auto" aria-label="Select a value">
-                        <SelectValue placeholder="Last 3 months" />
-                    </SelectTrigger>
-                    <SelectContent className="rounded-xl">
-                        <SelectItem value="90d" className="rounded-lg">
-                            Last 3 months
-                        </SelectItem>
-                        <SelectItem value="30d" className="rounded-lg">
-                            Last 30 days
-                        </SelectItem>
-                        <SelectItem value="7d" className="rounded-lg">
-                            Last 7 days
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
+                <Tabs className="w-full sm:w-auto" value={timeRange} onValueChange={setTimeRange}>
+                    <TabsList className="w-full sm:w-auto">
+                        <TabsTrigger value="90d">Last 3 months</TabsTrigger>
+                        <TabsTrigger value="30d">Last 30 days</TabsTrigger>
+                        <TabsTrigger value="7d">Last 7 days</TabsTrigger>
+                    </TabsList>
+                </Tabs>
             </CardHeader>
             <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
                 <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
