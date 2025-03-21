@@ -1,5 +1,7 @@
 'use client';
 
+import { CircleX, ClipboardList, House, Package, Truck } from 'lucide-react';
+
 import {
     DndContext,
     KeyboardSensor,
@@ -40,43 +42,30 @@ import {
     GripVerticalIcon,
     LoaderIcon,
     MoreVerticalIcon,
-    PlusIcon,
-    TrendingUpIcon,
 } from 'lucide-react';
 import * as React from 'react';
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
-import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { Checkbox } from '@/components/ui/checkbox';
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Separator } from '@radix-ui/react-separator';
 
 export const schema = z.object({
     id: z.number(),
-    header: z.string(),
-    type: z.string(),
+    OrderID: z.string(),
     status: z.string(),
-    target: z.string(),
-    limit: z.string(),
-    reviewer: z.string(),
+    TotalPrice: z.string(),
+    ProductName: z.string(),
+    dateCreated: z.string(),
+    paymentMethod: z.string(),
 });
 
 // Create a separate component for the drag handle
@@ -100,39 +89,31 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         cell: ({ row }) => <DragHandle id={row.original.id} />,
     },
     {
-        id: 'select',
-        header: ({ table }) => (
-            <div className="flex items-center justify-center">
-                <Checkbox
-                    checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
-                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                    aria-label="Select all"
-                />
-            </div>
-        ),
-        cell: ({ row }) => (
-            <div className="flex items-center justify-center">
-                <Checkbox checked={row.getIsSelected()} onCheckedChange={(value) => row.toggleSelected(!!value)} aria-label="Select row" />
-            </div>
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: 'header',
-        header: 'Header',
+        accessorKey: 'OrderID',
+        header: 'OrderID',
         cell: ({ row }) => {
             return <TableCellViewer item={row.original} />;
         },
         enableHiding: false,
     },
     {
-        accessorKey: 'type',
-        header: 'Section Type',
+        accessorKey: 'ProductName', // Updated to match the SelectItem value
+        header: 'Product Name',
         cell: ({ row }) => (
             <div className="w-32">
                 <Badge variant="outline" className="text-muted-foreground px-1.5">
-                    {row.original.type}
+                    {row.original.ProductName}
+                </Badge>
+            </div>
+        ),
+    },
+    {
+        accessorKey: 'paymentMethod', // Updated to match the SelectItem value
+        header: 'Payment Method',
+        cell: ({ row }) => (
+            <div className="w-32">
+                <Badge variant="secondary" className="text-muted-foreground px-1.5">
+                    {row.original.paymentMethod}
                 </Badge>
             </div>
         ),
@@ -142,92 +123,43 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         header: 'Status',
         cell: ({ row }) => (
             <Badge variant="outline" className="text-muted-foreground flex gap-1 px-1.5 [&_svg]:size-3">
-                {row.original.status === 'Done' ? <CheckCircle2Icon className="text-green-500 dark:text-green-400" /> : <LoaderIcon />}
+                {row.original.status === 'Done' ? (
+                    <CheckCircle2Icon className="text-green-500 dark:text-green-400" />
+                ) : row.original.status === 'Canceled' ? (
+                    <CircleX className="text-red-500 dark:text-red-400" />
+                ) : row.original.status === 'Ordered' ? (
+                    <ClipboardList className="text-blue-500 dark:text-blue-400" />
+                ) : row.original.status === 'Packed' ? (
+                    <Package className="text-yellow-500 dark:text-yellow-400" />
+                ) : row.original.status === 'InTransit' ? (
+                    <Truck className="text-orange-500 dark:text-orange-400" />
+                ) : row.original.status === 'Delivered' ? (
+                    <House className="text-green-500 dark:text-green-400" />
+                ) : (
+                    <LoaderIcon />
+                )}
                 {row.original.status}
             </Badge>
         ),
     },
     {
-        accessorKey: 'target',
-        header: () => <div className="w-full text-right">Target</div>,
-        cell: ({ row }) => (
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-                        loading: `Saving ${row.original.header}`,
-                        success: 'Done',
-                        error: 'Error',
-                    });
-                }}
-            >
-                <Label htmlFor={`${row.original.id}-target`} className="sr-only">
-                    Target
-                </Label>
-                <Input
-                    className="hover:bg-input/30 focus-visible:bg-background h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border"
-                    defaultValue={row.original.target}
-                    id={`${row.original.id}-target`}
-                />
-            </form>
-        ),
+        accessorKey: 'TotalPrice',
+        header: 'Total Price',
+        cell: ({ row }) => <div className="text-left">{row.original.TotalPrice}</div>,
     },
     {
-        accessorKey: 'limit',
-        header: () => <div className="w-full text-right">Limit</div>,
-        cell: ({ row }) => (
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-                        loading: `Saving ${row.original.header}`,
-                        success: 'Done',
-                        error: 'Error',
-                    });
-                }}
-            >
-                <Label htmlFor={`${row.original.id}-limit`} className="sr-only">
-                    Limit
-                </Label>
-                <Input
-                    className="hover:bg-input/30 focus-visible:bg-background h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border"
-                    defaultValue={row.original.limit}
-                    id={`${row.original.id}-limit`}
-                />
-            </form>
-        ),
-    },
-    {
-        accessorKey: 'reviewer',
-        header: 'Reviewer',
+        accessorKey: 'dateCreated', // Updated to match the SelectItem value
+        header: 'Date Created',
         cell: ({ row }) => {
-            const isAssigned = row.original.reviewer !== 'Assign reviewer';
+            const date = new Date(row.original.dateCreated);
+            const formattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
 
-            if (isAssigned) {
-                return row.original.reviewer;
-            }
-
-            return (
-                <>
-                    <Label htmlFor={`${row.original.id}-reviewer`} className="sr-only">
-                        Reviewer
-                    </Label>
-                    <Select>
-                        <SelectTrigger className="h-8 w-40" id={`${row.original.id}-reviewer`}>
-                            <SelectValue placeholder="Assign reviewer" />
-                        </SelectTrigger>
-                        <SelectContent align="end">
-                            <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
-                            <SelectItem value="Jamik Tashpulatov">Jamik Tashpulatov</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </>
-            );
+            return <div>{formattedDate}</div>;
         },
     },
     {
         id: 'actions',
-        cell: () => (
+        cell: ({ row }) => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="text-muted-foreground data-[state=open]:bg-muted flex size-8" size="icon">
@@ -236,10 +168,6 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-32">
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem>Make a copy</DropdownMenuItem>
-                    <DropdownMenuItem>Favorite</DropdownMenuItem>
-                    <DropdownMenuSeparator />
                     <DropdownMenuItem>Delete</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
@@ -320,6 +248,12 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
             });
         }
     }
+    const [searchColumn, setSearchColumn] = React.useState('OrderID');
+
+    function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+        const value = event.target.value;
+        setColumnFilters([{ id: searchColumn, value }]);
+    }
 
     return (
         <Tabs defaultValue="outline" className="flex w-full flex-col justify-start gap-6">
@@ -329,9 +263,9 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                 </Label>
                 <TabsList className="w-full sm:w-auto">
                     <TabsTrigger value="outline">Orders</TabsTrigger>
-                    <TabsTrigger value="past-performance">Past Performance</TabsTrigger>
-                    <TabsTrigger value="key-personnel">Key Personnel</TabsTrigger>
-                    <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
+                    <TabsTrigger value="past-performance">Tab 2</TabsTrigger>
+                    <TabsTrigger value="key-personnel">Tab 3</TabsTrigger>
+                    <TabsTrigger value="focus-documents">Tab 4</TabsTrigger>
                 </TabsList>
                 <TabsList className="hidden @4xl/main:flex">
                     <TabsTrigger value="outline">Outline</TabsTrigger>
@@ -350,6 +284,19 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                     <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
                 </TabsList>
                 <div className="flex items-center gap-2">
+                    <Select value={searchColumn} onValueChange={(value) => setSearchColumn(value)}>
+                        <SelectTrigger className="w-40">
+                            <SelectValue placeholder="Search Column" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="OrderID">Order ID</SelectItem>
+                            <SelectItem value="ProductName">Product Name</SelectItem>
+                            <SelectItem value="paymentMethod">Payment Method</SelectItem>
+                            <SelectItem value="status">Status</SelectItem>
+                            <SelectItem value="dateCreated">Date Created</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <Input type="text" placeholder={`Search by ${searchColumn}`} onChange={handleSearch} className="w-64" />
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" size="sm">
@@ -377,10 +324,6 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button variant="outline" size="sm">
-                        <PlusIcon />
-                        <span className="hidden lg:inline">Add Section</span>
-                    </Button>
                 </div>
             </div>
             <TabsContent value="outline" className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6">
@@ -425,9 +368,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                     </DndContext>
                 </div>
                 <div className="flex items-center justify-between px-4">
-                    <div className="text-muted-foreground hidden flex-1 text-sm lg:flex">
-                        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
-                    </div>
+                    <div className="text-muted-foreground hidden flex-1 text-sm lg:flex"></div>
                     <div className="flex w-full items-center gap-8 lg:w-fit">
                         <div className="hidden items-center gap-2 lg:flex">
                             <Label htmlFor="rows-per-page" className="text-sm font-medium">
@@ -523,26 +464,6 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
     );
 }
 
-const chartData = [
-    { month: 'January', desktop: 186, mobile: 80 },
-    { month: 'February', desktop: 305, mobile: 200 },
-    { month: 'March', desktop: 237, mobile: 120 },
-    { month: 'April', desktop: 73, mobile: 190 },
-    { month: 'May', desktop: 209, mobile: 130 },
-    { month: 'June', desktop: 214, mobile: 140 },
-];
-
-const chartConfig = {
-    desktop: {
-        label: 'Desktop',
-        color: 'var(--primary)',
-    },
-    mobile: {
-        label: 'Mobile',
-        color: 'var(--primary)',
-    },
-} satisfies ChartConfig;
-
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
     const isMobile = useIsMobile();
 
@@ -550,127 +471,81 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         <Sheet>
             <SheetTrigger asChild>
                 <Button variant="link" className="text-foreground w-fit px-0 text-left">
-                    {item.header}
+                    {item.OrderID}
                 </Button>
             </SheetTrigger>
             <SheetContent side="right" className="flex flex-col">
                 <SheetHeader className="gap-1">
-                    <SheetTitle>{item.header}</SheetTitle>
-                    <SheetDescription>Showing total visitors for the last 6 months</SheetDescription>
+                    <SheetTitle>Edit</SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-1 flex-col gap-4 overflow-y-auto py-4 text-sm">
-                    {!isMobile && (
-                        <>
-                            <ChartContainer config={chartConfig}>
-                                <AreaChart
-                                    accessibilityLayer
-                                    data={chartData}
-                                    margin={{
-                                        left: 0,
-                                        right: 10,
-                                    }}
-                                >
-                                    <CartesianGrid vertical={false} />
-                                    <XAxis
-                                        dataKey="month"
-                                        tickLine={false}
-                                        axisLine={false}
-                                        tickMargin={8}
-                                        tickFormatter={(value) => value.slice(0, 3)}
-                                        hide
-                                    />
-                                    <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
-                                    <Area
-                                        dataKey="mobile"
-                                        type="natural"
-                                        fill="var(--color-mobile)"
-                                        fillOpacity={0.6}
-                                        stroke="var(--color-mobile)"
-                                        stackId="a"
-                                    />
-                                    <Area
-                                        dataKey="desktop"
-                                        type="natural"
-                                        fill="var(--color-desktop)"
-                                        fillOpacity={0.4}
-                                        stroke="var(--color-desktop)"
-                                        stackId="a"
-                                    />
-                                </AreaChart>
-                            </ChartContainer>
-                            <Separator />
-                            <div className="grid gap-2">
-                                <div className="flex gap-2 leading-none font-medium">
-                                    Trending up by 5.2% this month <TrendingUpIcon className="size-4" />
-                                </div>
-                                <div className="text-muted-foreground">
-                                    Showing total visitors for the last 6 months. This is just some random text to test the layout. It spans multiple
-                                    lines and should wrap around.
-                                </div>
-                            </div>
-                            <Separator />
-                        </>
-                    )}
+                <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 py-4 text-sm">
                     <form className="flex flex-col gap-4">
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="header">Header</Label>
-                            <Input id="header" defaultValue={item.header} />
+                            <Label htmlFor="header">Order ID</Label>
+                            <div id="header">{item.OrderID}</div>
+                            <Separator />
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="type">Type</Label>
-                                <Select defaultValue={item.type}>
-                                    <SelectTrigger id="type" className="w-full">
-                                        <SelectValue placeholder="Select a type" />
+                                <Label htmlFor="Product Name">Product Name</Label>
+                                <Select defaultValue={item.ProductName}>
+                                    <SelectTrigger id="Product Name" className="w-full">
+                                        <SelectValue placeholder="Product Name" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="Table of Contents">Table of Contents</SelectItem>
-                                        <SelectItem value="Executive Summary">Executive Summary</SelectItem>
-                                        <SelectItem value="Technical Approach">Technical Approach</SelectItem>
-                                        <SelectItem value="Design">Design</SelectItem>
-                                        <SelectItem value="Capabilities">Capabilities</SelectItem>
-                                        <SelectItem value="Focus Documents">Focus Documents</SelectItem>
-                                        <SelectItem value="Narrative">Narrative</SelectItem>
-                                        <SelectItem value="Cover Page">Cover Page</SelectItem>
+                                        <SelectItem value="Bouquet 1">Bouquet 1</SelectItem>
+                                        <SelectItem value="Bouquet 2">Bouquet 2</SelectItem>
+                                        <SelectItem value="Bouquet 3">Bouquet 3</SelectItem>
+                                        <SelectItem value="Bouquet 4">Bouquet 4</SelectItem>
+                                        <SelectItem value="Bouquet 5">Bouquet 5</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="status">Status</Label>
+                                <Label htmlFor="Payment method">Payment method</Label>
+                                <Select defaultValue={item.paymentMethod}>
+                                    <SelectTrigger id="Payment method" className="w-full">
+                                        <SelectValue placeholder="Payment method" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="Gcash">Gcash</SelectItem>
+                                        <SelectItem value="MasterCard">MasterCard</SelectItem>
+                                        <SelectItem value="PayPal">PayPal</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 gap-4">
+                            <div className="flex flex-col gap-3">
+                                <Label htmlFor="Status">Status</Label>
                                 <Select defaultValue={item.status}>
-                                    <SelectTrigger id="status" className="w-full">
-                                        <SelectValue placeholder="Select a status" />
+                                    <SelectTrigger id="Status" className="w-full">
+                                        <SelectValue placeholder="Status" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="Done">Done</SelectItem>
-                                        <SelectItem value="In Progress">In Progress</SelectItem>
-                                        <SelectItem value="Not Started">Not Started</SelectItem>
+                                        <SelectItem value="Ordered">Ordered </SelectItem>
+                                        <SelectItem value="Packed">Packed </SelectItem>
+                                        <SelectItem value="InTransit">InTransit</SelectItem>
+                                        <SelectItem value="Delivered">Delivered </SelectItem>
+                                        <SelectItem value="Canceled">Canceled</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="target">Target</Label>
-                                <Input id="target" defaultValue={item.target} />
-                            </div>
-                            <div className="flex flex-col gap-3">
-                                <Label htmlFor="limit">Limit</Label>
-                                <Input id="limit" defaultValue={item.limit} />
+                                <Label htmlFor="TotalPrice">TotalPrice</Label>
+                                <Input id="TotalPrice" defaultValue={item.TotalPrice} />
                             </div>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="reviewer">Reviewer</Label>
-                            <Select defaultValue={item.reviewer}>
-                                <SelectTrigger id="reviewer" className="w-full">
-                                    <SelectValue placeholder="Select a reviewer" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
-                                    <SelectItem value="Jamik Tashpulatov">Jamik Tashpulatov</SelectItem>
-                                    <SelectItem value="Emily Whalen">Emily Whalen</SelectItem>
-                                </SelectContent>
-                            </Select>
+                            <Label htmlFor="dateCreated">Date Created</Label>
+                            <Input
+                                id="dateCreated"
+                                type="date"
+                                defaultValue={item.dateCreated}
+                                onChange={(e) => {
+                                    item.dateCreated = e.target.value;
+                                }}
+                            />
                         </div>
                     </form>
                 </div>

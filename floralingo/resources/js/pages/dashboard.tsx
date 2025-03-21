@@ -1,6 +1,6 @@
+import { BarChartComponent } from '@/components/bar-chart';
 import { Component as ChartAreaInteractive } from '@/components/chart-area-interactive';
 import { DataTable } from '@/components/data-table';
-import { ProgressChart } from '@/components/progresschart';
 import { SectionCards } from '@/components/section-cards';
 import { useIsMobile } from '@/hooks/use-mobile';
 import AppLayout from '@/layouts/app-layout';
@@ -29,7 +29,7 @@ export default function Dashboard() {
                         <ChartAreaInteractive />
                     </div>
                     <div className={`${isMobile ? '' : 'col-span-2'}`}>
-                        <ProgressChart />
+                        <BarChartComponent />
                     </div>
                 </div>
                 <DataTable data={data} />

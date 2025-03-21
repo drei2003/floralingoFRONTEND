@@ -1,10 +1,10 @@
 'use client';
 
-import * as React from 'react';
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import * as React from 'react';
+import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 const chartData = [
     { date: '2024-04-01', desktop: 222, mobile: 150 },
     { date: '2024-04-02', desktop: 97, mobile: 180 },
@@ -104,11 +104,11 @@ const chartConfig = {
         label: 'Visitors',
     },
     desktop: {
-        label: 'Desktop',
+        label: 'Total Sales',
         color: 'hsl(var(--chart-1))',
     },
     mobile: {
-        label: 'Mobile',
+        label: 'Item2',
         color: 'hsl(var(--chart-2))',
     },
 } satisfies ChartConfig;
@@ -134,8 +134,8 @@ export function Component() {
         <Card>
             <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
                 <div className="grid flex-1 gap-1 text-center sm:text-left">
-                    <CardTitle>Area Chart - Interactive</CardTitle>
-                    <CardDescription>Showing total visitors for the last 3 months</CardDescription>
+                    <CardTitle>Sales Report</CardTitle>
+                    <CardDescription>Showing Sales Report for the last 3 months</CardDescription>
                 </div>
                 <Tabs className="w-full sm:w-auto" value={timeRange} onValueChange={setTimeRange}>
                     <TabsList className="w-full sm:w-auto">
