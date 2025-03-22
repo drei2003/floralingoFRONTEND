@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, ChartLine, ClipboardList, CreditCard, Flower, Folder, FolderTree, House, LayoutGrid } from 'lucide-react';
+import { ChartLine, ClipboardList, CreditCard, Flower, FolderTree, House, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -15,51 +15,46 @@ const mainNavItems: NavItem[] = [
     },
 
     {
-        title: 'Product',
-        href: '',
+        title: 'Products',
+        href: '/products',
         icon: LayoutGrid,
     },
 
     {
         title: 'Category',
-        href: '',
+        href: '/category',
         icon: FolderTree,
     },
 
     {
-        title: 'Flower',
-        href: '',
+        title: 'Flowers',
+        href: '/flowers',
         icon: Flower,
     },
 
     {
         title: 'Orders',
-        href: '',
+        href: '/orders',
         icon: ClipboardList,
     },
 
     {
         title: 'Payment Options',
-        href: '',
+        href: '/paymentOptions',
         icon: CreditCard,
     },
 
     {
         title: 'Sales',
-        href: '',
+        href: '/sales',
         icon: ChartLine,
     },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Floralingo Landing page',
-        href: '',
+        title: 'Landing page',
+        href: '/landingPage',
         icon: Flower,
     },
 ];

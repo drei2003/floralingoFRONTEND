@@ -1,13 +1,13 @@
 import { BarChartComponent } from '@/components/bar-chart';
 import { Component as ChartAreaInteractive } from '@/components/chart-area-interactive';
-import { DataTable } from '@/components/data-table';
+import { DataTable } from '@/components/data-table-orders';
 import { SectionCards } from '@/components/section-cards';
 import { useIsMobile } from '@/hooks/use-mobile';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 
-import data from './data.json';
+import data from './data table/data-orders.json';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
