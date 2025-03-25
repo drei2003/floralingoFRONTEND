@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "PaymentID": "PYMT-12345",
+        "paymentMethod": "Gcash",
+        "status": "Active"
+    },
+    {
+        "id": 2,
+        "PaymentID": "PYMT-6789",
+        "paymentMethod": "MasterCard",
+        "status": "Disabled"
+    }
+]

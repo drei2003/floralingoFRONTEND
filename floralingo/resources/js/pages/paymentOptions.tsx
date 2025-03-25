@@ -1,7 +1,9 @@
+import { DataTable } from '@/components/data-table-payment';
 import Heading from '@/components/heading';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+import data from './data table/data-payment.json';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,6 +20,8 @@ export default function PaymentOptions() {
                 <div className="pt-3 pl-6">
                     <Heading title="Payment Options" description="Track, manage, and update customer orders" />
                 </div>
+
+                <DataTable data={data} />
             </div>
         </AppLayout>
     );

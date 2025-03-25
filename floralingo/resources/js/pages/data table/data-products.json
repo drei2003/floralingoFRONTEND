@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "ProductID": "PRD-001",
+        "Price": "₱599",
+        "ProductName": "Product1",
+        "Added_at": "2024-03-15",
+        "Description": "Beautiful arrangement of red roses",
+        "Thumbnail_url": "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "Availability": false
+    },
+    {
+        "id": 2,
+        "ProductID": "PRD-002",
+        "Price": "₱899",
+        "ProductName": "Product2",
+        "Added_at": "2024-03-16",
+        "Description": "Bright sunflower arrangement",
+        "Thumbnail_url": "https://images.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "Availability": true
+    },
+    {
+        "id": 3,
+        "ProductID": "PRD-003",
+        "Price": "₱799",
+        "ProductName": "Product3",
+        "Added_at": "2024-03-17",
+        "Description": "Colorful mix of fresh tulips",
+        "Thumbnail_url": "https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "Availability": false
+    },
+    {
+        "id": 4,
+        "ProductID": "PRD-004",
+        "Price": "₱1299",
+        "ProductName": "Product4",
+        "Added_at": "2024-03-18",
+        "Description": "Elegant orchid arrangement",
+        "Thumbnail_url": "https://images.pexels.com/photos/46216/sunflower-flowers-bright-yellow-46216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "Availability": true
+    },
+    {
+        "id": 5,
+        "ProductID": "PRD-005",
+        "Price": "₱499",
+        "ProductName": "Product5",
+        "Added_at": "2024-03-19",
+        "Description": "Fresh white daisies",
+        "Thumbnail_url": "https://images.pexels.com/photos/2058498/pexels-photo-2058498.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "Availability": true
+    }
+]

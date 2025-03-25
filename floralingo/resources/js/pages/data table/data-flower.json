@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "flower_id": "FLR-001",
+        "flower_name": "Red Rose",
+        "description": "Classic red rose symbolizing love and passion",
+        "scientific_name": "Rosa rubiginosa",
+        "pronunciation": "ROH-zuh roo-bij-ih-NOH-suh",
+        "added_at": "2024-03-15",
+        "Thumbnail_url": "https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg"
+    },
+    {
+        "id": 2,
+        "flower_id": "FLR-002",
+        "flower_name": "Sunflower",
+        "description": "Bright yellow sunflower representing happiness",
+        "scientific_name": "Helianthus annuus",
+        "pronunciation": "hee-lee-AN-thus AN-yoo-us",
+        "added_at": "2024-03-16",
+        "Thumbnail_url": "https://images.pexels.com/photos/46216/sunflower-flowers-bright-yellow-46216.jpeg"
+    },
+    {
+        "id": 3,
+        "flower_id": "FLR-003",
+        "flower_name": "Tulip",
+        "description": "Elegant spring tulip in various colors",
+        "scientific_name": "Tulipa gesneriana",
+        "pronunciation": "TOO-li-puh ges-ner-ee-AY-nuh",
+        "added_at": "2024-03-17",
+        "Thumbnail_url": "https://images.pexels.com/photos/69776/tulips-bed-colorful-color-69776.jpeg"
+    },
+    {
+        "id": 4,
+        "flower_id": "FLR-004",
+        "flower_name": "Orchid",
+        "description": "Exotic orchid with delicate petals",
+        "scientific_name": "Phalaenopsis amabilis",
+        "pronunciation": "fal-eh-NOP-sis am-AB-ih-lis",
+        "added_at": "2024-03-18",
+        "Thumbnail_url": "https://images.pexels.com/photos/4534532/pexels-photo-4534532.jpeg"
+    },
+    {
+        "id": 5,
+        "flower_id": "FLR-005",
+        "flower_name": "Lily",
+        "description": "Pure white lily symbolizing purity",
+        "scientific_name": "Lilium candidum",
+        "pronunciation": "LIL-ee-um KAN-di-dum",
+        "added_at": "2024-03-19",
+        "Thumbnail_url": "https://images.pexels.com/photos/808482/pexels-photo-808482.jpeg"
+    }
+]

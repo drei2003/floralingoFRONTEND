@@ -52,7 +52,7 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -258,31 +258,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
     return (
         <Tabs defaultValue="outline" className="flex w-full flex-col justify-start gap-6">
             <div className="flex items-center justify-between px-4 lg:px-6">
-                <Label htmlFor="view-selector" className="sr-only">
-                    View
-                </Label>
-                <TabsList className="w-full sm:w-auto">
-                    <TabsTrigger value="outline">Orders</TabsTrigger>
-                    <TabsTrigger value="past-performance">Tab 2</TabsTrigger>
-                    <TabsTrigger value="key-personnel">Tab 3</TabsTrigger>
-                    <TabsTrigger value="focus-documents">Tab 4</TabsTrigger>
-                </TabsList>
-                <TabsList className="hidden @4xl/main:flex">
-                    <TabsTrigger value="outline">Outline</TabsTrigger>
-                    <TabsTrigger value="past-performance" className="gap-1">
-                        Past Performance{' '}
-                        <Badge variant="secondary" className="bg-muted-foreground/30 flex h-5 w-5 items-center justify-center rounded-full">
-                            3
-                        </Badge>
-                    </TabsTrigger>
-                    <TabsTrigger value="key-personnel" className="gap-1">
-                        Key Personnel{' '}
-                        <Badge variant="secondary" className="bg-muted-foreground/30 flex h-5 w-5 items-center justify-center rounded-full">
-                            2
-                        </Badge>
-                    </TabsTrigger>
-                    <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
-                </TabsList>
+               
                 <div className="flex items-center gap-2">
                     <Select value={searchColumn} onValueChange={(value) => setSearchColumn(value)}>
                         <SelectTrigger className="w-40">
@@ -474,9 +450,10 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                     {item.OrderID}
                 </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="flex flex-col">
-                <SheetHeader className="gap-1">
-                    <SheetTitle>Edit</SheetTitle>
+            <SheetContent side="right" className="flex flex-col p-3">
+                <SheetHeader>
+                    <SheetTitle>Edit profile</SheetTitle>
+                    <SheetDescription>Make changes here..</SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 py-4 text-sm">
                     <form className="flex flex-col gap-4">
@@ -488,18 +465,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
                                 <Label htmlFor="Product Name">Product Name</Label>
-                                <Select defaultValue={item.ProductName}>
-                                    <SelectTrigger id="Product Name" className="w-full">
-                                        <SelectValue placeholder="Product Name" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Bouquet 1">Bouquet 1</SelectItem>
-                                        <SelectItem value="Bouquet 2">Bouquet 2</SelectItem>
-                                        <SelectItem value="Bouquet 3">Bouquet 3</SelectItem>
-                                        <SelectItem value="Bouquet 4">Bouquet 4</SelectItem>
-                                        <SelectItem value="Bouquet 5">Bouquet 5</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <Input id="Product Name" className="w-full" defaultValue={item.ProductName} placeholder="Product Name" />
                             </div>
                             <div className="flex flex-col gap-3">
                                 <Label htmlFor="Payment method">Payment method</Label>

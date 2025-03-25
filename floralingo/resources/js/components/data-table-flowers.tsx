@@ -1,6 +1,4 @@
 'use client';
-import { Switch } from '@/components/ui/switch';
-import { cn } from '@/lib/utils';
 import {
     DndContext,
     KeyboardSensor,
@@ -57,13 +55,13 @@ import { Separator } from '@radix-ui/react-separator';
 
 export const schema = z.object({
     id: z.number(),
-    ProductID: z.string(),
-    Price: z.string(),
-    ProductName: z.string(),
+    flower_id: z.string(),
+    flower_name: z.string(),
     Added_at: z.string(),
-    Description: z.string(),
+    description: z.string(),
+    pronunciation: z.string(),
+    scientific_name: z.string(),
     Thumbnail_url: z.string().url().optional(),
-    Availability: z.boolean().default(true),
 });
 
 // Create a separate component for the drag handle
@@ -101,35 +99,40 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         ),
     },
     {
-        accessorKey: 'ProductID',
-        header: 'ProductID',
+        accessorKey: 'flower_id',
+        header: 'FlowerID',
         cell: ({ row }) => {
             return <TableCellViewer item={row.original} />;
         },
         enableHiding: false,
     },
     {
-        accessorKey: 'ProductName', // Updated to match the SelectItem value
-        header: 'Product Name',
+        accessorKey: 'flower_name', // Updated to match the SelectItem value
+        header: 'Flower Name',
         cell: ({ row }) => (
             <div className="w-32">
                 <Badge variant="outline" className="text-muted-foreground px-1.5">
-                    {row.original.ProductName}
+                    {row.original.flower_name}
                 </Badge>
             </div>
         ),
     },
     {
-        accessorKey: 'Description',
+        accessorKey: 'description',
         header: 'Description',
-        cell: ({ row }) => <div className="w-35 break-words whitespace-normal">{row.original.Description}</div>,
+        cell: ({ row }) => <div className="w-35 break-words whitespace-normal">{row.original.description}</div>,
+    },
+    {
+        accessorKey: 'scientific_name',
+        header: 'Scientific Name',
+        cell: ({ row }) => <div className="w-35 break-words whitespace-normal">{row.original.scientific_name}</div>,
+    },
+    {
+        accessorKey: 'pronunciation',
+        header: 'Pronunciation',
+        cell: ({ row }) => <div className="w-35 break-words whitespace-normal">{row.original.pronunciation}</div>,
     },
 
-    {
-        accessorKey: 'Price',
-        header: 'Price',
-        cell: ({ row }) => <div className="text-left">{row.original.Price}</div>,
-    },
     {
         accessorKey: 'Added_at', // Updated to match the SelectItem value
         header: 'Added_at',
@@ -140,37 +143,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
             return <div>{formattedDate}</div>;
         },
     },
-    {
-        accessorKey: 'Availability',
-        header: 'Availability',
-        cell: ({ row }) => {
-            const [isAvailable, setIsAvailable] = React.useState(row.original.Availability);
 
-            const handleAvailabilityChange = (checked: boolean) => {
-                setIsAvailable(checked);
-                // Here you would typically make an API call to update the backend
-                try {
-                    // Update the row data
-                    row.original.Availability = checked;
-                    console.log('Availability changed:', checked);
-                } catch (error) {
-                    // Revert the state if the update fails
-                    setIsAvailable(!checked);
-                    console.error('Error updating availability:', error);
-                }
-            };
-            return (
-                <div className="flex items-center justify-center">
-                    <Switch
-                        checked={isAvailable}
-                        onCheckedChange={handleAvailabilityChange}
-                        aria-label="Toggle availability"
-                        className={cn('data-[state=checked]:bg-green-500', 'data-[state=unchecked]:bg-red-500')}
-                    />
-                </div>
-            );
-        },
-    },
     {
         id: 'actions',
         cell: ({ row }) => (
@@ -262,7 +235,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
             });
         }
     }
-    const [searchColumn, setSearchColumn] = React.useState('ProductID');
+    const [searchColumn, setSearchColumn] = React.useState('flower_id');
 
     function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
         const value = event.target.value;
@@ -282,9 +255,11 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                             <SelectValue placeholder="Search Column" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="ProductID">Product ID</SelectItem>
-                            <SelectItem value="ProductName">Product Name</SelectItem>
-                            <SelectItem value="Price">Price</SelectItem>
+                            <SelectItem value="flower_id">Flower ID</SelectItem>
+                            <SelectItem value="flower_name">Flower Name</SelectItem>
+                            <SelectItem value="description">Description</SelectItem>
+                            <SelectItem value="scientific_name">Scientific Name</SelectItem>
+                            <SelectItem value="pronunciation">Pronunciation</SelectItem>
                             <SelectItem value="Added_at">Added_at</SelectItem>
                         </SelectContent>
                     </Select>
@@ -463,7 +438,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         <Sheet>
             <SheetTrigger asChild>
                 <Button variant="link" className="text-foreground w-fit px-0 text-left">
-                    {item.ProductID}
+                    {item.flower_id}
                 </Button>
             </SheetTrigger>
             <SheetContent side="right" className="flex flex-col p-3">
@@ -475,7 +450,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                     <form className="flex flex-col gap-4">
                         <div className="flex flex-col gap-3">
                             <Label htmlFor="header">Product ID</Label>
-                            <div id="header">{item.ProductID}</div>
+                            <div id="header">{item.flower_id}</div>
                             <Separator />
                         </div>
                         <div className="grid grid-cols-1 gap-4">
@@ -484,26 +459,29 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                                 <Input
                                     id="ProductName"
                                     className="w-full"
-                                    defaultValue={item.ProductName}
+                                    defaultValue={item.flower_name}
                                     onChange={(e) => {
-                                        item.ProductName = e.target.value;
+                                        item.flower_name = e.target.value;
                                     }}
                                 />
                             </div>
 
                             <div className="flex flex-col gap-3">
                                 <Label htmlFor="Payment method">Description</Label>
-                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.Description}</p>
+                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.description}</p>
                             </div>
-                        </div>
-                        <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="TotalPrice">TotalPrice</Label>
-                                <Input id="TotalPrice" defaultValue={item.Price} />
+                                <Label htmlFor="Payment method"> Scientific Name</Label>
+                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.scientific_name}</p>
+                            </div>
+                            <div className="flex flex-col gap-3">
+                                <Label htmlFor="Payment method"> Pronunciation</Label>
+                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.pronunciation}</p>
                             </div>
                         </div>
+                        <div className="grid grid-cols-1 gap-4"></div>
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="dateCreated">Date Created</Label>
+                            <Label htmlFor="dateCreated">Added at</Label>
                             <Input
                                 id="dateCreated"
                                 type="date"

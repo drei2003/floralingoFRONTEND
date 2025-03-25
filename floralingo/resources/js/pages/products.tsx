@@ -1,9 +1,9 @@
-import { DataTable } from '@/components/data-table-orders';
+import { DataTable } from '@/components/data-table-products';
 import Heading from '@/components/heading';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import data from './data table/data-orders.json';
+import data from './data table/data-products.json';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -13,6 +13,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Products() {
+    const processedData = data.map(item => ({
+        ...item,
+        Thumbnail_url: item.Thumbnail_url || undefined,
+    }));
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Products" />
@@ -20,8 +24,9 @@ export default function Products() {
                 <div className="pt-3 pl-6">
                     <Heading title="Products" description="Track, manage, and update customer orders" />
                 </div>
-                <DataTable data={data} />
+                <DataTable data={processedData} />
             </div>
         </AppLayout>
     );
 }
+
