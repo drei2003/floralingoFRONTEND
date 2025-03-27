@@ -57,8 +57,8 @@ import { Separator } from '@radix-ui/react-separator';
 
 export const schema = z.object({
     id: z.number(),
-    ProductID: z.string(),
-    Price: z.string(),
+    ProductID: z.number(),
+    Price: z.number(),
     ProductName: z.string(),
     Added_at: z.string(),
     Description: z.string(),

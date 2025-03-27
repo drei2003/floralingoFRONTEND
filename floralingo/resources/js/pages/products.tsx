@@ -13,7 +13,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Products() {
-    const processedData = data.map(item => ({
+    const processedData = data.map((item) => ({
         ...item,
         Thumbnail_url: item.Thumbnail_url || undefined,
     }));
@@ -22,11 +22,10 @@ export default function Products() {
             <Head title="Products" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="pt-3 pl-6">
-                    <Heading title="Products" description="Track, manage, and update customer orders" />
+                    <Heading title="Products" description="Manage and track all product listings." />
                 </div>
                 <DataTable data={processedData} />
             </div>
         </AppLayout>
     );
 }
-

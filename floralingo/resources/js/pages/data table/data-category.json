@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "ProductCatID": 100001,
+        "Name": "Bundle Deals",
+        "Description": "A vibrant bouquet to brighten up your day.",
+        "addedAt": "09-13-2022"
+    },
+    {
+        "id": 2,
+        "ProductCatID": 100002,
+        "Name": "Best Sellers",
+        "Description": "A beautiful bouquet perfect for any occasion.",
+        "addedAt": "05-27-2026"
+    },
+    {
+        "id": 3,
+        "ProductCatID": 100003,
+        "Name": "Popular Picks",
+        "Description": "A stunning bouquet for special moments.",
+        "addedAt": "12-31-2024"
+    }
+]

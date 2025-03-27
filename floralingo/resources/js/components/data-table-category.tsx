@@ -1,8 +1,5 @@
 'use client';
 
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { CircleX, ClipboardList, House, Package, Truck } from 'lucide-react';
-
 import {
     DndContext,
     KeyboardSensor,
@@ -33,7 +30,6 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import {
-    CheckCircle2Icon,
     ChevronDownIcon,
     ChevronLeftIcon,
     ChevronRightIcon,
@@ -41,7 +37,6 @@ import {
     ChevronsRightIcon,
     ColumnsIcon,
     GripVerticalIcon,
-    LoaderIcon,
     MoreVerticalIcon,
 } from 'lucide-react';
 import * as React from 'react';
@@ -53,7 +48,7 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -61,15 +56,10 @@ import { Separator } from '@radix-ui/react-separator';
 
 export const schema = z.object({
     id: z.number(),
-    OrderID: z.number(),
-    status: z.string(),
-    TotalPrice: z.number(),
-    ProductName: z.string(),
-    dateCreated: z.string(),
-    paymentMethod: z.string(),
-    shippingAdd: z.string(),
-    numItems: z.number(),
-    shippingFee: z.number(),
+    ProductCatID: z.number(),
+    Description: z.string(),
+    Name: z.string(),
+    addedAt: z.string(),
 });
 
 // Create a separate component for the drag handle
@@ -93,90 +83,34 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         cell: ({ row }) => <DragHandle id={row.original.id} />,
     },
     {
-        accessorKey: 'OrderID',
-        header: 'OrderID',
+        accessorKey: 'ProductCatID',
+        header: 'ProductCatID',
         cell: ({ row }) => {
-            return (
-                <Tooltip>
-                    <TooltipTrigger>
-                        <TableCellViewer item={row.original} />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <div className="space-y-1">
-                            <p>
-                                <div className="font-bold">Shipping address:</div> {row.original.shippingAdd}
-                            </p>
-                            <p>
-                                <div className="font-bold">Shipping Fee:</div> ₱{row.original.shippingFee}
-                            </p>
-
-                            <p>
-                                <div className="font-bold">Number of items </div> {row.original.numItems}
-                            </p>
-                        </div>
-                    </TooltipContent>
-                </Tooltip>
-            );
+            return <TableCellViewer item={row.original} />;
         },
         enableHiding: false,
     },
     {
-        accessorKey: 'ProductName', // Updated to match the SelectItem value
-        header: 'Product Name',
+        accessorKey: 'Name', // Updated to match the SelectItem value
+        header: 'Name',
         cell: ({ row }) => (
             <div className="w-32">
                 <Badge variant="outline" className="text-muted-foreground px-1.5">
-                    {row.original.ProductName}
+                    {row.original.Name}
                 </Badge>
             </div>
         ),
     },
     {
-        accessorKey: 'paymentMethod', // Updated to match the SelectItem value
-        header: 'Payment Method',
-        cell: ({ row }) => (
-            <div className="w-32">
-                <Badge variant="secondary" className="text-muted-foreground px-1.5">
-                    {row.original.paymentMethod}
-                </Badge>
-            </div>
-        ),
+        accessorKey: 'Description',
+        header: 'Description',
+        cell: ({ row }) => <div className="w-40 break-words whitespace-normal">{row.original.Description}</div>,
     },
     {
-        accessorKey: 'status',
-        header: 'Status',
-        cell: ({ row }) => (
-            <Badge variant="outline" className="text-muted-foreground flex gap-1 px-1.5 [&_svg]:size-3">
-                {row.original.status === 'Done' ? (
-                    <CheckCircle2Icon className="text-green-500 dark:text-green-400" />
-                ) : row.original.status === 'Canceled' ? (
-                    <CircleX className="text-red-500 dark:text-red-400" />
-                ) : row.original.status === 'Ordered' ? (
-                    <ClipboardList className="text-blue-500 dark:text-blue-400" />
-                ) : row.original.status === 'Packed' ? (
-                    <Package className="text-yellow-500 dark:text-yellow-400" />
-                ) : row.original.status === 'InTransit' ? (
-                    <Truck className="text-orange-500 dark:text-orange-400" />
-                ) : row.original.status === 'Delivered' ? (
-                    <House className="text-green-500 dark:text-green-400" />
-                ) : (
-                    <LoaderIcon />
-                )}
-                {row.original.status}
-            </Badge>
-        ),
-    },
-    {
-        accessorKey: 'TotalPrice',
-        header: 'Total Price',
-        cell: ({ row }) => <div className="text-left">{row.original.TotalPrice}</div>,
-    },
-
-    {
-        accessorKey: 'dateCreated', // Updated to match the SelectItem value
-        header: 'Date Created',
+        accessorKey: 'addedAt', // Updated to match the SelectItem value
+        header: 'Date Added',
         cell: ({ row }) => {
-            const date = new Date(row.original.dateCreated);
+            const date = new Date(row.original.addedAt);
             const formattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
 
             return <div>{formattedDate}</div>;
@@ -193,6 +127,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-32">
+                    <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem>Delete</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
@@ -273,7 +208,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
             });
         }
     }
-    const [searchColumn, setSearchColumn] = React.useState('OrderID');
+    const [searchColumn, setSearchColumn] = React.useState('ProductCatID');
 
     function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
         const value = event.target.value;
@@ -283,17 +218,19 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
     return (
         <Tabs defaultValue="outline" className="flex w-full flex-col justify-start gap-6">
             <div className="flex items-center justify-between px-4 lg:px-6">
+                <Label htmlFor="view-selector" className="sr-only">
+                    View
+                </Label>
                 <div className="flex items-center gap-2">
                     <Select value={searchColumn} onValueChange={(value) => setSearchColumn(value)}>
                         <SelectTrigger className="w-40">
                             <SelectValue placeholder="Search Column" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="OrderID">Order ID</SelectItem>
-                            <SelectItem value="ProductName">Product Name</SelectItem>
-                            <SelectItem value="paymentMethod">Payment Method</SelectItem>
-                            <SelectItem value="status">Status</SelectItem>
-                            <SelectItem value="dateCreated">Date Created</SelectItem>
+                            <SelectItem value="ProductCatID"> Category ID</SelectItem>
+                            <SelectItem value="Name"> Name</SelectItem>
+                            <SelectItem value="Description">Description</SelectItem>
+                            <SelectItem value="addedAt">Added at</SelectItem>
                         </SelectContent>
                     </Select>
                     <Input type="text" placeholder={`Search by ${searchColumn}`} onChange={handleSearch} className="w-64" />
@@ -471,45 +408,42 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         <Sheet>
             <SheetTrigger asChild>
                 <Button variant="link" className="text-foreground w-fit px-0 text-left">
-                    {item.OrderID}
+                    {item.ProductCatID}
                 </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="flex flex-col p-3">
-                <SheetHeader>
-                    <SheetTitle>Edit profile</SheetTitle>
-                    <SheetDescription>Make changes here..</SheetDescription>
+            <SheetContent side="right" className="flex flex-col">
+                <SheetHeader className="gap-1">
+                    <SheetTitle>Edit</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 py-4 text-sm">
                     <form className="flex flex-col gap-4">
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="header">Order ID</Label>
-                            <div id="header">{item.OrderID}</div>
+                            <Label htmlFor="header">Product Category ID</Label>
+                            <div id="header">{item.ProductCatID}</div>
                             <Separator />
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Product Name">Product Name</Label>
-                                <Input id="Product Name" className="w-full" defaultValue={item.ProductName} placeholder="Product Name" />
-                            </div>
-                            <div className="flex flex-col gap-3">
-                                <Label htmlFor="Payment method">Payment method</Label>
-                                <Select defaultValue={item.paymentMethod}>
-                                    <SelectTrigger id="Payment method" className="w-full">
-                                        <SelectValue placeholder="Payment method" />
+                                <Label htmlFor="Name">Name</Label>
+                                <Select defaultValue={item.Name}>
+                                    <SelectTrigger id="Name" className="w-full">
+                                        <SelectValue placeholder="Name" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="Gcash">Gcash</SelectItem>
-                                        <SelectItem value="MasterCard">MasterCard</SelectItem>
-                                        <SelectItem value="PayPal">PayPal</SelectItem>
+                                        <SelectItem value="Bouquet 1">Bouquet 1</SelectItem>
+                                        <SelectItem value="Bouquet 2">Bouquet 2</SelectItem>
+                                        <SelectItem value="Bouquet 3">Bouquet 3</SelectItem>
+                                        <SelectItem value="Bouquet 4">Bouquet 4</SelectItem>
+                                        <SelectItem value="Bouquet 5">Bouquet 5</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Status">Status</Label>
-                                <Select defaultValue={item.status}>
-                                    <SelectTrigger id="Status" className="w-full">
+                                <Label htmlFor="Status">Description</Label>
+                                <Select defaultValue={item.Description}>
+                                    <SelectTrigger id="Description" className="w-full">
                                         <SelectValue placeholder="Status" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -521,19 +455,15 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                                     </SelectContent>
                                 </Select>
                             </div>
-                            <div className="flex flex-col gap-3">
-                                <Label htmlFor="TotalPrice">TotalPrice</Label>
-                                <Input id="TotalPrice" defaultValue={item.TotalPrice} />
-                            </div>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="dateCreated">Date Created</Label>
+                            <Label htmlFor="dateCreated">Date Added</Label>
                             <Input
                                 id="dateCreated"
                                 type="date"
-                                defaultValue={item.dateCreated}
+                                defaultValue={item.addedAt}
                                 onChange={(e) => {
-                                    item.dateCreated = e.target.value;
+                                    item.addedAt = e.target.value;
                                 }}
                             />
                         </div>

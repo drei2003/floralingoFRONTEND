@@ -24,7 +24,7 @@ export default function Flowers() {
             <Head title="Flowers" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="pt-3 pl-6">
-                    <Heading title="Flowers" description="Track, manage, and update flower information" />
+                    <Heading title="Flowers" description="Explore and manage flower listings with detailed insights." />
                 </div>
                 <DataTable data={processedData} />
             </div>

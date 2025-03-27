@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "flower_id": "FLR-001",
+        "flower_id": "001",
         "flower_name": "Red Rose",
         "description": "Classic red rose symbolizing love and passion",
         "scientific_name": "Rosa rubiginosa",
@@ -11,7 +11,7 @@
     },
     {
         "id": 2,
-        "flower_id": "FLR-002",
+        "flower_id": "002",
         "flower_name": "Sunflower",
         "description": "Bright yellow sunflower representing happiness",
         "scientific_name": "Helianthus annuus",
@@ -21,7 +21,7 @@
     },
     {
         "id": 3,
-        "flower_id": "FLR-003",
+        "flower_id": "003",
         "flower_name": "Tulip",
         "description": "Elegant spring tulip in various colors",
         "scientific_name": "Tulipa gesneriana",
@@ -31,7 +31,7 @@
     },
     {
         "id": 4,
-        "flower_id": "FLR-004",
+        "flower_id": "004",
         "flower_name": "Orchid",
         "description": "Exotic orchid with delicate petals",
         "scientific_name": "Phalaenopsis amabilis",
@@ -41,7 +41,7 @@
     },
     {
         "id": 5,
-        "flower_id": "FLR-005",
+        "flower_id": "005",
         "flower_name": "Lily",
         "description": "Pure white lily symbolizing purity",
         "scientific_name": "Lilium candidum",

@@ -18,9 +18,8 @@ export default function PaymentOptions() {
             <Head title="Products" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className="pt-3 pl-6">
-                    <Heading title="Payment Options" description="Track, manage, and update customer orders" />
+                    <Heading title="Payment Options" description="Manage and customize available payment methods." />
                 </div>
-
                 <DataTable data={data} />
             </div>
         </AppLayout>
