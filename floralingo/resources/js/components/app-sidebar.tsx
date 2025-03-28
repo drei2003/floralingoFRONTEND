@@ -13,6 +13,12 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: House,
     },
+    
+    {
+        title: 'Orders',
+        href: '/orders',
+        icon: ClipboardList,
+    },
 
     {
         title: 'Products',
@@ -30,12 +36,6 @@ const mainNavItems: NavItem[] = [
         title: 'Flowers',
         href: '/flowers',
         icon: Flower,
-    },
-
-    {
-        title: 'Orders',
-        href: '/orders',
-        icon: ClipboardList,
     },
 
     {
