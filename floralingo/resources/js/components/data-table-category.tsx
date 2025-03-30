@@ -539,7 +539,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                                     onChange={(e) => setDescription(e.target.value)}
                                     className="w-full resize-none"
                                     placeholder="Enter product description"
-                                    rows={3} // Ensures text is visible
+                                    rows={10} // Ensures text is visible
                                 />
                             </div>
                         </div>

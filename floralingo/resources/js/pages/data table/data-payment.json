@@ -1,26 +1,14 @@
 [
     {
-        "id": 7,
-        "PaymentID": "94901",
-        "paymentMethod": "Cash on Delivery",
-        "status": "Active"
-    },
-    {
-        "id": 3,
-        "PaymentID": "45803",
-        "paymentMethod": "Banco de Oro",
+        "id": 1,
+        "PaymentID": "1233",
+        "paymentMethod": "Gcash",
         "status": "Disabled"
     },
     {
         "id": 2,
-        "PaymentID": "78835",
-        "paymentMethod": "Gcash",
-        "status": "Active"
-    },
-    {
-        "id": 1,
-        "PaymentID": "47665",
-        "paymentMethod": "PayPal",
+        "PaymentID": "63296",
+        "paymentMethod": "Banco de Oro",
         "status": "Active"
     }
 ]
