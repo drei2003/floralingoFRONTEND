@@ -58,6 +58,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Separator } from '@radix-ui/react-separator';
+import { router } from '@inertiajs/react';
+import { useState, useEffect } from 'react'
+import axios from 'axios';
 
 export const schema = z.object({
     id: z.number(),
@@ -75,6 +78,21 @@ function DragHandle({ id }: { id: number }) {
             <span className="sr-only">Drag to reorder</span>
         </Button>
     );
+}
+
+function handleDelete(id: number) {
+    if (!confirm("Are you sure you want to delete this category?")) return;
+
+    axios
+        .delete(`http://localhost:8000/paymentOptions/${id}`)
+        .then((response) => {
+            alert(response.data.message);
+            window.location.reload(); // Refresh page after deletion
+        })
+        .catch((error) => {
+            console.error("Error deleting category:", error);
+            alert("Failed to delete category.");
+        });
 }
 
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
@@ -116,18 +134,20 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
             </Badge>
         ),
     },
-    {
-        id: 'actions',
+{
+        id: "actions",
         cell: ({ row }) => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="text-muted-foreground data-[state=open]:bg-muted flex size-8" size="icon">
+                    <Button variant="ghost" className="text-muted-foreground flex size-8" size="icon">
                         <MoreVerticalIcon />
                         <span className="sr-only">Open menu</span>
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-32">
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+                        Delete
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         ),
@@ -203,11 +223,38 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 
     function handleAddPayment(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log('Submitting new payment option');
-        // Add your payment creation logic here
-        setAddDialogOpen(false);
+    
+        const formData = new FormData(event.currentTarget);
+    
+        // Convert form data to JSON format
+        const data = {
+            PaymentID: String(Math.floor(Math.random() * 100000)), // Ensure PaymentID is a string
+            paymentMethod: formData.get('paymentMethod') as string,
+            status: formData.get('status') as string,
+        };
+    
+        // Ensure required fields are not empty
+        if (!data.paymentMethod || !data.status) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+    
+        console.log('Submitting new payment method:', data);
+    
+        // Send data to Laravel backend
+        router.post('/paymentOptions', data, {
+            onSuccess: () => {
+                console.log('Payment Method added successfully');
+                alert('Payment Method added successfully!');
+                setAddDialogOpen(false);
+                window.location.reload();
+            },
+            onError: (errors) => {
+                console.error('Error adding Payment Method:', errors);
+                alert('Error adding Payment Method');
+            },
+        });
     }
-
     return (
         <>
             <Tabs defaultValue="outline" className="flex w-full flex-col justify-start gap-6">
@@ -377,13 +424,13 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                     </DialogHeader>
                     <form onSubmit={handleAddPayment} className="flex flex-col gap-4">
                         <div>
-                            <Label htmlFor="newPaymentMethod">Payment Method</Label>
-                            <Input id="newPaymentMethod" placeholder="Enter Payment Method" />
+                            <Label htmlFor="paymentMethod">Payment Method</Label>
+                            <Input id="paymentMethod" name="paymentMethod" placeholder="Enter Payment Method" required />
                         </div>
                         <div>
-                            <Label htmlFor="newPaymentStatus">Status</Label>
-                            <Select defaultValue="Active">
-                                <SelectTrigger id="newPaymentStatus" className="w-full">
+                            <Label htmlFor="status">Status</Label>
+                            <Select name="status" defaultValue="Active">
+                                <SelectTrigger id="status" className="w-full">
                                     <SelectValue placeholder="Select Status" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -406,7 +453,24 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 }
 
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
-    const isMobile = useIsMobile();
+    const [paymentMethod, setPaymentMethod] = useState(item.paymentMethod);
+    const [status, setStatus] = useState(item.status);
+
+    const handleUpdate = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8000/paymentOptions/${item.PaymentID}`, {
+                paymentMethod,
+                status,
+            });
+    
+            alert(response.data.message);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error updating payment method", error);
+            alert("Failed to update payment method.");
+        }
+    };
+
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -414,10 +478,9 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                     {item.PaymentID}
                 </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="flex flex-col p-3">
-                <SheetHeader>
-                    <SheetTitle>Edit profile</SheetTitle>
-                    <SheetDescription>Make changes here..</SheetDescription>
+            <SheetContent side="right" className="flex flex-col">
+                <SheetHeader className="gap-1">
+                    <SheetTitle>Edit Payment Method</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 py-4 text-sm">
                     <form className="flex flex-col gap-4">
@@ -428,25 +491,22 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="PaymentMethod">Payment method</Label>
-                                <Select defaultValue={item.paymentMethod}>
-                                    <SelectTrigger id="PaymentMethod" className="w-full">
-                                        <SelectValue placeholder="Payment method" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Gcash">Gcash</SelectItem>
-                                        <SelectItem value="MasterCard">MasterCard</SelectItem>
-                                        <SelectItem value="PayPal">PayPal</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <Label htmlFor="PaymentMethod">Payment Method</Label>
+                                <Input
+                                    id="PaymentMethod"
+                                    value={paymentMethod}
+                                    onChange={(e) => setPaymentMethod(e.target.value)}
+                                    className="w-full"
+                                    placeholder="Enter Payment Method"
+                                />
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
                                 <Label htmlFor="StatusPayment">Status</Label>
-                                <Select defaultValue={item.status}>
+                                <Select value={status} onValueChange={setStatus}>
                                     <SelectTrigger id="StatusPayment" className="w-full">
-                                        <SelectValue placeholder="Status" />
+                                        <SelectValue placeholder="Select Status" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="Active">Active</SelectItem>
@@ -458,7 +518,9 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                     </form>
                 </div>
                 <SheetFooter className="mt-auto flex gap-2 sm:flex-col sm:space-x-0">
-                    <Button className="w-full">Submit</Button>
+                    <Button className="w-full" onClick={handleUpdate}>
+                        Submit
+                    </Button>
                     <SheetClose asChild>
                         <Button variant="outline" className="w-full">
                             Done
@@ -469,3 +531,5 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         </Sheet>
     );
 }
+
+export default TableCellViewer;

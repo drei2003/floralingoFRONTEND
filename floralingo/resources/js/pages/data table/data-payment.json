@@ -1,14 +1,26 @@
 [
     {
-        "id": 1,
-        "PaymentID": "PYMT-12345",
+        "id": 7,
+        "PaymentID": "94901",
+        "paymentMethod": "Cash on Delivery",
+        "status": "Active"
+    },
+    {
+        "id": 3,
+        "PaymentID": "45803",
+        "paymentMethod": "Banco de Oro",
+        "status": "Disabled"
+    },
+    {
+        "id": 2,
+        "PaymentID": "78835",
         "paymentMethod": "Gcash",
         "status": "Active"
     },
     {
-        "id": 2,
-        "PaymentID": "PYMT-6789",
-        "paymentMethod": "MasterCard",
-        "status": "Disabled"
+        "id": 1,
+        "PaymentID": "47665",
+        "paymentMethod": "PayPal",
+        "status": "Active"
     }
 ]

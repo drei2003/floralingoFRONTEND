@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymenthMethodController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CategoryController;
@@ -28,9 +29,9 @@ Route::get('/flowers', function () {
     return Inertia::render('flowers');
 })->name('flowers');
 
-Route::get('/paymentOptions', function () {
-    return Inertia::render('paymentOptions');
-})->name('paymentOptions');
+
+Route::resource('paymentOptions', PaymenthMethodController::class)->middleware(['auth']);
+
 
 Route::get('/sales', function () {
     return Inertia::render('sales');
