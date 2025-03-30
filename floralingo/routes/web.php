@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return Inertia::render('auth/login');
@@ -21,9 +22,7 @@ Route::get('/products', function () {
     return Inertia::render('products');
 })->name('products');
 
-Route::get('/category', function () {
-    return Inertia::render('category');
-})->name('category');
+Route::resource('category', CategoryController::class)->middleware(['auth']);
 
 Route::get('/flowers', function () {
     return Inertia::render('flowers');

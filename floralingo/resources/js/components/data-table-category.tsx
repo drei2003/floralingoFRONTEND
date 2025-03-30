@@ -49,12 +49,16 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Separator } from '@radix-ui/react-separator';
+import { router } from '@inertiajs/react';
+import { useState, useEffect } from 'react'
+import axios from 'axios';
 
 export const schema = z.object({
     id: z.number(),
@@ -76,6 +80,21 @@ function DragHandle({ id }: { id: number }) {
             <span className="sr-only">Drag to reorder</span>
         </Button>
     );
+}
+
+function handleDelete(id: number) {
+    if (!confirm("Are you sure you want to delete this category?")) return;
+
+    axios
+        .delete(`http://localhost:8000/category/${id}`)
+        .then((response) => {
+            alert(response.data.message);
+            window.location.reload(); // Refresh page after deletion
+        })
+        .catch((error) => {
+            console.error("Error deleting category:", error);
+            alert("Failed to delete category.");
+        });
 }
 
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
@@ -118,7 +137,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         },
     },
     {
-        id: 'actions',
+        id: "actions",
         cell: ({ row }) => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -128,8 +147,9 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-32">
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+                        Delete
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         ),
@@ -220,9 +240,31 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 
     function handleAddCategory(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log('Submitting new category');
-        // Add your category creation logic here
-        setAddDialogOpen(false);
+    
+        // Get form data
+        const formData = new FormData(event.currentTarget);
+        
+        // Convert form data to JSON format
+        const data = {
+            ProductCatID: Math.floor(Math.random() * 100000), // Generate a random ID
+            Name: formData.get('newCategoryName'),
+            Description: formData.get('newCategoryDescription') || '',
+            addedAt: formData.get('newCategoryDate'),
+        };
+    
+        console.log('Submitting new category:', data);
+    
+        // Send data to Laravel backend
+        router.post('/category', data, {
+            onSuccess: () => {
+                console.log('Category added successfully');
+                setAddDialogOpen(false);
+                window.location.reload();
+            },
+            onError: (errors) => {
+                console.error('Error adding category:', errors);
+            },
+        });
     }
 
     return (
@@ -419,16 +461,13 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                     <form onSubmit={handleAddCategory} className="flex flex-col gap-4">
                         <div>
                             <Label htmlFor="newCategoryName">Name</Label>
-                            <Input id="newCategoryName" placeholder="Name" required />
+                            <Input id="newCategoryName" name="newCategoryName" placeholder="Name" required />
                         </div>
                         <div>
                             <Label htmlFor="newCategoryDescription">Description</Label>
-                            <Input id="newCategoryDescription" placeholder="Description" />
+                            <Input id="newCategoryDescription" name="newCategoryDescription" placeholder="Description" />
                         </div>
-                        <div>
-                            <Label htmlFor="newCategoryDate">Date Added</Label>
-                            <Input id="newCategoryDate" type="date" required />
-                        </div>
+                        
                         <DialogFooter>
                             <Button type="submit">Submit</Button>
                             <DialogClose asChild>
@@ -443,7 +482,23 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 }
 
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
-    const isMobile = useIsMobile();
+    const [name, setName] = useState(item.Name);
+    const [description, setDescription] = useState(item.Description);
+
+    const handleUpdate = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8000/category/${item.id}`, {
+                Name: name,
+                Description: description,
+            });
+
+            alert(response.data.message);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error updating category", error);
+            alert("Failed to update category.");
+        }
+    };
 
     return (
         <Sheet>
@@ -466,52 +521,34 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
                                 <Label htmlFor="Name">Name</Label>
-                                <Select defaultValue={item.Name}>
-                                    <SelectTrigger id="Name" className="w-full">
-                                        <SelectValue placeholder="Name" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Bouquet 1">Bouquet 1</SelectItem>
-                                        <SelectItem value="Bouquet 2">Bouquet 2</SelectItem>
-                                        <SelectItem value="Bouquet 3">Bouquet 3</SelectItem>
-                                        <SelectItem value="Bouquet 4">Bouquet 4</SelectItem>
-                                        <SelectItem value="Bouquet 5">Bouquet 5</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <Input
+                                    id="Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className="w-full"
+                                    placeholder="Enter product name"
+                                />
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Status">Description</Label>
-                                <Select defaultValue={item.Description}>
-                                    <SelectTrigger id="Description" className="w-full">
-                                        <SelectValue placeholder="Status" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Ordered">Ordered</SelectItem>
-                                        <SelectItem value="Packed">Packed</SelectItem>
-                                        <SelectItem value="InTransit">InTransit</SelectItem>
-                                        <SelectItem value="Delivered">Delivered</SelectItem>
-                                        <SelectItem value="Canceled">Canceled</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <Label htmlFor="Description">Description</Label>
+                                <Textarea
+                                    id="Description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    className="w-full resize-none"
+                                    placeholder="Enter product description"
+                                    rows={3} // Ensures text is visible
+                                />
                             </div>
-                        </div>
-                        <div className="flex flex-col gap-3">
-                            <Label htmlFor="dateCreated">Date Added</Label>
-                            <Input
-                                id="dateCreated"
-                                type="date"
-                                defaultValue={item.addedAt}
-                                onChange={(e) => {
-                                    item.addedAt = e.target.value;
-                                }}
-                            />
                         </div>
                     </form>
                 </div>
                 <SheetFooter className="mt-auto flex gap-2 sm:flex-col sm:space-x-0">
-                    <Button className="w-full">Submit</Button>
+                    <Button className="w-full" onClick={handleUpdate}>
+                        Submit
+                    </Button>
                     <SheetClose asChild>
                         <Button variant="outline" className="w-full">
                             Done
@@ -522,3 +559,5 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         </Sheet>
     );
 }
+
+export default TableCellViewer;
