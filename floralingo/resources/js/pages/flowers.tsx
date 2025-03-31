@@ -16,7 +16,7 @@ export default function Flowers() {
         ...item,
         Thumbnail_url: item.Thumbnail_url || undefined,
         ProductName: item.flower_name,
-        Added_at: item.added_at,
+        added_at: item.added_at,
     }));
 
     return (

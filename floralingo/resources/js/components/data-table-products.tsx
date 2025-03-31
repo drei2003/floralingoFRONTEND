@@ -41,6 +41,8 @@ import {
     GripVerticalIcon,
     MoreVerticalIcon,
     PlusIcon,
+    Loader as LoaderIcon,
+    CheckCircle2Icon,
 } from 'lucide-react';
 import * as React from 'react';
 import { z } from 'zod';
@@ -56,6 +58,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Separator } from '@radix-ui/react-separator';
+import { CircleX } from 'lucide-react';
+import { useState } from "react";
+import axios from "axios";
+import { router } from '@inertiajs/react';  
+import { useEffect } from "react";
+
 
 export const schema = z.object({
     id: z.number(),
@@ -65,7 +73,7 @@ export const schema = z.object({
     Added_at: z.string(),
     Description: z.string(),
     Thumbnail_url: z.string().url().optional(),
-    Availability: z.boolean().default(true),
+    Availability: z.string(),
 });
 
 // Create a separate component for the drag handle
@@ -77,6 +85,21 @@ function DragHandle({ id }: { id: number }) {
             <span className="sr-only">Drag to reorder</span>
         </Button>
     );
+}
+
+function handleDelete(id: number) {
+    if (!confirm("Are you sure you want to delete this category?")) return;
+
+    axios
+        .delete(`http://localhost:8000/products/${id}`)
+        .then((response) => {
+            alert(response.data.message);
+            window.location.reload(); // Refresh page after deletion
+        })
+        .catch((error) => {
+            console.error("Error deleting this Product:", error);
+            alert("Failed to delete this Product.");
+        });
 }
 
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
@@ -125,8 +148,9 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     {
         accessorKey: 'Price',
         header: 'Price',
-        cell: ({ row }) => <div className="text-left">{row.original.Price}</div>,
+        cell: ({ row }) => <div className="text-left">₱{row.original.Price}</div>,
     },
+    
     {
         accessorKey: 'Added_at',
         header: 'Added_at',
@@ -139,42 +163,33 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     {
         accessorKey: 'Availability',
         header: 'Availability',
-        cell: ({ row }) => {
-            const [isAvailable, setIsAvailable] = React.useState(row.original.Availability);
-            const handleAvailabilityChange = (checked: boolean) => {
-                setIsAvailable(checked);
-                try {
-                    row.original.Availability = checked;
-                    console.log('Availability changed:', checked);
-                } catch (error) {
-                    setIsAvailable(!checked);
-                    console.error('Error updating availability:', error);
-                }
-            };
-            return (
-                <div className="flex items-center justify-center">
-                    <Switch
-                        checked={isAvailable}
-                        onCheckedChange={handleAvailabilityChange}
-                        aria-label="Toggle availability"
-                        className={cn('data-[state=checked]:bg-green-500', 'data-[state=unchecked]:bg-red-500')}
-                    />
-                </div>
-            );
-        },
+        cell: ({ row }) => (
+            <Badge variant="outline" className="text-muted-foreground flex gap-1 px-1.5 [&_svg]:size-3">
+                {row.original.Availability === 'Available' ? (
+                    <CheckCircle2Icon className="text-green-500 dark:text-green-400" />
+                ) : row.original.Availability === 'Unavailable' ? (
+                    <CircleX className="text-red-500 dark:text-red-400" />
+                ) : (
+                    <LoaderIcon />
+                )}
+                {row.original.Availability}
+            </Badge>
+        ),
     },
     {
-        id: 'actions',
+        id: "actions",
         cell: ({ row }) => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="text-muted-foreground data-[state=open]:bg-muted flex size-8" size="icon">
+                    <Button variant="ghost" className="text-muted-foreground flex size-8" size="icon">
                         <MoreVerticalIcon />
                         <span className="sr-only">Open menu</span>
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-32">
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+                        Delete
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         ),
@@ -258,14 +273,29 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
         setColumnFilters([{ id: searchColumn, value }]);
     }
 
-    // Function to call when submitting a new product
     function handleAddProduct(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        // Retrieve form values and process new product creation logic here
-        console.log('Submitting new product');
-        // After processing, close the dialog.
-        setAddDialogOpen(false);
+        const formData = new FormData(event.currentTarget);
+        // Append a unique product ID
+        formData.append('ProductID', Math.floor(Math.random() * 100000).toString());
+        console.log('Submitting new Product:', formData);
+    
+        // Send data (including the image) to Laravel backend
+        router.post('/products', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Required for file uploads
+            },
+            onSuccess: () => {
+                console.log('Product added successfully');
+                setAddDialogOpen(false);
+                window.location.reload();
+            },
+            onError: (errors) => {
+                console.error('Error adding new product:', errors);
+            },
+        });
     }
+    
 
     return (
         <>
@@ -472,30 +502,36 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                     <form className="flex flex-col gap-4" onSubmit={handleAddProduct}>
                         <div>
                             <Label htmlFor="newProductThumbnail">Thumbnail</Label>
-                            <Input id="newProductThumbnail" type="file" />
+                            <Input id="newProductThumbnail" name="Thumbnail_url" type="file" accept="image/*" required />
                         </div>
                         <div>
                             <Label htmlFor="newProductName">Product Name</Label>
-                            <Input id="newProductName" placeholder="Product Name" required />
+                            <Input id="newProductName" name="ProductName" placeholder="Product Name" required />
                         </div>
                         <div>
                             <Label htmlFor="newProductDescription">Description</Label>
-                            <Input id="newProductDescription" placeholder="Description" />
+                            <Input id="newProductDescription" name="Description" placeholder="Description" required />
                         </div>
                         <div>
                             <Label htmlFor="newProductPrice">Price</Label>
-                            <Input id="newProductPrice" type="number" placeholder="Price" required />
+                            <Input id="newProductPrice" name="Price" type="number" placeholder="Price" required />
                         </div>
                         <div>
                             <Label htmlFor="newProductDate">Date Created</Label>
-                            <Input id="newProductDate" type="date" required />
+                            <Input id="newProductDate" name="Added_at" type="date" required />
                         </div>
                         <div className="flex items-center gap-2">
-                            <Label htmlFor="newProductAvailability">Availability</Label>
-                            <Switch id="newProductAvailability" defaultChecked />
+                            <Label htmlFor="Availability">Availability</Label>
+                            <Select name="Availability" defaultValue="Available">
+                                <SelectTrigger id="Availability" className="w-full">
+                                    <SelectValue placeholder="Select Availability" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="Available">Available</SelectItem>
+                                    <SelectItem value="Unavailable">Unavailable</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </div>
-
-                        {/* Add additional fields as needed */}
                         <DialogFooter>
                             <Button type="submit">Submit</Button>
                             <DialogClose asChild>
@@ -510,7 +546,30 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 }
 
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
-    const isMobile = useIsMobile();
+    const [productName, setProductName] = useState(item.ProductName);
+    const [description, setDescription] = useState(item.Description);
+    const [price, setPrice] = useState(item.Price);
+    const [addedAt, setAddedAt] = useState(item.Added_at);
+    const [availability, setAvailability] = useState(item.Availability);
+
+    const handleUpdate = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8000/products/${item.id}`, {
+                ProductName: productName,
+                Description: description,
+                Price: price,
+                Added_at: addedAt,
+                Availability: availability,
+            });
+
+            alert(response.data.message);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error updating product", error);
+            alert("Failed to update product.");
+        }
+    };
+
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -520,14 +579,14 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             </SheetTrigger>
             <SheetContent side="right" className="flex flex-col p-3">
                 <SheetHeader>
-                    <SheetTitle>Edit profile</SheetTitle>
+                    <SheetTitle>Edit Product</SheetTitle>
                     <SheetDescription>Make changes here.</SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 py-4 text-sm">
                     <form className="flex flex-col gap-4">
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="header">Product ID</Label>
-                            <div id="header">{item.ProductID}</div>
+                            <Label htmlFor="ProductID">Product ID</Label>
+                            <div id="ProductID">{item.ProductID}</div>
                             <Separator />
                         </div>
                         <div className="grid grid-cols-1 gap-4">
@@ -536,45 +595,66 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                                 <Input
                                     id="ProductName"
                                     className="w-full"
-                                    defaultValue={item.ProductName}
-                                    onChange={(e) => {
-                                        item.ProductName = e.target.value;
-                                    }}
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)}
                                 />
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="ProductDescription">Description</Label>
-                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.Description}</p>
+                                <Label htmlFor="Description">Description</Label>
+                                <Input
+                                    id="Description"
+                                    className="w-full"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                />
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="TotalPrice">TotalPrice</Label>
-                                <Input id="TotalPrice" defaultValue={item.Price} />
+                                <Label htmlFor="Price">Total Price</Label>
+                                <Input
+                                    id="Price"
+                                    className="w-full"
+                                    value={price}
+                                    onChange={(e) => setPrice(Number(e.target.value))}
+                                />
                             </div>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="dateCreated">Date Created</Label>
+                            <Label htmlFor="Added_at">Date Created</Label>
                             <Input
-                                id="dateCreated"
+                                id="Added_at"
                                 type="date"
-                                defaultValue={item.Added_at}
-                                onChange={(e) => {
-                                    item.Added_at = e.target.value;
-                                }}
+                                className="w-full"
+                                value={addedAt}
+                                onChange={(e) => setAddedAt(e.target.value)}
                             />
+                        </div>
+                        <div className="grid grid-cols-1 gap-4">
+                            <div className="flex flex-col gap-3">
+                                <Label htmlFor="Availability">Status</Label>
+                                <Select value={availability} onValueChange={setAvailability}>
+                                    <SelectTrigger id="StatusAvailability" className="w-full">
+                                        <SelectValue placeholder="Product Availability" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="Available">Available</SelectItem>
+                                        <SelectItem value="Unavailable">Unavailable</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <SheetFooter className="mt-auto flex gap-2 sm:flex-col sm:space-x-0">
-                    <Button className="w-full">Submit</Button>
+                    <Button className="w-full" onClick={handleUpdate}>Submit</Button>
                     <SheetClose asChild>
-                        <Button variant="outline" className="w-full">
-                            Done
-                        </Button>
+                        <Button variant="outline" className="w-full">Done</Button>
                     </SheetClose>
                 </SheetFooter>
             </SheetContent>
         </Sheet>
     );
 }
+
+export default TableCellViewer;

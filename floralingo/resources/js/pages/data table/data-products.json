@@ -1,52 +1,32 @@
 [
     {
-        "id": 1,
-        "ProductID": 639671,
-        "Price": 599,
-        "ProductName": "Product1",
-        "Added_at": "2024-03-15",
-        "Description": "Beautiful arrangement of red roses",
-        "Thumbnail_url": "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "Availability": false
+        "id": 7,
+        "ProductID": 16468,
+        "Price": 679,
+        "ProductName": "Rose Bouquete",
+        "Description": "A classic bouquet of fresh red roses, symbolizing love and passion. Perfect for special occasions or heartfelt gestures.",
+        "Availability": "Available",
+        "Added_at": "03-31-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418937_roseboq.jpg"
     },
     {
-        "id": 2,
-        "ProductID": 592440,
-        "Price": 899,
-        "ProductName": "Product2",
-        "Added_at": "2024-03-16",
-        "Description": "Bright sunflower arrangement",
-        "Thumbnail_url": "https://images.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "Availability": true
+        "id": 8,
+        "ProductID": 71629,
+        "Price": 1200,
+        "ProductName": "Sunflower Arrangement",
+        "Description": "A bright and cheerful sunflower arrangement that brings warmth and positivity to any space. Ideal for gifts and home decor.",
+        "Availability": "Unavailable",
+        "Added_at": "03-31-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418968_sunflowerboq.jpg"
     },
     {
-        "id": 3,
-        "ProductID": 278095,
-        "Price": 799,
-        "ProductName": "Product3",
-        "Added_at": "2024-03-17",
-        "Description": "Colorful mix of fresh tulips",
-        "Thumbnail_url": "https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "Availability": false
-    },
-    {
-        "id": 4,
-        "ProductID": 258167,
-        "Price": 1299,
-        "ProductName": "Product4",
-        "Added_at": "2024-03-18",
-        "Description": "Elegant orchid arrangement",
-        "Thumbnail_url": "https://images.pexels.com/photos/46216/sunflower-flowers-bright-yellow-46216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "Availability": true
-    },
-    {
-        "id": 5,
-        "ProductID": 682778,
-        "Price": 499,
-        "ProductName": "Product5",
-        "Added_at": "2024-03-19",
-        "Description": "Fresh white daisies",
-        "Thumbnail_url": "https://images.pexels.com/photos/2058498/pexels-photo-2058498.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "Availability": true
+        "id": 9,
+        "ProductID": 76905,
+        "Price": 789,
+        "ProductName": "Carnation Mix",
+        "Description": "A delicate mix of pink and white carnations, representing admiration and pure love. Suitable for anniversaries, birthdays, and remembrance.",
+        "Availability": "Available",
+        "Added_at": "03-31-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418991_carnationboq.jpg"
     }
 ]

@@ -52,12 +52,16 @@ import {
 } from 'lucide-react';
 import * as React from 'react';
 import { z } from 'zod';
+import { router } from '@inertiajs/react';
+import { useState, useEffect } from 'react'
+import axios from 'axios';
+import { Textarea } from '@/components/ui/textarea';
 
 export const schema = z.object({
     id: z.number(),
     flower_id: z.string(),
     flower_name: z.string(),
-    Added_at: z.string(),
+    added_at: z.string(),
     description: z.string(),
     pronunciation: z.string(),
     scientific_name: z.string(),
@@ -73,6 +77,21 @@ function DragHandle({ id }: { id: number }) {
             <span className="sr-only">Drag to reorder</span>
         </Button>
     );
+}
+
+function handleDelete(id: number) {
+    if (!confirm("Are you sure you want to delete this category?")) return;
+
+    axios
+        .delete(`http://localhost:8000/flowers/${id}`)
+        .then((response) => {
+            alert(response.data.message);
+            window.location.reload(); // Refresh page after deletion
+        })
+        .catch((error) => {
+            console.error("Error deleting this Flower:", error);
+            alert("Failed to delete this Flower.");
+        });
 }
 
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
@@ -127,26 +146,28 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         cell: ({ row }) => <div className="w-35 break-words whitespace-normal">{row.original.pronunciation}</div>,
     },
     {
-        accessorKey: 'Added_at',
-        header: 'Added_at',
+        accessorKey: 'added_at',
+        header: 'added_at',
         cell: ({ row }) => {
-            const date = new Date(row.original.Added_at);
+            const date = new Date(row.original.added_at);
             const formattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
             return <div>{formattedDate}</div>;
         },
     },
     {
-        id: 'actions',
+        id: "actions",
         cell: ({ row }) => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="text-muted-foreground data-[state=open]:bg-muted flex size-8" size="icon">
+                    <Button variant="ghost" className="text-muted-foreground flex size-8" size="icon">
                         <MoreVerticalIcon />
                         <span className="sr-only">Open menu</span>
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-32">
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDelete(row.original.id)}>
+                        Delete
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         ),
@@ -227,10 +248,31 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 
     function handleAddFlower(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log('Submitting new flower');
-        // Add your flower creation logic here
-        setAddDialogOpen(false);
+    
+        // Create a new FormData object
+        const formData = new FormData(event.currentTarget);
+    
+        // Append additional data
+        formData.append('flower_id', Math.floor(Math.random() * 100000).toString());
+    
+        console.log('Submitting new Flower:', formData);
+    
+        // Send data (including the image) to Laravel backend
+        router.post('/flowers', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data', // Required for file uploads
+            },
+            onSuccess: () => {
+                console.log('Flower added successfully');
+                setAddDialogOpen(false);
+                window.location.reload();
+            },
+            onError: (errors) => {
+                console.error('Error adding new flower:', errors);
+            },
+        });
     }
+    
 
     return (
         <>
@@ -430,27 +472,27 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                     <form className="flex flex-col gap-4" onSubmit={handleAddFlower}>
                         <div>
                             <Label htmlFor="newFlowerThumbnail">Thumbnail</Label>
-                            <Input id="newFlowerThumbnail" type="file" />
+                            <Input id="newFlowerThumbnail" name="Thumbnail_url" type="file" accept="image/*" required />
                         </div>
                         <div>
                             <Label htmlFor="newFlowerName">Flower Name</Label>
-                            <Input id="newFlowerName" placeholder="Flower Name" required />
+                            <Input id="newFlowerName" name="flower_name" placeholder="Flower Name" required />
                         </div>
                         <div>
                             <Label htmlFor="newFlowerDesc">Description</Label>
-                            <Input id="newFlowerDesc" placeholder="Description" />
+                            <Input id="newFlowerDesc" name="description" placeholder="Description" required />
                         </div>
                         <div>
                             <Label htmlFor="newFlowerScientific">Scientific Name</Label>
-                            <Input id="newFlowerScientific" placeholder="Scientific Name" />
+                            <Input id="newFlowerScientific" name="scientific_name" placeholder="Scientific Name" required />
                         </div>
                         <div>
                             <Label htmlFor="newFlowerPronunciation">Pronunciation</Label>
-                            <Input id="newFlowerPronunciation" placeholder="Pronunciation" />
+                            <Input id="newFlowerPronunciation" name="pronunciation" placeholder="Pronunciation" required />
                         </div>
                         <div>
                             <Label htmlFor="newFlowerDate">Date Added</Label>
-                            <Input id="newFlowerDate" type="date" required />
+                            <Input id="newFlowerDate" name="added_at" type="date" required />
                         </div>
                         <DialogFooter>
                             <Button type="submit">Submit</Button>
@@ -459,6 +501,7 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                             </DialogClose>
                         </DialogFooter>
                     </form>
+
                 </DialogContent>
             </Dialog>
         </>
@@ -466,7 +509,29 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 }
 
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
-    const isMobile = useIsMobile();
+    const [flowerName, setFlowerName] = useState(item.flower_name);
+    const [description, setDescription] = useState(item.description);
+    const [scientificName, setScientificName] = useState(item.scientific_name);
+    const [pronunciation, setPronunciation] = useState(item.pronunciation);
+    const [addedAt, setAddedAt] = useState(item.added_at);
+
+    const handleUpdate = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8000/flowers/${item.id}`, {
+                flower_name: flowerName,
+                description: description,
+                scientific_name: scientificName,
+                pronunciation: pronunciation,
+                added_at: addedAt,
+            });
+
+            alert(response.data.message);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error updating flower", error);
+            alert("Failed to update flower.");
+        }
+    };
 
     return (
         <Sheet>
@@ -477,65 +542,77 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             </SheetTrigger>
             <SheetContent side="right" className="flex flex-col p-3">
                 <SheetHeader>
-                    <SheetTitle>Edit profile</SheetTitle>
+                    <SheetTitle>Edit Flower</SheetTitle>
                     <SheetDescription>Make changes here.</SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 py-4 text-sm">
                     <form className="flex flex-col gap-4">
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="header">Product ID</Label>
-                            <div id="header">{item.flower_id}</div>
+                            <Label htmlFor="flower_id">Flower ID</Label>
+                            <div id="flower_id">{item.flower_id}</div>
                             <Separator />
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Product Name">Product Name</Label>
+                                <Label htmlFor="flower_name">Flower Name</Label>
                                 <Input
-                                    id="ProductName"
+                                    id="flower_name"
                                     className="w-full"
-                                    defaultValue={item.flower_name}
-                                    onChange={(e) => {
-                                        item.flower_name = e.target.value;
-                                    }}
+                                    value={flowerName}
+                                    onChange={(e) => setFlowerName(e.target.value)}
                                 />
                             </div>
-
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Payment method">Description</Label>
-                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.description}</p>
+                                <Label htmlFor="description">Description</Label>
+                                <Textarea
+                                    id="description"
+                                    className="w-full resize-none"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    rows={4}
+                                />
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Payment method"> Scientific Name</Label>
-                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.scientific_name}</p>
+                                <Label htmlFor="scientific_name">Scientific Name</Label>
+                                <Input
+                                    id="scientific_name"
+                                    className="w-full"
+                                    value={scientificName}
+                                    onChange={(e) => setScientificName(e.target.value)}
+                                />
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Payment method"> Pronunciation</Label>
-                                <p className="w-full rounded-md border px-3 py-2 text-sm">{item.pronunciation}</p>
+                                <Label htmlFor="pronunciation">Pronunciation</Label>
+                                <Input
+                                    id="pronunciation"
+                                    className="w-full"
+                                    value={pronunciation}
+                                    onChange={(e) => setPronunciation(e.target.value)}
+                                />
                             </div>
-                        </div>
-                        <div className="grid grid-cols-1 gap-4"></div>
-                        <div className="flex flex-col gap-3">
-                            <Label htmlFor="dateCreated">Added at</Label>
-                            <Input
-                                id="dateCreated"
-                                type="date"
-                                defaultValue={item.Added_at}
-                                onChange={(e) => {
-                                    item.Added_at = e.target.value;
-                                }}
-                            />
+                            <div className="flex flex-col gap-3">
+                                <Label htmlFor="added_at">Added At</Label>
+                                <Input
+                                    id="added_at"
+                                    type="date"
+                                    className="w-full"
+                                    value={addedAt}
+                                    onChange={(e) => setAddedAt(e.target.value)}
+                                />
+                            </div>
                         </div>
                     </form>
                 </div>
                 <SheetFooter className="mt-auto flex gap-2 sm:flex-col sm:space-x-0">
-                    <Button className="w-full">Submit</Button>
+                    <Button className="w-full" onClick={handleUpdate}>Submit</Button>
                     <SheetClose asChild>
-                        <Button variant="outline" className="w-full">
-                            Done
-                        </Button>
+                        <Button variant="outline" className="w-full">Done</Button>
                     </SheetClose>
                 </SheetFooter>
             </SheetContent>
         </Sheet>
     );
 }
+
+export default TableCellViewer;
+

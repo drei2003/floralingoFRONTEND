@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymenthMethodController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\FlowerController;
 
 
 //Public Routes (Accessible to Everyone)
@@ -35,17 +36,15 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         return Inertia::render('orders');
     })->name('orders');
 
-    Route::get('/products', function () {
-        return Inertia::render('products');
-    })->name('products');
 
-    Route::get('/flowers', function () {
-        return Inertia::render('flowers');
-    })->name('flowers');
 
     Route::get('/sales', function () {
         return Inertia::render('sales');
     })->name('sales');
+
+    Route::resource('products', ProductController::class);
+
+    Route::resource('flowers', FlowerController::class);
 
     Route::resource('category', CategoryController::class);
     
