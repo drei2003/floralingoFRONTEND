@@ -45,6 +45,7 @@ import {
     CheckCircle2Icon,
 } from 'lucide-react';
 import * as React from 'react';
+import { JSX } from 'react';
 import { z } from 'zod';
 
 import { Badge } from '@/components/ui/badge';
@@ -63,6 +64,10 @@ import { useState } from "react";
 import axios from "axios";
 import { router } from '@inertiajs/react';  
 import { useEffect } from "react";
+import { GiftIcon } from 'lucide-react';
+import { CakeIcon } from 'lucide-react';
+import { Flower2Icon } from 'lucide-react';
+import { StarIcon } from 'lucide-react';
 
 
 export const schema = z.object({
@@ -74,6 +79,7 @@ export const schema = z.object({
     Description: z.string(),
     Thumbnail_url: z.string().url().optional(),
     Availability: z.string(),
+    Category: z.string()
 });
 
 // Create a separate component for the drag handle
@@ -176,6 +182,32 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
             </Badge>
         ),
     },
+    {
+        accessorKey: 'Category',
+        header: 'Category',
+        cell: ({ row }) => {
+            const categoryIcons: Record<string, JSX.Element> = {
+                'New Arrival': <CheckCircle2Icon className="text-green-500 dark:text-green-400" />,
+                'Unavailable': <CircleX className="text-red-500 dark:text-red-400" />,
+                'Best Sellers': <StarIcon className="text-yellow-500 dark:text-yellow-400" />,
+                'Bundle': <GiftIcon className="text-purple-500 dark:text-purple-400" />,
+                'Birthday': <CakeIcon className="text-pink-500 dark:text-pink-400" />,
+                'Floral Tributes': <Flower2Icon className="text-blue-500 dark:text-blue-400" />,
+            };
+    
+            const category = row.original.Category as keyof typeof categoryIcons;
+    
+            return (
+                <Badge variant="outline" className="text-muted-foreground flex gap-1 px-1.5 [&_svg]:size-3">
+                    {categoryIcons[category] || <LoaderIcon />}
+                    {category}
+                </Badge>
+            );
+        },
+    },
+    
+    
+    
     {
         id: "actions",
         cell: ({ row }) => (
@@ -532,6 +564,22 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                                 </SelectContent>
                             </Select>
                         </div>
+                        <div className="flex items-center gap-2">
+                            <Label htmlFor="Category">Product Category</Label>
+                            <Select name="Category" defaultValue="New Arrival">
+                                <SelectTrigger id="Category" className="w-full">
+                                    <SelectValue placeholder="Select Category" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="Best Sellers">Best Sellers</SelectItem>
+                                    <SelectItem value="New Arrival">New Arrival</SelectItem>
+                                    <SelectItem value="Bundle">Bundle</SelectItem>
+                                    <SelectItem value="Birthday">Birthday</SelectItem>
+                                    <SelectItem value="Floral Tributes">Floral Tributes</SelectItem>
+                                    <SelectItem value="Unavailable">Unavailable</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
                         <DialogFooter>
                             <Button type="submit">Submit</Button>
                             <DialogClose asChild>
@@ -551,6 +599,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
     const [price, setPrice] = useState(item.Price);
     const [addedAt, setAddedAt] = useState(item.Added_at);
     const [availability, setAvailability] = useState(item.Availability);
+    const [category, setCategory] = useState(item.Category);
 
     const handleUpdate = async () => {
         try {
@@ -560,6 +609,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                 Price: price,
                 Added_at: addedAt,
                 Availability: availability,
+                Category: category,
             });
 
             alert(response.data.message);
@@ -639,6 +689,24 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="Available">Available</SelectItem>
+                                        <SelectItem value="Unavailable">Unavailable</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 gap-4">
+                            <div className="flex flex-col gap-3">
+                                <Label htmlFor="Availability">Status</Label>
+                                <Select value={category} onValueChange={setCategory}>
+                                    <SelectTrigger id="StatusAvailability" className="w-full">
+                                        <SelectValue placeholder="Product Availability" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="Best Sellers">Best Sellers</SelectItem>
+                                        <SelectItem value="New Arrival">New Arrival</SelectItem>
+                                        <SelectItem value="Bundle">Bundle</SelectItem>
+                                        <SelectItem value="Birthday">Birthday</SelectItem>
+                                        <SelectItem value="Floral Tributes">Floral Tributes</SelectItem>
                                         <SelectItem value="Unavailable">Unavailable</SelectItem>
                                     </SelectContent>
                                 </Select>

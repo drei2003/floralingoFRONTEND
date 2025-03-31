@@ -22,6 +22,7 @@ class Product extends Model
         'Description',
         'Thumbnail_url',
         'Availability',
+        'Category',
     ];
     protected $casts = [
         'Added_at' => 'date',

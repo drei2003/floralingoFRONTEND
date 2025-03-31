@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('Description');
             $table->string('Thumbnail_url')->nullable();
             $table->string('Availability');
+            $table->string('Category');
             $table->timestamps();
         });
         

@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         // Fetch products from the database
         $products = Product::orderBy('Added_at', 'desc')->get([
-            'id', 'ProductID', 'Price', 'ProductName', 'Added_at', 'Description', 'Thumbnail_url', 'Availability'
+            'id', 'ProductID', 'Price', 'ProductName', 'Added_at', 'Description', 'Thumbnail_url', 'Availability', 'Category'
         ]);
 
         // Return empty if no products found
@@ -36,6 +36,7 @@ class ProductController extends Controller
                 'ProductName' => (string) $product->ProductName,
                 'Description' => (string) $product->Description,
                 'Availability' => (string) $product->Availability,
+                'Category' => (string) $product->Category,
                 'Added_at' => Carbon::parse($product->Added_at)->format('m-d-Y'),
                 'Thumbnail_url' => $product->Thumbnail_url ? asset('imgAssets/' . basename($product->Thumbnail_url)) : null,
             ];
@@ -77,6 +78,7 @@ class ProductController extends Controller
             'Price' => 'required|numeric',
             'Added_at' => 'nullable|date',
             'Availability' => 'required|string',
+            'Category' => 'required|string',
             'Thumbnail_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -134,6 +136,7 @@ class ProductController extends Controller
             'Price' => 'required|numeric',
             'Added_at' => 'nullable|date',
             'Availability' => 'required|string',
+            'Category' => 'required|string',
         ]);
     
         // Update product details
@@ -142,6 +145,7 @@ class ProductController extends Controller
         $product->Price = $request->Price;
         $product->Added_at = $request->Added_at;
         $product->Availability = $request->Availability;
+        $product->Category = $request->Category;
         $product->save();
     
         return response()->json(['message' => 'Product updated successfully!']);

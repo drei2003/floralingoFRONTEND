@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { ChartLine, ClipboardList, CreditCard, Flower, FolderTree, House, LayoutGrid } from 'lucide-react';
+import { ChartLine, ClipboardList, CreditCard, Flower, FolderTree, House, LayoutGrid, FolderKanban } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -24,12 +24,6 @@ const mainNavItems: NavItem[] = [
         title: 'Products',
         href: '/products',
         icon: LayoutGrid,
-    },
-
-    {
-        title: 'Category',
-        href: '/category',
-        icon: FolderTree,
     },
 
     {

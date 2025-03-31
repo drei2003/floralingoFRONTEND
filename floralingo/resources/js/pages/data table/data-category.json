@@ -7,20 +7,6 @@
         "addedAt": "03-30-2025"
     },
     {
-        "id": 6,
-        "ProductCatID": 84655,
-        "Name": "\ud83c\udf42 Dried Flowers",
-        "Description": "Rustic, charming, and timeless\u2014our dried flowers bring a natural elegance to any setting.",
-        "addedAt": "03-30-2025"
-    },
-    {
-        "id": 5,
-        "ProductCatID": 56911,
-        "Name": "\ud83c\udf3a Eternal Flowers",
-        "Description": "love that lasts forever deserves flowers that do too. Our Eternal Flowers are preserved to maintain their beauty for years, making them the perfect symbol of everlasting love and appreciation.",
-        "addedAt": "03-30-2025"
-    },
-    {
         "id": 4,
         "ProductCatID": 34625,
         "Name": "\ud83c\udf3f New Arrivals",

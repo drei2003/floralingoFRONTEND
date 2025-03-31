@@ -1,32 +1,57 @@
 [
     {
-        "id": 7,
-        "ProductID": 16468,
-        "Price": 679,
-        "ProductName": "Rose Bouquete",
+        "id": 4,
+        "ProductID": 4796,
+        "Price": 699,
+        "ProductName": "Rose Bouquet",
         "Description": "A classic bouquet of fresh red roses, symbolizing love and passion. Perfect for special occasions or heartfelt gestures.",
         "Availability": "Available",
-        "Added_at": "03-31-2025",
-        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418937_roseboq.jpg"
+        "Category": "Best Sellers",
+        "Added_at": "04-01-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743439456_roseboq.jpg"
     },
     {
-        "id": 8,
-        "ProductID": 71629,
-        "Price": 1200,
-        "ProductName": "Sunflower Arrangement",
-        "Description": "A bright and cheerful sunflower arrangement that brings warmth and positivity to any space. Ideal for gifts and home decor.",
-        "Availability": "Unavailable",
-        "Added_at": "03-31-2025",
-        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418968_sunflowerboq.jpg"
-    },
-    {
-        "id": 9,
-        "ProductID": 76905,
-        "Price": 789,
+        "id": 6,
+        "ProductID": 45325,
+        "Price": 786,
         "ProductName": "Carnation Mix",
         "Description": "A delicate mix of pink and white carnations, representing admiration and pure love. Suitable for anniversaries, birthdays, and remembrance.",
         "Availability": "Available",
-        "Added_at": "03-31-2025",
-        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418991_carnationboq.jpg"
+        "Category": "Birthday",
+        "Added_at": "04-01-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743439552_carnationboq.jpg"
+    },
+    {
+        "id": 7,
+        "ProductID": 58799,
+        "Price": 899,
+        "ProductName": "Rose & Lily",
+        "Description": "A stunning combination of roses and lilies, ideal for expressing deep emotions.",
+        "Availability": "Available",
+        "Category": "Bundle",
+        "Added_at": "04-01-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743439678_roselily.jpg"
+    },
+    {
+        "id": 8,
+        "ProductID": 24277,
+        "Price": 678,
+        "ProductName": "White Lily Tribute",
+        "Description": "A floral tribute featuring elegant white lilies, symbolizing peace and remembrance.",
+        "Availability": "Unavailable",
+        "Category": "Floral Tributes",
+        "Added_at": "04-01-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743439725_whitelilyy.jpg"
+    },
+    {
+        "id": 5,
+        "ProductID": 89427,
+        "Price": 899,
+        "ProductName": "Sunflower Arrangement",
+        "Description": "A bright and cheerful sunflower arrangement that brings warmth and positivity to any space. Ideal for gifts and home decor.",
+        "Availability": "Unavailable",
+        "Category": "Unavailable",
+        "Added_at": "01-04-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743439500_sunflowerboq.jpg"
     }
 ]
