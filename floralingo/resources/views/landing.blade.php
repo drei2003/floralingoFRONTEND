@@ -48,9 +48,9 @@
                 >Categories</a
               >
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">First Item</a
-                ><a class="dropdown-item" href="#">Second Item</a
-                ><a class="dropdown-item" href="#">Third Item</a>
+                <a class="dropdown-item" >First Item</a
+                ><a class="dropdown-item" >Second Item</a
+                ><a class="dropdown-item" >Third Item</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -62,9 +62,9 @@
                 >Price list</a
               >
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">First Item</a
-                ><a class="dropdown-item" href="#">Second Item</a
-                ><a class="dropdown-item" href="#">Third Item</a>
+                <a class="dropdown-item" >First Item</a
+                ><a class="dropdown-item" >Second Item</a
+                ><a class="dropdown-item" >Third Item</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -76,9 +76,9 @@
                 >Flower</a
               >
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">First Item</a
-                ><a class="dropdown-item" href="#">Second Item</a
-                ><a class="dropdown-item" href="#">Third Item</a>
+                <a class="dropdown-item" >First Item</a
+                ><a class="dropdown-item" >Second Item</a
+                ><a class="dropdown-item" >Third Item</a>
               </div>
             </li>
             <li class="nav-item">
