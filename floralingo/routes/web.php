@@ -20,6 +20,15 @@ Route::get('/landingPage', function () {
 
 
 
+
+Route::get('/landing', function () {
+    return view('landing');
+});
+
+
+
+
+
 //User Routes (Only for Logged-In Users, Excluding Admins)
 Route::middleware(['auth', 'verified'])->group(function () {
     //for authenticated users
