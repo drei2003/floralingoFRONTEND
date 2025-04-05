@@ -10,6 +10,25 @@ use App\Http\Controllers\FlowerController;
 use App\Http\Controllers\LandingContentController;
 
 
+Route::get('/userLogIn', function () {
+    return view('userLogIn');
+})->name('userLogIn');
+
+Route::get('/userSignUp', function () {
+    return view('userSignUp');
+})->name('userSignUp');
+
+Route::get('/forgotPass', function () {
+    return view('forgotPass');
+})->name('forgotPass');
+
+Route::get('/userHome', function () {
+    return view('userHome');
+})->name('userHome');
+
+
+
+
 //Public Routes (Accessible to Everyone)
 //landing page new BLADE
 Route::get('/', [LandingContentController::class, 'landingPage'])->name('userlanding');
