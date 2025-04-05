@@ -26,7 +26,7 @@ class AdminMiddleware
 
         if (!in_array(Auth::user()->email, $adminEmails)) {
             // If user is not an admin, redirect to "Not Authorized" page
-            return redirect()->route('landingPage')->with('error', 'You are not authorized to access this page.');
+            return redirect()->route('userlanding')->with('error', 'You are not authorized to access this page.');
         }
 
         // If admin, proceed to the requested page

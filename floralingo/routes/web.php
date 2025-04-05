@@ -7,26 +7,27 @@ use App\Http\Controllers\PaymenthMethodController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\FlowerController;
+use App\Http\Controllers\LandingContentController;
 
 
 //Public Routes (Accessible to Everyone)
-Route::get('/', function () {
+//landing page new BLADE
+Route::get('/', [LandingContentController::class, 'landingPage'])->name('userlanding');
+
+//render admin login page
+Route::get('/admin', function () {
     return Inertia::render('auth/login');
 })->name('home');
 
+
+//old landing page
 Route::get('/landingPage', function () {
     return Inertia::render('landingPage');
 })->name('landingPage');
 
-
-
-
-Route::get('/landing', function () {
-    return view('landing');
-});
-
-
-
+Route::get('/userlanding', function () {
+    return view('userlanding');
+})->name('userlanding');
 
 
 //User Routes (Only for Logged-In Users, Excluding Admins)
