@@ -27,5 +27,33 @@ class LandingContentController extends Controller
         // Pass both products and flowers data to the view
         return view('userlanding', compact('products', 'flowers'));
     }
+
+    public function userHomeContent()
+    {
+        // Fetch top 5 new products ordered by 'Added_at' in descending order
+        $newProducts = Product::select('ProductName', 'Price', 'Thumbnail_url', 'id')
+            ->where('Availability', 'Available')
+            ->where('Category', '!=', 'Unavailable')
+            ->orderBy('Added_at', 'desc') // Order by Added_at, descending
+            ->take(5) // Limit to 5 new products
+            ->get();
+    
+        // Fetch top 5 Best Sellers
+        $bestSellers = Product::select('ProductName', 'Price', 'Thumbnail_url', 'Description', 'id')
+            ->where('Availability', 'Available')
+            ->where('Category', 'Best Sellers')
+            ->take(5) // Limit to 5 best sellers
+            ->get();
+
+
+        $allProducts = Product::select('ProductName', 'Price', 'Thumbnail_url', 'Description', 'id')
+            ->where('Availability', 'Available')
+            ->where('Category', '!=', 'Unavailable')
+            ->get();
+
+    return view('userHome', compact('newProducts', 'bestSellers', 'allProducts'));
+    }
+    
+    
 }
 

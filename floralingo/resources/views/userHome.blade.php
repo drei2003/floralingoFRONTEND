@@ -419,109 +419,49 @@
       <!-- End: Header --><!-- Start: cardHolder -->
       <div class="d-flex" style="overflow: auto">
         <!-- Start: productHolder -->
-        <div
-          class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-3"
-          style="margin-top: 35px; margin-bottom: 2px"
-        >
-          <div
-            class="card d-flex"
-            style="
-              border-radius: 26px;
-              background: #f4f4f4;
-              border-style: none;
-              box-shadow: 0px 0px;
-            "
-          >
-            <div class="d-flex justify-content-center align-items-center">
-              <img
-                class="rounded img-fluid object-fit-contain"
-                id="productIMG-5"
-                src="/assets/img/600_8nQTOou9p1IFQzRlA9foAP2zd.png?h=e584b9ec87ff7a941096bdd0ed7d9143"
-                width="300"
-                height="300"
-                style="max-width: 100%"
-              />
+        <div class="d-flex" style="overflow: auto">
+    @foreach ($newProducts as $product)
+        <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-3" style="margin-top: 35px; margin-bottom: 2px">
+            <div class="card d-flex" style="border-radius: 26px; background: #f4f4f4; border-style: none; box-shadow: 0px 0px;">
+                <div class="d-flex justify-content-center align-items-center">
+                    <!-- Image with fixed size and cropped -->
+                    <img class="rounded img-fluid object-fit-cover" id="productIMG-{{ $product->id }}"
+                         src="{{ $product->Thumbnail_url }}" width="300" height="300" style="max-width: 100%; height: 300px; object-fit: cover;" />
+                </div>
+                <div class="card-img-overlay d-flex d-sm-flex justify-content-end align-items-end justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end pt-4 px-xl-3 py-xl-3 px-md-3 py-md-3 px-sm-3 py-sm-3 px-3" style="padding-right: 28px">
+                    <button class="btn btn-secondary" type="button" style="border-radius: 82px; height: 55px; border-style: none; box-shadow: 0px 0px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart-plus" style="font-size: 25px; color: var(--bs-primary)">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                            <path d="M12.5 17h-6.5v-14h-2"></path>
+                            <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
+                            <path d="M16 19h6"></path>
+                            <path d="M19 16v6"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <div
-              class="card-img-overlay d-flex d-sm-flex justify-content-end align-items-end justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end pt-4 px-xl-3 py-xl-3 px-md-3 py-md-3 px-sm-3 py-sm-3 px-3"
-              style="padding-right: 28px"
-            >
-              <button
-                class="btn btn-secondary"
-                type="button"
-                style="
-                  border-radius: 82px;
-                  height: 55px;
-                  border-style: none;
-                  box-shadow: 0px 0px;
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-shopping-cart-plus"
-                  style="font-size: 25px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                  <path d="M12.5 17h-6.5v-14h-2"></path>
-                  <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
-                  <path d="M16 19h6"></path>
-                  <path d="M19 16v6"></path>
-                </svg>
-              </button>
+            <div class="mt-xl-3" style="padding-left: 16px; padding-right: 16px; margin-top: 12px">
+                <h5 id="productTitle-{{ $product->id }}" class="mb-xl-2 mb-2" style="padding-bottom: 0px">
+                    {{ $product->ProductName }}
+                </h5>
+                <div class="d-flex justify-content-between">
+                    <p class="mb-xl-0" style="color: var(--bs-primary)">
+                        ₱<span id="productPrice-{{ $product->id }}" class="ms-xl-1">{{ number_format($product->Price, 2) }}</span>
+                    </p>
+                    <p class="d-xl-flex align-items-xl-center mb-xl-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-star-filled pe-xl-0" style="margin-right: 3px; color: var(--bs-warning)">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" stroke-width="0" fill="currentColor"></path>
+                        </svg>
+                        4.5 (76)
+                    </p>
+                </div>
             </div>
-          </div>
-          <div
-            class="mt-xl-3"
-            style="padding-left: 16px; padding-right: 16px; margin-top: 12px"
-          >
-            <h5
-              id="productTitle-5"
-              class="mb-xl-2 mb-2"
-              style="padding-bottom: 0px"
-            >
-              Scarlet Embrace
-            </h5>
-            <div class="d-flex justify-content-between">
-              <!-- Start: prodPrice -->
-              <p class="mb-xl-0" style="color: var(--bs-primary)">
-                ₱<span id="productPrice-5" class="ms-xl-1">999</span>
-              </p>
-              <!-- End: prodPrice --><!-- Start: prodRatings -->
-              <p class="d-xl-flex align-items-xl-center mb-xl-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-star-filled pe-xl-0"
-                  style="margin-right: 3px; color: var(--bs-warning)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                    stroke-width="0"
-                    fill="currentColor"
-                  ></path></svg
-                >4.5 (76)
-              </p>
-              <!-- End: prodRatings -->
-            </div>
-          </div>
         </div>
+    @endforeach
+</div>
+
         <!-- End: productHolder -->
       </div>
       <!-- End: cardHolder -->
@@ -540,109 +480,49 @@
       <!-- End: Header --><!-- Start: cardHolder -->
       <div class="d-flex" style="overflow: auto">
         <!-- Start: productHolder -->
-        <div
-          class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-3"
-          style="margin-top: 35px; margin-bottom: 2px"
-        >
-          <div
-            class="card d-flex"
-            style="
-              border-radius: 26px;
-              background: #f4f4f4;
-              border-style: none;
-              box-shadow: 0px 0px;
-            "
-          >
-            <div class="d-flex justify-content-center align-items-center">
-              <img
-                class="rounded img-fluid object-fit-contain"
-                id="productIMG-7"
-                src="/assets/img/600_8nQTOou9p1IFQzRlA9foAP2zd.png?h=e584b9ec87ff7a941096bdd0ed7d9143"
-                width="300"
-                height="300"
-                style="max-width: 100%"
-              />
+        @foreach ($bestSellers as $product)
+        <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-3" style="margin-top: 35px; margin-bottom: 2px;">
+            <div class="card d-flex" style="border-radius: 26px; background: #f4f4f4; border-style: none; box-shadow: 0px 0px;">
+                <div class="d-flex justify-content-center align-items-center">
+                    <!-- Fixed size image with object-fit cover -->
+                    <img class="rounded img-fluid object-fit-cover" id="productIMG-{{ $product->id }}"
+                         src="{{ $product->Thumbnail_url }}" width="300" height="300" 
+                         style="max-width: 100%; height: 300px; object-fit: cover;" />
+                </div>
+                <div class="card-img-overlay d-flex justify-content-end align-items-end pt-4 px-xl-3 py-xl-3">
+                    <button class="btn btn-secondary" type="button" style="border-radius: 82px; height: 55px; border-style: none;">
+                        <!-- Add Cart Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart-plus" style="font-size: 25px; color: var(--bs-primary)">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                            <path d="M12.5 17h-6.5v-14h-2"></path>
+                            <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
+                            <path d="M16 19h6"></path>
+                            <path d="M19 16v6"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <div
-              class="card-img-overlay d-flex d-sm-flex justify-content-end align-items-end justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end pt-4 px-xl-3 py-xl-3 px-md-3 py-md-3 px-sm-3 py-sm-3 px-3"
-              style="padding-right: 28px"
-            >
-              <button
-                class="btn btn-secondary"
-                type="button"
-                style="
-                  border-radius: 82px;
-                  height: 55px;
-                  border-style: none;
-                  box-shadow: 0px 0px;
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-shopping-cart-plus"
-                  style="font-size: 25px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                  <path d="M12.5 17h-6.5v-14h-2"></path>
-                  <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
-                  <path d="M16 19h6"></path>
-                  <path d="M19 16v6"></path>
-                </svg>
-              </button>
+            <div class="mt-xl-3" style="padding-left: 16px; padding-right: 16px; margin-top: 12px;">
+                <h5 id="productTitle-{{ $product->id }}" class="mb-xl-2 mb-2" style="padding-bottom: 0px;">
+                    {{ $product->ProductName }}
+                </h5>
+                <div class="d-flex justify-content-between">
+                    <p class="mb-xl-0" style="color: var(--bs-primary)">
+                        ₱<span id="productPrice-{{ $product->id }}" class="ms-xl-1">{{ number_format($product->Price, 2) }}</span>
+                    </p>
+                    <p class="d-xl-flex align-items-xl-center mb-xl-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-star-filled pe-xl-0" style="margin-right: 3px; color: var(--bs-warning)">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" stroke-width="0" fill="currentColor"></path>
+                        </svg>
+                        4.5 (76)
+                    </p>
+                </div>
+                
             </div>
-          </div>
-          <div
-            class="mt-xl-3"
-            style="padding-left: 16px; padding-right: 16px; margin-top: 12px"
-          >
-            <h5
-              id="productTitle-7"
-              class="mb-xl-2 mb-2"
-              style="padding-bottom: 0px"
-            >
-              Scarlet Embrace
-            </h5>
-            <div class="d-flex justify-content-between">
-              <!-- Start: prodPrice -->
-              <p class="mb-xl-0" style="color: var(--bs-primary)">
-                ₱<span id="productPrice-7" class="ms-xl-1">999</span>
-              </p>
-              <!-- End: prodPrice --><!-- Start: prodRatings -->
-              <p class="d-xl-flex align-items-xl-center mb-xl-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-star-filled pe-xl-0"
-                  style="margin-right: 3px; color: var(--bs-warning)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                    stroke-width="0"
-                    fill="currentColor"
-                  ></path></svg
-                >4.5 (76)
-              </p>
-              <!-- End: prodRatings -->
-            </div>
-          </div>
         </div>
+    @endforeach
         <!-- End: productHolder -->
       </div>
       <!-- End: cardHolder -->
@@ -663,109 +543,45 @@
       <!-- End: Header -->
       <div class="row gx-5 gy-4 d-flex justify-content-center mt-0">
         <!-- Start: productHolder -->
-        <div
-          class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3"
-          style="margin-top: 35px; margin-bottom: 2px"
-        >
-          <div
-            class="card d-flex"
-            style="
-              border-radius: 26px;
-              background: #f4f4f4;
-              border-style: none;
-              box-shadow: 0px 0px;
-            "
-          >
+        @foreach ($allProducts as $product)
+        <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-3" style="margin-top: 35px; margin-bottom: 2px;">
+            <div class="card d-flex" style="border-radius: 26px; background: #f4f4f4; border-style: none; box-shadow: 0px 0px;">
             <div class="d-flex justify-content-center align-items-center">
-              <img
-                class="rounded img-fluid object-fit-contain"
-                id="productIMG-11"
-                src="/assets/img/600_8nQTOou9p1IFQzRlA9foAP2zd.png?h=e584b9ec87ff7a941096bdd0ed7d9143"
-                width="300"
-                height="300"
-                style="max-width: 100%"
-              />
+                    <!-- Fixed size image with object-fit cover -->
+                    <img class="rounded img-fluid object-fit-cover" id="productIMG-{{ $product->id }}"
+                         src="{{ $product->Thumbnail_url }}" width="300" height="300" 
+                         style="max-width: 100%; height: 300px; object-fit: cover;" />
+                </div>
+                <div class="card-img-overlay d-flex justify-content-end align-items-end pt-4 px-xl-3 py-xl-3">
+                    <button class="btn btn-secondary" type="button" style="border-radius: 82px; height: 55px; border-style: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                             fill="none" stroke-linecap="round" stroke-linejoin="round"
+                             class="icon icon-tabler icon-tabler-shopping-cart-plus"
+                             style="font-size: 25px; color: var(--bs-primary)">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                            <path d="M12.5 17h-6.5v-14h-2"></path>
+                            <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
+                            <path d="M16 19h6"></path>
+                            <path d="M19 16v6"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <div
-              class="card-img-overlay d-flex d-sm-flex justify-content-end align-items-end justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end pt-4 px-xl-3 py-xl-3 px-md-3 py-md-3 px-sm-3 py-sm-3 px-3"
-              style="padding-right: 28px"
-            >
-              <button
-                class="btn btn-secondary"
-                type="button"
-                style="
-                  border-radius: 82px;
-                  height: 55px;
-                  border-style: none;
-                  box-shadow: 0px 0px;
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-shopping-cart-plus"
-                  style="font-size: 25px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                  <path d="M12.5 17h-6.5v-14h-2"></path>
-                  <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
-                  <path d="M16 19h6"></path>
-                  <path d="M19 16v6"></path>
-                </svg>
-              </button>
+            <div class="mt-xl-3" style="padding-left: 16px; padding-right: 16px; margin-top: 12px;">
+                <h5 id="productTitle-{{ $product->id }}" class="mb-xl-2 mb-2" style="padding-bottom: 0px;">
+                    {{ $product->ProductName }}
+                </h5>
+                <div class="d-flex justify-content-between">
+                    <p class="mb-xl-0" style="color: var(--bs-primary)">
+                        ₱<span id="productPrice-{{ $product->id }}" class="ms-xl-1">{{ number_format($product->Price, 2) }}</span>
+                    </p>
+                </div>
+                
             </div>
-          </div>
-          <div
-            class="mt-xl-3"
-            style="padding-left: 16px; padding-right: 16px; margin-top: 12px"
-          >
-            <h5
-              id="productTitle-11"
-              class="mb-xl-2 mb-2"
-              style="padding-bottom: 0px"
-            >
-              Scarlet Embrace
-            </h5>
-            <div class="d-flex justify-content-between">
-              <!-- Start: prodPrice -->
-              <p class="mb-xl-0" style="color: var(--bs-primary)">
-                ₱<span id="productPrice-11" class="ms-xl-1">999</span>
-              </p>
-              <!-- End: prodPrice --><!-- Start: prodRatings -->
-              <p class="d-xl-flex align-items-xl-center mb-xl-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-star-filled pe-xl-0"
-                  style="margin-right: 3px; color: var(--bs-warning)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                    stroke-width="0"
-                    fill="currentColor"
-                  ></path></svg
-                >4.5 (76)
-              </p>
-              <!-- End: prodRatings -->
-            </div>
-          </div>
         </div>
+    @endforeach
         <!-- End: productHolder -->
       </div>
     </div>
@@ -1633,6 +1449,15 @@
               <li class="text-dark">
                 <a class="link-dark" href="#">Contact Us</a>
               </li>
+              
+              <!-- Temporary: Logout -->
+              <li class="text-dark">
+                  <form action="{{ route('logout') }}" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-link link-dark p-0 m-0 align-baseline">Log Out</button>
+                  </form>
+              </li>
+
             </ul>
           </div>
           <!-- Start: Social Icons -->

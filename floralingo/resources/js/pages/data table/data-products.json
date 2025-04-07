@@ -13,13 +13,46 @@
     {
         "id": 10,
         "ProductID": 37118,
-        "Price": 1111,
-        "ProductName": "yieyiey",
+        "Price": 22222,
+        "ProductName": "yieyieyyy",
         "Description": "luphet pahreh",
         "Availability": "Available",
         "Category": "Floral Tributes",
-        "Added_at": "04-05-2025",
+        "Added_at": "04-06-2025",
         "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743849821_lupet.jpg"
+    },
+    {
+        "id": 11,
+        "ProductID": 16876,
+        "Price": 1300,
+        "ProductName": "Lavender Bliss",
+        "Description": "A calming lavender bouquet, known for its soothing fragrance and stress-relieving properties. Ideal for relaxation and a peaceful atmosphere.",
+        "Availability": "Available",
+        "Category": "New Arrival",
+        "Added_at": "04-05-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743864415_lavander.jpg"
+    },
+    {
+        "id": 12,
+        "ProductID": 65284,
+        "Price": 2000,
+        "ProductName": "Orchid",
+        "Description": "A luxurious orchid arrangement, symbolizing rare beauty and strength. Perfect for sophisticated settings or as a gift for someone special.",
+        "Availability": "Available",
+        "Category": "Birthday",
+        "Added_at": "04-05-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743864483_orchid.jpg"
+    },
+    {
+        "id": 13,
+        "ProductID": 63384,
+        "Price": 1203,
+        "ProductName": "Daffodil Sunrise",
+        "Description": "A vibrant daffodil bouquet, symbolizing new beginnings and hope. A perfect choice for springtime or to celebrate new chapters in life.",
+        "Availability": "Available",
+        "Category": "Floral Tributes",
+        "Added_at": "04-05-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743864541_Daffodil Delight.jpg"
     },
     {
         "id": 4,
@@ -62,7 +95,7 @@
         "Description": "A floral tribute featuring elegant white lilies, symbolizing peace and remembrance.",
         "Availability": "Available",
         "Category": "Floral Tributes",
-        "Added_at": "01-04-2025",
+        "Added_at": "04-01-2025",
         "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743439725_whitelilyy.jpg"
     }
 ]

@@ -55,7 +55,7 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="#faqs">FAQs</a></li>
         </ul>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="#"
+        <a class="btn btn-outline-primary btn-lg" role="button" href="{{ route('userSignUp') }}"
           style="height: fit-content; width: fit-content; font-size: inherit">Sign In</a>
       </div>
     </div>
@@ -382,7 +382,8 @@
         <div
         class="card-img-overlay d-flex d-sm-flex justify-content-end align-items-end justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end pt-4 px-xl-3 py-xl-3 px-md-3 py-md-3 px-sm-3 py-sm-3 px-3"
         style="padding-right: 28px">
-        <a href="{{ route('userlanding', $product->id) }}">
+        <!-- <a href="{{ route('userlanding', $product->id) }}"> -->
+        <a href="{{ route('loginUser') }}">
           <button class="btn btn-secondary" type="button" style="
       border-radius: 82px;
       height: 55px;
@@ -939,7 +940,7 @@
           </p>
         </div>
         <div class="my-2">
-          <a class="btn btn-secondary fs-5 link-primary py-2 px-4 me-sm-2 me-2" role="button" href="#">Sign In</a>
+          <a class="btn btn-secondary fs-5 link-primary py-2 px-4 me-sm-2 me-2" role="button" href="{{ route('userSignUp') }}">Sign In</a>
         </div>
       </div>
     </div>

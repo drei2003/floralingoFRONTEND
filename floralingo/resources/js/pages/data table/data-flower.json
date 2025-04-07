@@ -1,9 +1,19 @@
 [
     {
+        "id": 11,
+        "flower_id": "62272",
+        "flower_name": "Carnations",
+        "description": "A flower of admiration, remembrance, and deep affection. Carnations symbolize the bonds we share with those we loveu2014each petal carrying a story, much like our own experiences. They remind us that even in moments of sorrow, love and memories bloom eternal.",
+        "scientific_name": "Dianthus caryophyllus",
+        "pronunciation": "dye-AN-thus ka-ree-oh-FIL-us",
+        "added_at": "04-06-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418699_carnations.jpg"
+    },
+    {
         "id": 9,
         "flower_id": "80142",
         "flower_name": "Rose",
-        "description": "A symbol of love, passion, and deep emotions. The rose reflects the beauty and complexity of relationships\u2014its petals soft and inviting, yet its thorns a reminder of love\u2019s challenges. Just like in life, love requires care, patience, and understanding..",
+        "description": "A symbol of love, passion, and deep emotions. The rose reflects the beauty and complexity of relationshipsu2014its petals soft and inviting, yet its thorns a reminder of loveu2019s challenges. Just like in life, love requires care, patience, and understanding.",
         "scientific_name": "Rosa",
         "pronunciation": "ROH-zuh",
         "added_at": "04-01-2025",
@@ -18,15 +28,5 @@
         "pronunciation": "HE-lee-AN-thus AN-yoo-us",
         "added_at": "03-31-2025",
         "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418663_sunflower.jpg"
-    },
-    {
-        "id": 11,
-        "flower_id": "62272",
-        "flower_name": "Carnation",
-        "description": "A flower of admiration, remembrance, and deep affection. Carnations symbolize the bonds we share with those we love\u2014each petal carrying a story, much like our own experiences. They remind us that even in moments of sorrow, love and memories bloom eternal.",
-        "scientific_name": "Dianthus caryophyllus",
-        "pronunciation": "dye-AN-thus ka-ree-oh-FIL-us",
-        "added_at": "03-31-2025",
-        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1743418699_carnations.jpg"
     }
 ]

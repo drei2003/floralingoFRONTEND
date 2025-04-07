@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="mt-lg-3">
                                         <p class="d-xl-flex justify-content-xl-center" style="font-size: 13px">
-                                            Or, return to<span class="ms-2"><a class="link-primary ms-0" href="/logIn.html">Log in</a></span>
+                                            Or, return to<span class="ms-2"><a class="link-primary ms-0" href="{{ route ('userLogIn') }}">Log in</a></span>
                                         </p>
                                     </div>
                                 </form>
