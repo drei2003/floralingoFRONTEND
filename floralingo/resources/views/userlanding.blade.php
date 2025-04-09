@@ -958,7 +958,7 @@
               <a class="link-dark" href="#contactUs">Contact Us</a>
             </li>
             <li class="text-dark">
-              <a class="link-dark" href="{{ route('home') }}">Login as Admin</a>
+              <a class="link-dark" href="{{ route('home') }}" target="_blank">Login as Admin</a>
             </li>
 
           </ul>

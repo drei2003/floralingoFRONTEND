@@ -16,28 +16,35 @@
             <div class="card d-flex flex-row-reverse" style="height: 600px; box-shadow: 0px 0px; border-radius: 20px">
                 <img class="card-img-top d-block d-none d-lg-flex fit-cover w-100"
                     style="height: auto; max-width: inherit; border-radius: 0px; border-bottom-right-radius: 20px; border-top-right-radius: 20px"
-                    src="/assets/img/9qjg8pkr.webp?h=0860fccbf8b9bdac5392db46e4d48178" />
+                    src="/assets/img/login.jpg" />
                 <div class="card-body d-flex d-xl-flex justify-content-center align-items-center p-4 px-5 py-5"
                     style="width: 978.188px">
                     <section class="px-xxl-5 px-xl-4 px-md-5 px-lg-0 me-0 px-0">
                         <!-- Start: heading -->
                         <div class="mb-5">
                             <a class="navbar-brand d-flex justify-content-center align-items-center align-items-xxl-center mb-3"
-                                href="{{ route ('userlanding') }}"><span
+                                href="{{ route('userlanding') }}"><span
                                     class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center bs-icon me-2"><img
                                         class="img-fluid"
                                         src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span>
                                 <h4 class="fw-bold mb-0">FLORALINGO</h4>
                             </a>
-                            <h1 class="fw-bolder d-xl-flex mb-1">Log in to your account</h1>
+                            <h1 class="fw-bolder d-xl-flex mb-1">Log in to your shopping account</h1>
                         </div>
                         <!-- End: heading -->
                         <div>
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
                             <form method="POST" action="{{ route('loginUser') }}">
                                 @csrf
                                 <label class="form-label">Email address&nbsp;</label>
                                 <input class="form-control mb-3" type="email" name="email"
                                     placeholder="email@example.com" required />
+
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label">Password</label>
                                     <a class="link-primary" href="{{ route('forgotPass') }}"
@@ -45,9 +52,11 @@
                                 </div>
                                 <input class="form-control mb-4" type="password" name="password" placeholder="Password"
                                     required />
+
                                 <div class="mt-lg-3">
                                     <button class="btn btn-primary" type="submit" style="width: 100%">Log In</button>
                                 </div>
+
                                 <div class="mt-lg-3">
                                     <p class="d-xl-flex justify-content-xl-center" style="font-size: 13px">
                                         Don’t have an account?

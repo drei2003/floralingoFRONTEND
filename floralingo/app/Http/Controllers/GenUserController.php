@@ -11,14 +11,17 @@ use App\Models\GenUser;
 class GenUserController extends Controller
 {
     public function genUserRegister(Request $request)
-    {
-        // Validate user input
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+{
+    // Validate user input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:gen_users,email',
+        'password' => 'required|string|min:8|confirmed',
+    ], [
+        'email.unique' => 'This email is already taken. Please use a different email address.',
+    ]);
 
+    try {
         // Create the user
         $user = GenUser::create([
             'name' => $request->name,
@@ -26,12 +29,18 @@ class GenUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Log the user in
-        Auth::login($user);
+        // Optionally log the user in
+        // Auth::login($user);
 
-        // Redirect to the home page
-        return redirect()->route('userHome')->with('success', 'Account created successfully!');
+        // Redirect to the login page with a success message
+        return redirect()->route('userLogIn')->with('success', 'Account created successfully! Please log in.');
+    } catch (\Exception $e) {
+        // Catch any errors and display a friendly error message
+        return back()->withErrors(['email' => 'An error occurred while creating your account. Please try again.'])->withInput();
     }
+}
+
+    
 
     public function genUserLogin(Request $request)
     {
@@ -49,26 +58,34 @@ class GenUserController extends Controller
         if ($user && Hash::check($credentials['password'], $user->password)) {
             // Log the user in manually
             Auth::login($user);
-
+            
+            // Store the user in session
+            session(['user' => $user]); // Store the user object in session
+    
             $request->session()->regenerate();
-
+    
             return redirect()->route('userHome')->with('success', 'Logged in successfully!');
         }
-
+    
         return back()->withErrors([
             'email' => 'Invalid credentials.',
         ])->withInput();
     }
+    
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
+    public function GenLogout(Request $request)
+{
+    // Remove the custom user session
+    $request->session()->forget('user');
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    // Optional: destroy the entire session
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
-        return redirect()->route('userlanding')->with('success', 'Logged out successfully!');
-    }
+    // Redirect to user landing page with success message
+    return redirect()->route('userlanding')->with('success', 'Logged out successfully!');
+
+}
 
 
 }

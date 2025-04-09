@@ -9,6 +9,7 @@ use App\Http\Controllers\GenUserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\FlowerController;
 use App\Http\Controllers\LandingContentController;
+use App\Http\Middleware\CheckRegisteredUser;
 
 
 //Public Routes (Accessible to Everyone)
@@ -28,15 +29,16 @@ Route::get('/userLogIn', function () {
 Route::post('/userLogIn', [GenUserController::class, 'genUserLogin'])->name('loginUser');
 
 
-Route::post('/logout', [GenUserController::class, 'logout'])->name('logout');
+Route::post('/GenLogout', [GenUserController::class, 'GenLogout'])->name('GenLogout');
 
 
 Route::get('/forgotPass', function () {
     return view('forgotPass');
 })->name('forgotPass');
 
-Route::get('/userHome', [LandingContentController::class, 'userHomeContent'])->name('userHome');
-
+Route::get('/userHome', [LandingContentController::class, 'userHomeContent'])
+    ->middleware(CheckRegisteredUser::class)  // Apply custom middleware
+    ->name('userHome');
 
 
 

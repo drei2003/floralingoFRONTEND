@@ -16,13 +16,13 @@
             <div class="card d-flex flex-row-reverse" style="height: 675px; box-shadow: 0px 0px; border-radius: 20px">
                 <img class="card-img-top d-block d-none d-lg-flex fit-cover w-100"
                     style="height: auto; max-width: inherit; border-radius: 0px; border-bottom-right-radius: 20px; border-top-right-radius: 20px"
-                    src="/assets/img/9qjg8pkr.webp?h=0860fccbf8b9bdac5392db46e4d48178" />
+                    src="/assets/img/signup.jpg" />
                 <div class="card-body d-xl-flex p-4 px-5 py-5" style="width: 978.188px">
                     <section class="px-xxl-5 px-xl-4 px-md-5 px-lg-0 my-0 me-0 px-0">
                         <!-- Start: heading -->
                         <div class="mb-4">
                             <a class="navbar-brand d-flex justify-content-center align-items-center justify-content-xxl-center mb-3"
-                                href="{{ route ('userlanding') }}"><span
+                                href="{{ route('userlanding') }}"><span
                                     class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center bs-icon me-2"><img
                                         class="img-fluid"
                                         src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span>
@@ -36,11 +36,16 @@
                                 @csrf
                                 <label class="form-label">Name</label>
                                 <input class="form-control mb-3" type="text" name="name" placeholder="Full name"
-                                    required />
+                                    required value="{{ old('name') }}" />
 
                                 <label class="form-label">Email address</label>
                                 <input class="form-control mb-3" type="email" name="email"
-                                    placeholder="email@example.com" required />
+                                    placeholder="email@example.com" required value="{{ old('email') }}" />
+
+                                <!-- Display validation error for email -->
+                                @if ($errors->has('email'))
+                                    <div class="text-danger">{{ $errors->first('email') }}</div>
+                                @endif
 
                                 <label class="form-label">Password</label>
                                 <input class="form-control mb-3" type="password" name="password" placeholder="Password"
@@ -63,6 +68,7 @@
                                     </p>
                                 </div>
                             </form>
+
 
                         </div>
                     </section>

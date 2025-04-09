@@ -116,6 +116,7 @@
               class="display-1 text-uppercase fw-bold text-center text-lg-center text-primary pb-0 pb-lg-0 mb-0 mb-xl-0 mb-lg-0">
               <span class="fs-1 text-lg-center text-muted">Welcome to</span>&nbsp;<br />FLORALINGO
             </h2>
+            <h1 class="fs-1 text-lg-center text-muted">{{ $user->name }}!</h1>
             <p class="text-center text-lg-center text-body my-3 mb-4">
               Welcome to a World of Blossoms and Beauty. Discover stunning
               floral arrangements, handpicked for every occasion.&nbsp;
@@ -945,7 +946,7 @@
 
             <!-- Temporary: Logout -->
             <li class="text-dark">
-              <form action="{{ route('logout') }}" method="POST">
+              <form action="{{ route('GenLogout') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-link link-dark p-0 m-0 align-baseline">Log Out</button>
               </form>

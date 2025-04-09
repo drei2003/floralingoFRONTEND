@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Flower;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LandingContentController extends Controller
 {
@@ -30,6 +31,7 @@ class LandingContentController extends Controller
 
     public function userHomeContent()
     {
+        $user = session('user');
         // Fetch top 5 new products ordered by 'Added_at' in descending order
         $newProducts = Product::select('ProductName', 'Price', 'Thumbnail_url', 'id')
             ->where('Availability', 'Available')
@@ -53,7 +55,7 @@ class LandingContentController extends Controller
 
         $dictionary = Flower::orderBy('added_at', 'desc')->take(3)->get();
 
-        return view('userHome', compact('newProducts', 'bestSellers', 'allProducts', 'dictionary'));
+        return view('userHome', compact('user', 'newProducts', 'bestSellers', 'allProducts', 'dictionary'));
     }
     
     
