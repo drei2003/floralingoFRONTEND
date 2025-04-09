@@ -21,7 +21,7 @@ class LandingContentController extends Controller
 
         // Fetch 2 flowers
         $flowers = Flower::select('Thumbnail_url', 'flower_name', 'description', 'scientific_name', 'pronunciation')
-            ->limit(2)
+            ->limit(3)
             ->get();
 
         // Pass both products and flowers data to the view
@@ -51,7 +51,9 @@ class LandingContentController extends Controller
             ->where('Category', '!=', 'Unavailable')
             ->get();
 
-    return view('userHome', compact('newProducts', 'bestSellers', 'allProducts'));
+        $dictionary = Flower::orderBy('added_at', 'desc')->take(3)->get();
+
+        return view('userHome', compact('newProducts', 'bestSellers', 'allProducts', 'dictionary'));
     }
     
     

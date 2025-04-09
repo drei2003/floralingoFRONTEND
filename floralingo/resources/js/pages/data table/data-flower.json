@@ -1,5 +1,35 @@
 [
     {
+        "id": 13,
+        "flower_id": "7874",
+        "flower_name": "Tulip",
+        "description": "Tulips represent perfect love and elegance. Each bloom stands tall and proud, reflecting inner strength and the quiet beauty of simplicity. They remind us that even the simplest things can hold deep meaning.",
+        "scientific_name": "Tulipa",
+        "pronunciation": "TOO-lip",
+        "added_at": "04-09-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1744189937_tulip.jpg"
+    },
+    {
+        "id": 14,
+        "flower_id": "35139",
+        "flower_name": "Peony",
+        "description": "Peonies symbolize prosperity, good fortune, and honor. Their lush, full blooms represent romance and a fulfilling life. Often associated with healing and love, they remind us to embrace our own blooming journeys.",
+        "scientific_name": "Paeonia",
+        "pronunciation": "PEE-oh-nee-uh",
+        "added_at": "04-09-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1744189969_peony.jpg"
+    },
+    {
+        "id": 15,
+        "flower_id": "10925",
+        "flower_name": "Anemone",
+        "description": "A symbol of anticipation and protection. Anemones remind us of the fragility of life and the importance of appreciating each moment. Their soft, open form symbolizes emotional vulnerability and trust.",
+        "scientific_name": "Anemone coronaria",
+        "pronunciation": "uh-NEM-uh-nee koh-ro-NAH-ree-uh",
+        "added_at": "04-09-2025",
+        "Thumbnail_url": "http:\/\/localhost:8000\/imgAssets\/1744190001_anemone.jpg"
+    },
+    {
         "id": 11,
         "flower_id": "62272",
         "flower_name": "Carnations",

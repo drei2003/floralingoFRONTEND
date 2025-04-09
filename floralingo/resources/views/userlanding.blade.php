@@ -22,30 +22,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navcol-3">
         <ul class="navbar-nav mx-auto">
+
           <li class="nav-item dropdown">
-            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Categories</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item">Best Sellers</a>
-              <a class="dropdown-item">New Arrival</a>
-              <a class="dropdown-item">Bundle</a>
-              <a class="dropdown-item">Birthday</a>
-              <a class="dropdown-item">Floral Tributes</a>
-            </div>
+            <a class="nav-link" href="#floraDictionary">Dictionary</a>
+
           </li>
           <li class="nav-item dropdown">
-            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Price list</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">100 - 500</a>
-                <a class="dropdown-item" href="#">500 - 1000</a>
-                <a class="dropdown-item" href="#">1000 - 2000</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Flower</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item">First Item</a><a class="dropdown-item">Second Item</a><a
-                class="dropdown-item">Third Item</a>
-            </div>
+            <a class="nav-link" href="#floraProducts">Product</a>
+
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contactUs">Contact Us</a>
@@ -262,7 +246,7 @@
   <!-- End: promotional cards --><!-- Start: Featured products -->
   <div class="container-lg py-4 py-xl-5">
     <!-- Start: Header -->
-     <section id="floraFeatured"> </section>
+    <section id="floraFeatured"> </section>
     <div class="row mb-5">
       <div class="col-md-8 col-xl-8 col-xxl-8 text-center mx-auto py-0 px-4">
         <h2 class="fs-1 fw-bold text-primary">
@@ -332,7 +316,7 @@
   <!-- End: Featured products --><!-- Start: Our products -->
   <div class="container py-4 py-xl-5 my-5 pt-5 mt-0 mt-sm-5">
     <!-- Start: Header -->
-     <section id="floraProducts"></section>
+    <section id="floraProducts"></section>
     <div class="row mb-5 px-4">
       <div class="col-md-8 col-xl-7 col-xxl-8 offset-xl-1 text-center text-sm-start justify-content-evenly mx-auto">
         <h3 class="fs-1 fw-bold text-center text-sm-start text-primary">
@@ -541,75 +525,79 @@
     </section>
 
     <section id="floraDictionary">
-    <div class="container my-0 py-5">
-      <!-- Start: Header -->
-      <div class="row mb-5">
-        <div class="col-md-8 col-xl-8 col-xxl-8 text-center mx-auto px-4">
-          <h2 class="fs-1 fw-bold text-primary">
-            <span class="text-muted">The Language of Flowers:</span>&nbsp;<br />Your Flower Dictionary
-          </h2>
-          <p class="w-lg-50">
-            Dive into a world where each bloom tells a story. Learn the
-            meanings and symbolism behind your favorite flowers, from the
-            passionate red rose to the cheerful sunflower. Explore how
-            different cultures and occasions embrace the beauty of flowers,
-            and discover which bloom is the perfect choice to convey your
-            message
-          </p>
+      <div class="container my-0 py-5">
+        <!-- Start: Header -->
+        <div class="row mb-5">
+          <div class="col-md-8 col-xl-8 col-xxl-8 text-center mx-auto px-4">
+            <h2 class="fs-1 fw-bold text-primary">
+              <span class="text-muted">The Language of Flowers:</span>&nbsp;<br />Your Flower Dictionary
+            </h2>
+            <p class="w-lg-50">
+              Dive into a world where each bloom tells a story. Learn the
+              meanings and symbolism behind your favorite flowers, from the
+              passionate red rose to the cheerful sunflower. Explore how
+              different cultures and occasions embrace the beauty of flowers,
+              and discover which bloom is the perfect choice to convey your
+              message
+            </p>
+          </div>
+        </div>
+        <!-- End: Header -->
+        <div class="row gx-4 gy-4 d-flex justify-content-center">
+
+          <!-- userlanding.blade.php -->
+
+          @foreach($flowers as $flower)
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden"
+          style="border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <div class="position-relative">
+          <img class="card-img-top" src="{{ asset($flower->Thumbnail_url) }}" alt="{{ $flower->flower_name }}"
+            style="height: 220px; object-fit: cover;" />
+          <div class="position-absolute bottom-0 start-0 bg-gradient-dark w-100 p-3"
+            style="background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);">
+            <h3 class="fw-bold text-white mb-1">{{ $flower->flower_name }}</h3>
+            <p class="text-light mb-0 small">{{ $flower->pronunciation }}</p>
+          </div>
+          </div>
+          <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-normal">
+            <span class="text-muted">Scientific Name:</span>
+            <span class="ms-1 fw-medium fst-italic">{{ $flower->scientific_name }}</span>
+            </span>
+          </div>
+
+          <p class="card-text text-dark">{{ $flower->description }}</p>
+
+
+          <div class="mt-auto pt-3">
+            <a href="#" class="btn btn-outline-primary rounded-pill d-inline-flex align-items-center">
+            Learn More
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="ms-2">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M5 12l14 0"></path>
+              <path d="M13 18l6 -6"></path>
+              <path d="M13 6l6 6"></path>
+            </svg>
+            </a>
+          </div>
+          </div>
+        </div>
+        </div>
+      @endforeach
+
+
+
+
+          <!-- If no flowers, display a message -->
+          @if ($flowers->isEmpty())
+        <p>No flowers to show</p>
+      @endif
+
         </div>
       </div>
-      <!-- End: Header -->
-      <div class="row gx-4 gy-4 d-flex justify-content-center">
-
-        <!-- userlanding.blade.php -->
-
-          @foreach ($flowers as $flower)
-            <div
-              class="col-10 col-sm-6 col-md-5 col-lg-11 col-xl-11 col-xxl-10 d-lg-flex d-xl-flex d-xxl-flex justify-content-xl-end justify-content-xxl-center"
-              style="margin-top: 35px; margin-bottom: 2px">
-              <div class="card d-md-flex"
-              style="border-radius: 26px; background: #f4f4f4; border-style: none; box-shadow: 0px 0px;">
-              <div class="d-flex">
-                <!-- Make the image square with a fixed height and width, and crop it -->
-                <img class="img-fluid" src="{{ $flower->Thumbnail_url }}"
-                style="width: 400px; height: 200px; object-fit: cover; border-radius: 8px;" />
-              </div>
-              </div>
-              <div class="d-flex flex-column justify-content-between mt-xl-3"
-              style="padding-left: 16px; padding-right: 16px; margin-top: 12px">
-              <div>
-                <h3 class="fw-bold mb-0">{{ $flower->flower_name }}</h3>
-                <p class="mb-xl-0" style="color: rgb(73, 80, 87)">
-                {{ $flower->pronunciation }}
-                </p>
-                <p class="mb-xl-0" style="color: rgb(73, 80, 87); font-weight: bold">
-                Scientific Name: <span style="font-weight: normal !important">{{ $flower->scientific_name }}</span>
-                </p>
-              </div>
-              <p class="mb-xl-0" style="color: var(--bs-primary)">
-                {{ $flower->description }}
-              </p>
-              <a href="#" style="color: var(--bs-primary)">Learn More<svg xmlns="http://www.w3.org/2000/svg" width="1em"
-                height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-right ms-1">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M5 12l14 0"></path>
-                <path d="M13 18l6 -6"></path>
-                <path d="M13 6l6 6"></path>
-                </svg></a>
-              </div>
-            </div>
-          @endforeach
-
-
-
-            <!-- If no flowers, display a message -->
-            @if ($flowers->isEmpty())
-              <p>No flowers to show</p>
-            @endif
-
-      </div>
-    </div>
     </section>
 
     <section
@@ -834,7 +822,7 @@
               </div>
               <div class="px-2">
                 <h6 class="mb-0">Phone</h6>
-                <p class="mb-0">+123456789</p>
+                <p class="mb-0">+639 293 406 082</p>
               </div>
             </div>
             <div class="d-flex align-items-center p-3">
@@ -864,7 +852,7 @@
               </div>
               <div class="px-2">
                 <h6 class="mb-0">Location</h6>
-                <p class="mb-0">12 Example Street</p>
+                <p class="mb-0">RAJIV Company, Side Street</p>
               </div>
             </div>
           </div>
@@ -940,7 +928,8 @@
           </p>
         </div>
         <div class="my-2">
-          <a class="btn btn-secondary fs-5 link-primary py-2 px-4 me-sm-2 me-2" role="button" href="{{ route('userSignUp') }}">Sign In</a>
+          <a class="btn btn-secondary fs-5 link-primary py-2 px-4 me-sm-2 me-2" role="button"
+            href="{{ route('userSignUp') }}">Sign In</a>
         </div>
       </div>
     </div>
