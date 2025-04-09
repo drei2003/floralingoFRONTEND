@@ -36,6 +36,15 @@ Route::get('/forgotPass', function () {
     return view('forgotPass');
 })->name('forgotPass');
 
+Route::get('/updatePass', function () {
+    return view('updatePass');
+})->name('updatePass');
+
+// Route to handle the form submission (POST request)
+Route::post('/forgotPass', [GenUserController::class, 'resetPassword'])->name('resetPassword');
+// Route to update the password (POST request)
+Route::post('/updatePass/{id}', [GenUserController::class, 'updatePassword'])->name('updatePassword');
+
 Route::get('/userHome', [LandingContentController::class, 'userHomeContent'])
     ->middleware(CheckRegisteredUser::class)  // Apply custom middleware
     ->name('userHome');

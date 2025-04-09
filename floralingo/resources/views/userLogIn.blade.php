@@ -10,6 +10,11 @@
 </head>
 
 <body>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <section>
         <!-- Start: Articles Cards -->
         <div class="py-xl-5 container py-4">
@@ -33,11 +38,7 @@
                         </div>
                         <!-- End: heading -->
                         <div>
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+
 
                             <form method="POST" action="{{ route('loginUser') }}">
                                 @csrf
@@ -55,6 +56,8 @@
 
                                 <div class="mt-lg-3">
                                     <button class="btn btn-primary" type="submit" style="width: 100%">Log In</button>
+                                    <a href="{{ route('userlanding') }}" class="btn btn-secondary mt-3"
+                                        style="width: 100%">Back to Home</a>
                                 </div>
 
                                 <div class="mt-lg-3">

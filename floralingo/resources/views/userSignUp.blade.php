@@ -59,6 +59,8 @@
                                     <button class="btn btn-primary" type="submit" style="width: 100%">Create
                                         account</button>
                                 </div>
+                                <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3" style="width: 100%">Back</a>
+
 
                                 <div class="mt-lg-3">
                                     <p class="d-xl-flex justify-content-xl-center" style="font-size: 13px">

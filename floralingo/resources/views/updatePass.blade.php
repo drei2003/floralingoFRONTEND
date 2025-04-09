@@ -15,7 +15,7 @@
                     <img
                         class="card-img-top d-block d-none d-lg-flex fit-cover w-100"
                         style="height: auto; max-width: inherit; border-radius: 0px; border-bottom-right-radius: 20px; border-top-right-radius: 20px"
-                        src="/assets/img/signup.jpg"
+                        src="/assets/img/login.jpg"
                     />
                     <div
                         class="card-body d-flex d-xl-flex align-items-center justify-content-md-center align-items-xl-center p-4 px-5 py-5"
@@ -31,34 +31,31 @@
                                     /></span>
                                     <h4 class="fw-bold mb-0">FLORALINGO</h4></a
                                 >
-                                <h1 class="fw-bolder d-xl-flex mb-1">Forgot password</h1>
-                                <p class="text-muted">Enter your full name and email to verify your identity.</p>
+                                <h1 class="fw-bolder d-xl-flex mb-1">Update password</h1>
+                                <p class="text-muted">Enter your new password and make sure to remember it!</p>
                             </div>
                             <!-- End: heading -->
                             <div>
-                            @if(session('error'))
-                                <div class="alert alert-danger alert-dismissible fade show mt-3 mx-3" role="alert">
-                                    {{ session('error') }}
+                            @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show mt-3 mx-3" role="alert">
+                                    {{ session('success') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             @endif
 
-                            <form action="{{ route('resetPassword') }}" method="POST">
+                            <form action="{{ route('updatePassword', $user->id) }}" method="POST">
                                 @csrf
+                                <label class="form-label">New Password</label>
+                                <input class="form-control mb-3" type="password" name="password" placeholder="New Password" required />
                                 
-                                <!-- Name field -->
-                                <label class="form-label">Full Name&nbsp;</label>
-                                <input class="form-control mb-3" type="text" id="name" name="name" autocomplete="on" placeholder="Full Name" required="" />
+                                <label class="form-label">Confirm Password</label>
+                                <input class="form-control mb-3" type="password" name="password_confirmation" placeholder="Confirm Password" required />
                                 
-                                <!-- Email field -->
-                                <label class="form-label">Email address&nbsp;</label>
-                                <input class="form-control mb-3" type="email" id="email" name="email" autocomplete="on" placeholder="email@example.com" required="" />
-                                
-                                <div class="mt-lg-3">
-                                    <button class="btn btn-primary" type="submit" style="width: 100%">Verify Account</button>
-                                </div>
+                                <button class="btn btn-primary" type="submit" style="width: 100%">Update Password</button>
                             </form>
-                                <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3" style="width: 100%">Back</a>
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3" style="width: 100%">Back</a>
+
+
                             </div>
                         </section>
                     </div>
