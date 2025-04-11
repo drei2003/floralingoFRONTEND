@@ -61,23 +61,36 @@
             <a class="nav-link" href="#AllProducts">Shop</a>
           </li>
           <li class="nav-item" style="height: 100%">
-            <a class="nav-link" href="#floralingoDictionary">Dictionary</a>
+            <a class="nav-link" href="/dictionary">Dictionary</a>
           </li>
           <li class="nav-item" style="height: 100%">
             <a class="nav-link" href="#contactUs">Contact Us</a>
           </li>
           <li class="nav-item"><a class="nav-link" href="#faqs">FAQs</a></li>
+            <li class="nav-item">
+              <a class="nav-link d-flex" href="/favorites  "
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="icon icon-tabler icon-tabler-heart me-2"
+                  style="font-size: 18px; color: var(--bs-primary)"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path
+                    d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
+                  ></path></svg
+                >Favorites</a
+              >
+            </li>
           <li class="nav-item">
-            <a class="nav-link d-flex" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                stroke-linejoin="round" class="icon icon-tabler icon-tabler-heart me-2"
-                style="font-size: 18px; color: var(--bs-primary)">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
-              </svg>Favorites</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+            <a class="nav-link d-flex" href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                 stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart me-2"
                 style="font-size: 18px; color: var(--bs-primary)">
@@ -89,7 +102,7 @@
               </svg>Cart</a>
           </li>
         </ul>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="/userHome.html"
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/profile"
           style="height: fit-content; width: fit-content; font-size: inherit"><svg xmlns="http://www.w3.org/2000/svg"
             width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
             stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user me-2"

@@ -18,6 +18,40 @@ Route::get('/', [LandingContentController::class, 'landingPage'])->name('userlan
 
 
 
+Route::get('/dictionary', function () {
+    return view('dictionary');
+})->name('dictionary');
+
+Route::get('/contactUs', function () {
+    return view('contactUs');
+})->name('contactUs');
+
+Route::get('/faqs', function () {
+    return view('faqs');
+})->name('faqs');
+
+Route::get('/favorites', function () {
+    return view('favorites');
+})->name('favorites');
+
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart');
+
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
+Route::get('/checkOut', function () {
+    return view('checkOut');
+})->name('checkOut');
+
+Route::get('/productView', function () {
+    return view('productView');
+})->name('productView');
+
+
+
 Route::get('/userSignUp', function () {
     return view('userSignUp');
 })->name('userSignUp');
