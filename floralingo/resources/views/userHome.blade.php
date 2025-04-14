@@ -67,28 +67,15 @@
             <a class="nav-link" href="#contactUs">Contact Us</a>
           </li>
           <li class="nav-item"><a class="nav-link" href="#faqs">FAQs</a></li>
-            <li class="nav-item">
-              <a class="nav-link d-flex" href="/favorites  "
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-heart me-2"
-                  style="font-size: 18px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
-                  ></path></svg
-                >Favorites</a
-              >
-            </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex" href="/favorites  "><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-heart me-2"
+                style="font-size: 18px; color: var(--bs-primary)">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+              </svg>Favorites</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link d-flex" href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -340,6 +327,11 @@
           4.5 (76)
           </p>
         </div>
+        <div class="d-flex justify-content-between mt-3 px-3">
+        <a href="{{ route('product.view', ['id' => $product->id]) }}" class="btn btn-primary w-100">
+          View Product
+        </a>
+        </div>
         </div>
       </div>
     @endforeach
@@ -374,8 +366,8 @@
           style="max-width: 100%; height: 300px; object-fit: cover;" />
         </div>
         <div class="card-img-overlay d-flex justify-content-end align-items-end pt-4 px-xl-3 py-xl-3">
-        
-        
+
+
         <button class="btn btn-secondary" type="button"
           style="border-radius: 82px; height: 55px; border-style: none;">
           <!-- Add Cart Icon -->
@@ -391,7 +383,7 @@
           <path d="M19 16v6"></path>
           </svg>
         </button>
-        
+
         </div>
       </div>
       <div class="mt-xl-3" style="padding-left: 16px; padding-right: 16px; margin-top: 12px;">
@@ -414,6 +406,11 @@
           </svg>
           4.5 (76)
         </p>
+        </div>
+        <div class="d-flex justify-content-between mt-3 px-3">
+        <a href="{{ route('product.view', ['id' => $product->id]) }}" class="btn btn-primary w-100">
+          View Product
+        </a>
         </div>
 
       </div>
@@ -474,7 +471,24 @@
         <p class="mb-xl-0" style="color: var(--bs-primary)">
           ₱<span id="productPrice-{{ $product->id }}" class="ms-xl-1">{{ number_format($product->Price, 2) }}</span>
         </p>
-        
+        <p class="d-xl-flex align-items-xl-center mb-xl-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+          class="icon icon-tabler icon-tabler-star-filled pe-xl-0"
+          style="margin-right: 3px; color: var(--bs-warning)">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+            stroke-width="0" fill="currentColor"></path>
+          </svg>
+          4.5 (76)
+        </p>  
+
+        </div>
+        <div class="d-flex justify-content-between mt-3 px-3">
+        <a href="{{ route('product.view', ['id' => $product->id]) }}" class="btn btn-primary w-100">
+          View Product
+        </a>
         </div>
 
       </div>
@@ -618,7 +632,7 @@
 
 
           <div class="mt-auto pt-3">
-          <a href="#" class="btn btn-outline-primary rounded-pill d-inline-flex align-items-center">
+          <a href="/dictionary" class="btn btn-outline-primary rounded-pill d-inline-flex align-items-center">
             Learn More
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2"
             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="ms-2">

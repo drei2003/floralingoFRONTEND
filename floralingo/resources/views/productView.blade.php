@@ -18,108 +18,69 @@
   </head>
   <body>
     <!-- Start: Navbar Centered Links -->
-    <nav
-      class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="/userHome "
-          ><span
-            class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center me-2 bs-icon"
-            ><img
-              class="img-fluid"
-              src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span
-          ><span><strong>FLORALINGO</strong></span></a
-        ><button
-          data-bs-toggle="collapse"
-          class="navbar-toggler"
-          data-bs-target="#navcol-3"
-        >
-          <span class="visually-hidden">Toggle navigation</span
-          ><span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-3">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item" style="height: 100%">
-              <a class="nav-link" href="/dictionary ">Dictionary</a>
-            </li>
-            <li class="nav-item" style="height: 100%">
-              <a class="nav-link" href="/contactUs ">Contact Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/faqs ">FAQs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex" href="/favorites "
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-heart me-2"
-                  style="font-size: 18px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
-                  ></path></svg
-                >Favorites</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex" href="/cart "
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-shopping-cart me-2"
-                  style="font-size: 18px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                  <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                  <path d="M17 17h-11v-14h-2"></path>
-                  <path d="M6 5l14 1l-1 7h-13"></path></svg
-                >Cart</a
-              >
-            </li>
-          </ul>
-          <a
-            class="btn btn-outline-primary btn-lg"
-            role="button"
-            href="/profile "
-            style="height: fit-content; width: fit-content; font-size: inherit"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icon-tabler-user me-2"
-              style="font-size: 18px"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path></svg
-            >Profile</a
-          >
-        </div>
+    <nav class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="{{ route('userHome') }}"><span
+          class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center me-2 bs-icon"><img
+            class="img-fluid"
+            src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span><span><strong>FLORALINGO</strong></span></a><button
+        data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3">
+        <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navcol-3">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Categories</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ route('userHome') }}#NewRelease">New Release</a><a class="dropdown-item"
+                href="{{ route('userHome') }}#BestSellers">Best Sellers</a><a class="dropdown-item" href="{{ route('userHome') }}#AllProducts">All Products</a>
+            </div>
+          </li>
+          
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="{{ route('userHome') }}#AllProducts">Shop</a>
+          </li>
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="/dictionary">Dictionary</a>
+          </li>
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="/contactUs">Contact Us</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/faqs">FAQs</a></li>
+          <li class="nav-item">
+            <a class="nav-link d-flex" href="/favorites  "><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-heart me-2"
+                style="font-size: 18px; color: var(--bs-primary)">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+              </svg>Favorites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex" href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart me-2"
+                style="font-size: 18px; color: var(--bs-primary)">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M17 17h-11v-14h-2"></path>
+                <path d="M6 5l14 1l-1 7h-13"></path>
+              </svg>Cart</a>
+          </li>
+        </ul>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/profile"
+          style="height: fit-content; width: fit-content; font-size: inherit"><svg xmlns="http://www.w3.org/2000/svg"
+            width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user me-2"
+            style="font-size: 18px">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+          </svg>Profile</a>
       </div>
-    </nav>
+    </div>
+  </nav>
     <!-- End: Navbar Centered Links -->
     <section class="mt-5">
       <div class="container">
@@ -128,28 +89,21 @@
             class="col-md-8 col-lg-5 col-xl-5 col-xxl-5"
             style="position: relative"
           >
-            <aside style="position: sticky" class="mb-5">
-              <div
-                class="card d-flex"
-                style="
-                  border-radius: 26px;
-                  background: #f4f4f4;
-                  border-style: none;
-                  box-shadow: 0px 0px;
-                "
-              >
-                <div class="d-flex justify-content-center align-items-center">
-                  <img
-                    class="rounded img-fluid object-fit-contain"
-                    id="productIMG-5"
-                    src="/assets/img/600_8nQTOou9p1IFQzRlA9foAP2zd.png?h=e584b9ec87ff7a941096bdd0ed7d9143"
-                    width="400"
-                    height="400"
-                    style="max-width: 100%"
-                  />
-                </div>
+          <aside style="position: sticky" class="mb-5">
+            <div class="card d-flex" style="border-radius: 26px; background: #f4f4f4; border-style: none; box-shadow: 0px 0px;">
+              <div class="d-flex justify-content-center align-items-center" style="padding: 3px;">
+                <img
+                  class="rounded img-fluid"
+                  id="productIMG-5"
+                  src="{{ $product->Thumbnail_url }}"
+                  alt="{{ $product->ProductName }}"
+                  style="width: 100%; max-width: 400px; height: 400px; object-fit: cover; border-radius: 26px;"
+                />
               </div>
-            </aside>
+            </div>
+          </aside>
+
+
           </div>
           <div class="col-md-12 col-lg-7 col-xl-7 col-xxl-7">
             <div
@@ -162,117 +116,67 @@
               "
             >
               <div class="card-body justify-content-evenly my-4 px-xl-5">
-                <form>
-                  <div style="margin-top: 15px">
-                    <h2
-                      class="fw-bold text-primary mb-xl-2 mb-2"
-                      id="productTitle-1"
-                      style="padding-bottom: 0px"
-                    >
-                      Scarlet Embrace
-                    </h2>
-                    <div class="d-flex justify-content-start">
-                      <label class="form-label fw-semibold mb-xl-0"
-                        >Category:&nbsp;</label
-                      >
-                      <p class="ms-4 mb-xl-0">Lorem ipsum</p>
-                    </div>
-                    <div class="d-flex justify-content-start">
-                      <label class="form-label fw-semibold">Price:</label>
-                      <p class="ms-4">999</p>
-                    </div>
-                    <div
-                      class="mt-xl-3 px-0"
-                      style="
-                        padding-left: 16px;
-                        padding-right: 16px;
-                        margin-top: 12px;
-                      "
-                    >
-                      <h6
-                        class="fw-bold mb-xl-2 mb-2"
-                        id="productTitle-5"
-                        style="padding-bottom: 0px"
-                      >
-                        Description
-                      </h6>
-                      <p style="margin-top: 10px; margin-bottom: 10px">
-                        Want a bouquet that matches the sweetness and innocence
-                        of your love? With Heather's<br />vibrant colors and
-                        fresh flowers, this bouquet surely makes sparks fly with
-                        your person which will linger on. Surprise them with
-                        this bouquet today which consists of 4 pink gerberas, 8
-                        pink carnations, and rosal leaves.
-                      </p>
-                    </div>
-                    <div
-                      class="d-grid d-sm-flex d-md-flex d-lg-flex justify-content-between mb-3 mt-5 pt-4 mt-xl-4"
-                      style="border-top: 1px dashed var(--bs-gray-300)"
-                    >
-                      <div class="d-sm-flex align-items-xl-center mb-4">
-                        <label class="form-label fw-semibold me-4 mb-xl-0"
-                          >Quantity:
-                        </label>
-                        <div
-                          id="quantity"
-                          class="input-group quantity-selector"
-                          style="max-width: 150px"
-                        >
-                          <button
-                            class="btn btn-outline-secondary"
-                            type="button"
-                            onclick="decreaseQuantity(this)"
-                          >
-                            −
-                          </button>
-                          <input
-                            type="number"
-                            class="form-control text-center"
-                            value="1"
-                            min="1"
-                            step="1"
-                          />
-                          <button
-                            class="btn btn-outline-secondary"
-                            type="button"
-                            onclick="increaseQuantity(this)"
-                          >
-                            +
-                          </button>
-                        </div>
+              <form>
+  <div style="margin-top: 15px">
+    <h2 class="fw-bold text-primary mb-xl-2 mb-2" style="padding-bottom: 0px">
+      {{ $product->ProductName }}
+    </h2>
 
-                        <script>
-                          function decreaseQuantity(button) {
-                            const input =
-                              button.parentElement.querySelector("input");
-                            const value = parseInt(input.value) || 1;
-                            if (value > parseInt(input.min)) {
-                              input.value = value - 1;
-                            }
-                          }
+    <div class="d-flex justify-content-start">
+      <label class="form-label fw-semibold mb-xl-0">Category:&nbsp;</label>
+      <p class="ms-4 mb-xl-0">{{ $product->Category ?? 'N/A' }}</p>
+    </div>
 
-                          function increaseQuantity(button) {
-                            const input =
-                              button.parentElement.querySelector("input");
-                            const value = parseInt(input.value) || 1;
-                            input.value = value + 1;
-                          }
-                        </script>
-                      </div>
-                      <div
-                        class="align-items-sm-center justify-content-md-center justify-content-lg-start pe-0"
-                      >
-                        <button
-                          class="btn btn-outline-primary ms-0"
-                          type="submit"
-                          style="font-size: 16px"
-                        >
-                          Add to cart
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
+    <div class="d-flex justify-content-start">
+      <label class="form-label fw-semibold">Price:</label>
+      <p class="ms-4">₱{{ number_format($product->Price, 2) }}</p>
+    </div>
+
+    <div class="mt-xl-3 px-0" style="padding-left: 16px; padding-right: 16px; margin-top: 12px;">
+      <h6 class="fw-bold mb-xl-2 mb-2" style="padding-bottom: 0px">
+        Description
+      </h6>
+      <p style="margin-top: 10px; margin-bottom: 10px">
+        {{ $product->Description }}
+      </p>
+    </div>
+
+    <div class="d-grid d-sm-flex d-md-flex d-lg-flex justify-content-between mb-3 mt-5 pt-4 mt-xl-4"
+         style="border-top: 1px dashed var(--bs-gray-300)">
+      <div class="d-sm-flex align-items-xl-center mb-4">
+        <label class="form-label fw-semibold me-4 mb-xl-0">Quantity:</label>
+        <div id="quantity" class="input-group quantity-selector" style="max-width: 150px">
+          <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity(this)">−</button>
+          <input type="number" class="form-control text-center" value="1" min="1" step="1" />
+          <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity(this)">+</button>
+        </div>
+      </div>
+
+      <div class="align-items-sm-center justify-content-md-center justify-content-lg-start pe-0">
+        <button class="btn btn-outline-primary ms-0" type="submit" style="font-size: 16px">
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  function decreaseQuantity(button) {
+    const input = button.parentElement.querySelector("input");
+    const value = parseInt(input.value) || 1;
+    if (value > parseInt(input.min)) {
+      input.value = value - 1;
+    }
+  }
+
+  function increaseQuantity(button) {
+    const input = button.parentElement.querySelector("input");
+    const value = parseInt(input.value) || 1;
+    input.value = value + 1;
+  }
+</script>
+
               </div>
             </div>
           </div>
@@ -284,121 +188,64 @@
             </div>
             <div class="row gx-5 gy-4 d-flex justify-content-center mt-0">
               <!-- Start: productHolder -->
-              <div
-                class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3"
-                style="margin-top: 35px; margin-bottom: 2px"
-              >
-                <div
-                  class="card d-flex"
-                  style="
-                    border-radius: 26px;
-                    background: #f4f4f4;
-                    border-style: none;
-                    box-shadow: 0px 0px;
-                  "
-                >
-                  <div class="d-flex justify-content-center align-items-center">
-                    <img
-                      class="rounded img-fluid object-fit-contain"
-                      id="productIMG-11"
-                      src="/assets/img/600_8nQTOou9p1IFQzRlA9foAP2zd.png?h=e584b9ec87ff7a941096bdd0ed7d9143"
-                      width="300"
-                      height="300"
-                      style="max-width: 100%"
-                    />
-                  </div>
-                  <div
-                    class="card-img-overlay d-flex d-sm-flex justify-content-end align-items-end justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end pt-4 px-xl-3 py-xl-3 px-md-3 py-md-3 px-sm-3 py-sm-3 px-3"
-                    style="padding-right: 28px"
-                  >
-                    <button
-                      class="btn btn-secondary"
-                      type="button"
-                      style="
-                        border-radius: 82px;
-                        height: 55px;
-                        border-style: none;
-                        box-shadow: 0px 0px;
-                      "
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="icon icon-tabler icon-tabler-shopping-cart-plus"
-                        style="font-size: 25px; color: var(--bs-primary)"
-                      >
-                        <path
-                          stroke="none"
-                          d="M0 0h24v24H0z"
-                          fill="none"
-                        ></path>
-                        <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                        <path d="M12.5 17h-6.5v-14h-2"></path>
-                        <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
-                        <path d="M16 19h6"></path>
-                        <path d="M19 16v6"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <div
-                  class="mt-xl-3"
-                  style="
-                    padding-left: 16px;
-                    padding-right: 16px;
-                    margin-top: 12px;
-                  "
-                >
-                  <h5
-                    id="productTitle-11"
-                    class="mb-xl-2 mb-2"
-                    style="padding-bottom: 0px"
-                  >
-                    Scarlet Embrace
-                  </h5>
-                  <div class="d-flex justify-content-between">
-                    <!-- Start: prodPrice -->
-                    <p class="mb-xl-0" style="color: var(--bs-primary)">
-                      ₱<span id="productPrice-11" class="ms-xl-1">999</span>
-                    </p>
-                    <!-- End: prodPrice --><!-- Start: prodRatings -->
-                    <p class="d-xl-flex align-items-xl-center mb-xl-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="icon icon-tabler icon-tabler-star-filled pe-xl-0"
-                        style="margin-right: 3px; color: var(--bs-warning)"
-                      >
-                        <path
-                          stroke="none"
-                          d="M0 0h24v24H0z"
-                          fill="none"
-                        ></path>
-                        <path
-                          d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
-                          stroke-width="0"
-                          fill="currentColor"
-                        ></path></svg
-                      >4.5 (76)
-                    </p>
-                    <!-- End: prodRatings -->
-                  </div>
-                </div>
-              </div>
+              @foreach ($allProducts as $product)
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-3 px-3" style="margin-top: 35px; margin-bottom: 2px;">
+      <div class="card d-flex"
+        style="border-radius: 26px; background: #f4f4f4; border-style: none; box-shadow: 0px 0px;">
+        <div class="d-flex justify-content-center align-items-center">
+        <!-- Fixed size image with object-fit cover -->
+        <img class="rounded img-fluid object-fit-cover" id="productIMG-{{ $product->id }}"
+          src="{{ $product->Thumbnail_url }}" width="300" height="300"
+          style="max-width: 100%; height: 300px; object-fit: cover;" />
+        </div>
+        <div class="card-img-overlay d-flex justify-content-end align-items-end pt-4 px-xl-3 py-xl-3">
+        <button class="btn btn-secondary" type="button"
+          style="border-radius: 82px; height: 55px; border-style: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+          class="icon icon-tabler icon-tabler-shopping-cart-plus"
+          style="font-size: 25px; color: var(--bs-primary)">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+          <path d="M12.5 17h-6.5v-14h-2"></path>
+          <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
+          <path d="M16 19h6"></path>
+          <path d="M19 16v6"></path>
+          </svg>
+        </button>
+        </div>
+      </div>
+      <div class="mt-xl-3" style="padding-left: 16px; padding-right: 16px; margin-top: 12px;">
+        <h5 id="productTitle-{{ $product->id }}" class="mb-xl-2 mb-2" style="padding-bottom: 0px;">
+        {{ $product->ProductName }}
+        </h5>
+        <div class="d-flex justify-content-between">
+        <p class="mb-xl-0" style="color: var(--bs-primary)">
+          ₱<span id="productPrice-{{ $product->id }}" class="ms-xl-1">{{ number_format($product->Price, 2) }}</span>
+        </p>
+        <p class="d-xl-flex align-items-xl-center mb-xl-0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+          class="icon icon-tabler icon-tabler-star-filled pe-xl-0"
+          style="margin-right: 3px; color: var(--bs-warning)">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+            stroke-width="0" fill="currentColor"></path>
+          </svg>
+          4.5 (76)
+        </p>  
+
+        </div>
+        <div class="d-flex justify-content-between mt-3 px-3">
+        <a href="{{ route('product.view', ['id' => $product->id]) }}" class="btn btn-primary w-100">
+          View Product
+        </a>
+        </div>
+
+      </div>
+      </div>
+    @endforeach
               <!-- End: productHolder -->
             </div>
           </div>

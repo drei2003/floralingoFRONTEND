@@ -18,108 +18,69 @@
   </head>
   <body>
     <!-- Start: Navbar Centered Links -->
-    <nav
-      class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="/userHome "
-          ><span
-            class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center me-2 bs-icon"
-            ><img
-              class="img-fluid"
-              src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span
-          ><span><strong>FLORALINGO</strong></span></a
-        ><button
-          data-bs-toggle="collapse"
-          class="navbar-toggler"
-          data-bs-target="#navcol-3"
-        >
-          <span class="visually-hidden">Toggle navigation</span
-          ><span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-3">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item" style="height: 100%">
-              <a class="nav-link" href="/dictionary ">Dictionary</a>
-            </li>
-            <li class="nav-item" style="height: 100%">
-              <a class="nav-link" href="/contactUs ">Contact Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/faqs ">FAQs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex" href="/favorites "
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-heart me-2"
-                  style="font-size: 18px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
-                  ></path></svg
-                >Favorites</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex" href="/cart "
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-shopping-cart me-2"
-                  style="font-size: 18px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                  <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                  <path d="M17 17h-11v-14h-2"></path>
-                  <path d="M6 5l14 1l-1 7h-13"></path></svg
-                >Cart</a
-              >
-            </li>
-          </ul>
-          <a
-            class="btn btn-outline-primary btn-lg"
-            role="button"
-            href="/profile "
-            style="height: fit-content; width: fit-content; font-size: inherit"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icon-tabler-user me-2"
-              style="font-size: 18px"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path></svg
-            >Profile</a
-          >
-        </div>
+    <nav class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="{{ route('userHome') }}"><span
+          class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center me-2 bs-icon"><img
+            class="img-fluid"
+            src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span><span><strong>FLORALINGO</strong></span></a><button
+        data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3">
+        <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navcol-3">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Categories</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ route('userHome') }}#NewRelease">New Release</a><a class="dropdown-item"
+                href="{{ route('userHome') }}#BestSellers">Best Sellers</a><a class="dropdown-item" href="{{ route('userHome') }}#AllProducts">All Products</a>
+            </div>
+          </li>
+          
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="{{ route('userHome') }}#AllProducts">Shop</a>
+          </li>
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="/dictionary">Dictionary</a>
+          </li>
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="/contactUs">Contact Us</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/faqs">FAQs</a></li>
+          <li class="nav-item">
+            <a class="nav-link d-flex" href="/favorites  "><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-heart me-2"
+                style="font-size: 18px; color: var(--bs-primary)">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+              </svg>Favorites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex" href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart me-2"
+                style="font-size: 18px; color: var(--bs-primary)">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M17 17h-11v-14h-2"></path>
+                <path d="M6 5l14 1l-1 7h-13"></path>
+              </svg>Cart</a>
+          </li>
+        </ul>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/profile"
+          style="height: fit-content; width: fit-content; font-size: inherit"><svg xmlns="http://www.w3.org/2000/svg"
+            width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user me-2"
+            style="font-size: 18px">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+          </svg>Profile</a>
       </div>
-    </nav>
+    </div>
+  </nav>
     <!-- End: Navbar Centered Links -->
     <section class="bg-body-tertiary mb-5">
       <div class="container py-4 px-4 pt-5">
@@ -188,137 +149,111 @@
     >
       <!-- Start: Frequently Asked Questions -->
       <div class="container-lg py-4 py-xl-5 my-5" id="faqs">
-        <div
-          class="d-sm-flex d-xxl-flex justify-content-sm-end justify-content-md-end justify-content-lg-end align-items-lg-center justify-content-xxl-end px-3"
-        >
-          <input
-            class="border rounded border-primary form-control-sm px-3 my-0 pe-3 py-2 pt-sm-2 me-sm-3 mb-0 me-3"
-            type="search"
-            placeholder="Search"
-          /><button
-            class="btn btn-outline-primary btn-lg me-3 mb-3 mb-sm-0 me-sm-0 mt-3 mt-sm-0"
-            type="button"
-            style="height: fit-content; width: fit-content; font-size: inherit"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icon-tabler-arrow-down me-2"
-              style="font-size: 18px"
+    <div
+      class="d-sm-flex d-xxl-flex justify-content-sm-end justify-content-md-end justify-content-lg-end align-items-lg-center justify-content-xxl-end px-3"
+    >
+        <form method="GET" action="{{ route('dictionary') }}" class="d-flex">
+            <input
+                name="search" 
+                class="border rounded border-primary form-control-sm px-3 my-0 pe-3 py-2 pt-sm-2 me-sm-3 mb-0 me-3"
+                type="search"
+                placeholder="Search"
+                value="{{ request('search') }}"  
+                
+            /><!-- Keep search term in input field -->
+            <button
+                class="btn btn-outline-primary btn-lg me-3 mb-3 mb-sm-0 me-sm-0 mt-3 mt-sm-0"
+                type="submit"
+                style="height: fit-content; width: fit-content; font-size: inherit"
             >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M12 5l0 14"></path>
-              <path d="M18 13l-6 6"></path>
-              <path d="M6 13l6 6"></path></svg
-            >A-Z
-          </button>
-        </div>
-        <div class="row d-sm-flex justify-content-sm-center">
-          <div
-            class="col-12 col-sm-9 col-md-12 col-lg-11 col-xl-11 col-xxl-11 justify-content-xl-end justify-content-xxl-center"
-            style="margin-top: 35px; margin-bottom: 2px"
-          >
-            <div class="card" style="box-shadow: 0px 0px; border-style: none">
-              <div class="card-body d-md-flex" style="border-style: none">
-                <img
-                  class="d-sm-flex"
-                  id="alstroemeria"
-                  src="/assets/img/Frame%2014265.png?h=d24ec8be8cc326918891872c3e4a5413"
-                  width="300"
-                  style="max-width: 100%"
-                  height="300"
-                />
-                <div
-                  class="d-flex flex-column justify-content-between mt-xl-3 py-xl-4"
-                  style="
-                    padding-left: 16px;
-                    padding-right: 16px;
-                    margin-top: 12px;
-                  "
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icon-tabler-arrow-down me-2"
+                    style="font-size: 18px"
                 >
-                  <div>
-                    <div class="d-flex justify-content-start">
-                      <h3 class="fw-bold mb-0" id="alstroemeriaHeading">
-                        Alstroemeria
-                      </h3>
-                      <button
-                        class="btn link-primary ms-xl-2"
-                        data-bs-toggle="tooltip"
-                        data-bss-tooltip=""
-                        data-bs-placement="right"
-                        type="button"
-                        title="Add to Favorites"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icon-tabler-heart-plus fs-4 pe-0 me-2 me-xl-0 ms-xl-0"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path
-                            d="M12 20l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.96 6.053"
-                          ></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <p
-                      id="alstroemeriaPronounciation"
-                      class="mb-xl-0"
-                      style="color: rgb(73, 80, 87)"
-                    >
-                      Al-stroe-me-ri-a
-                    </p>
-                    <p
-                      id="AlstroemeriaSciName"
-                      class="mb-xl-0"
-                      style="color: rgb(73, 80, 87); font-weight: bold"
-                    >
-                      Scientific Name:<span class="ms-2"
-                        ><span style="font-weight: normal !important"
-                          >Alstroemeria spp.&nbsp;</span
-                        ></span
-                      >
-                    </p>
-                  </div>
-                  <p
-                    id="AlstroemeriaDescrip"
-                    class="mb-xl-0"
-                    style="color: var(--bs-primary)"
-                  >
-                    <span style="color: rgb(73, 80, 87)"
-                      >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Duis ut tempus justo, id imperdiet nisl. Sed sed hendrerit
-                      metus. Ut in enim vestibulum, laoreet nisl in, finibus
-                      urna. Curabitur vehicula sed turpis sit amet
-                      euismod.&nbsp;</span
-                    >
-                  </p>
-                </div>
-              </div>
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 5l0 14"></path>
+                    <path d="M18 13l-6 6"></path>
+                    <path d="M6 13l6 6"></path></svg
+                >A-Z
+            </button>
+        </form>
+    </div>
+
+    <div class="row d-sm-flex justify-content-sm-center">
+        <div class="col-12 col-sm-9 col-md-12 col-lg-11 col-xl-11 col-xxl-11 justify-content-xl-end justify-content-xxl-center" style="margin-top: 35px; margin-bottom: 2px">
+            <div class="card" style="box-shadow: 0px 0px; border-style: none">
+                @if ($Viewdictionary->isEmpty())
+                    <p>No flowers to show</p>
+                @else
+                    @foreach($Viewdictionary as $flower)
+                        <div class="card mb-4 shadow-sm" style="border-radius: 10px; overflow: hidden;">
+                            <div class="d-md-flex">
+                                <!-- Image Section -->
+                                <img
+                                    class="card-img-top"
+                                    src="{{ asset($flower->Thumbnail_url) }}"
+                                    style="width: 100%; height: 300px; object-fit: cover; max-width: 300px;"
+                                    alt="{{ $flower->flower_name }}"
+                                />
+                                <!-- Card Body -->
+                                <div class="card-body d-flex flex-column justify-content-between p-4">
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <h3 class="fw-bold mb-0">
+                                                {{ $flower->flower_name }}
+                                            </h3>
+                                            <form action="{{ route('add.favorites') }}" method="POST">
+    @csrf
+    <input type="hidden" name="flower_id" value="{{ $flower->id }}">
+    <button class="btn link-primary ms-xl-2" type="submit" title="Add to Favorites">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+             class="icon icon-tabler icon-tabler-heart-plus fs-4">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 20l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.96 6.053"></path>
+            <path d="M16 19h6"></path>
+            <path d="M19 16v6"></path>
+        </svg>
+    </button>
+</form>
+
+                                        </div>
+                                        <p class="mb-xl-0" style="color: rgb(73, 80, 87)">
+                                            {{ $flower->pronunciation }}
+                                        </p>
+                                        <p class="mb-xl-0" style="color: rgb(73, 80, 87); font-weight: bold">
+                                            Scientific Name:
+                                            <span class="ms-2">
+                                                <span style="font-weight: normal !important">
+                                                    {{ $flower->scientific_name }}
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <p class="mb-xl-0" style="color: var(--bs-primary)">
+                                        <span style="color: rgb(73, 80, 87)">
+                                            {{ $flower->description }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
       <!-- End: Frequently Asked Questions -->
     </section>
     <!-- Start: Footer Multi Column -->
@@ -331,8 +266,8 @@
           >
             <h3 class="fs-6">Sections</h3>
             <ul class="list-unstyled">
-              <li><a class="link-dark" href="#">Featured Products</a></li>
-              <li><a class="link-dark" href="#">Our Products</a></li>
+              <li><a class="link-dark" href="{{ route('userHome') }}#NewRelease">Featured Products</a></li>
+              <li><a class="link-dark" href="{{ route('userHome') }}#AllProducts">Our Products</a></li>
               <li>
                 <a class="link-dark" href="/dictionary "
                   >Flower Dictionary</a
@@ -347,7 +282,7 @@
             <ul class="list-unstyled">
               <li><a class="link-dark" href="/faqs ">FAQs</a></li>
               <li class="text-dark">
-                <a class="link-dark" href="#">About Us</a>
+                <a class="link-dark" href="{{  route('userHome') }}#">About Us</a>
               </li>
               <li class="text-dark">
                 <a class="link-dark" href="/contactUs ">Contact Us</a>

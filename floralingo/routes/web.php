@@ -12,76 +12,76 @@ use App\Http\Controllers\LandingContentController;
 use App\Http\Middleware\CheckRegisteredUser;
 
 
+
 //Public Routes (Accessible to Everyone)
 //landing page new BLADE
 Route::get('/', [LandingContentController::class, 'landingPage'])->name('userlanding'); 
 
 
 
-Route::get('/dictionary', function () {
-    return view('dictionary');
-})->name('dictionary');
-
-Route::get('/contactUs', function () {
-    return view('contactUs');
-})->name('contactUs');
-
-Route::get('/faqs', function () {
-    return view('faqs');
-})->name('faqs');
-
-Route::get('/favorites', function () {
-    return view('favorites');
-})->name('favorites');
-
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
-
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
-
-Route::get('/checkOut', function () {
-    return view('checkOut');
-})->name('checkOut');
-
-Route::get('/productView', function () {
-    return view('productView');
-})->name('productView');
-
-
-
+// PUBLIC ROUTES
 Route::get('/userSignUp', function () {
     return view('userSignUp');
 })->name('userSignUp');
+
 Route::post('/userSignUp', [GenUserController::class, 'genUserRegister'])->name('userSignUp');
 
 Route::get('/userLogIn', function () {
     return view('userLogIn');
 })->name('userLogIn');
+
 Route::post('/userLogIn', [GenUserController::class, 'genUserLogin'])->name('loginUser');
 
-
 Route::post('/GenLogout', [GenUserController::class, 'GenLogout'])->name('GenLogout');
-
 
 Route::get('/forgotPass', function () {
     return view('forgotPass');
 })->name('forgotPass');
 
+Route::post('/forgotPass', [GenUserController::class, 'resetPassword'])->name('resetPassword');
+
 Route::get('/updatePass', function () {
     return view('updatePass');
 })->name('updatePass');
 
-// Route to handle the form submission (POST request)
-Route::post('/forgotPass', [GenUserController::class, 'resetPassword'])->name('resetPassword');
-// Route to update the password (POST request)
 Route::post('/updatePass/{id}', [GenUserController::class, 'updatePassword'])->name('updatePassword');
 
-Route::get('/userHome', [LandingContentController::class, 'userHomeContent'])
-    ->middleware(CheckRegisteredUser::class)  // Apply custom middleware
-    ->name('userHome');
+
+// PROTECTED ROUTES (REQUIRES LOGGED-IN USER)
+Route::middleware([CheckRegisteredUser::class])->group(function () {
+
+    Route::get('/userHome', [LandingContentController::class, 'userHomeContent'])->name('userHome');
+
+    Route::get('/dictionary', [FlowerController::class, 'viewDictionary'])->name('dictionary');
+    Route::post('/dictionary', [FlowerController::class, 'addToFavorites'])->name('add.favorites');
+
+    Route::get('/favorites', [FlowerController::class, 'showFavorites'])->name('favorites');
+    Route::delete('/favorites/delete', [FlowerController::class, 'deleteFavorite'])->name('favorites.delete');
+
+    Route::get('/contactUs', function () {
+        return view('contactUs');
+    })->name('contactUs');
+
+    Route::get('/faqs', function () {
+        return view('faqs');
+    })->name('faqs');
+
+    Route::get('/cart', function () {
+        return view('cart');
+    })->name('cart');
+
+    Route::get('/profile', function () {
+        return view('profile');
+    })->name('profile');
+
+    Route::get('/checkOut', function () {
+        return view('checkOut');
+    })->name('checkOut');
+
+    Route::get('/productView', [ProductController::class, 'viewProduct'])->name('allProducts');
+    Route::get('/productView/{id}', [ProductController::class, 'viewProduct'])->name('product.view');
+
+});
 
 
 

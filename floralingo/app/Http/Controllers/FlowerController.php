@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\JsonResponse;
+use App\Models\Favorite;
 
 class FlowerController extends Controller
 {
@@ -158,5 +159,78 @@ class FlowerController extends Controller
     
         return response()->json(['message' => 'Product Category deleted successfully!']);
     }
+
+    public function viewDictionary(Request $request)
+    {
+        $user = session('user');
+        $search = $request->input('search'); // Get the search term from the input field
+    
+        if ($search) {
+            // Filter flowers based on the search term including flower_name, scientific_name, and description
+            $Viewdictionary = Flower::where('flower_name', 'like', '%' . $search . '%')
+                ->orWhere('scientific_name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%') // Include description in the search
+                ->orderBy('added_at', 'desc')
+                ->get();
+        } else {
+            // If no search term, fetch all flowers
+            $Viewdictionary = Flower::orderBy('added_at', 'desc')->get();
+        }
+    
+        return view('dictionary', compact('user', 'Viewdictionary'));
+    }
+
+
+        public function addToFavorites(Request $request)
+    {
+        $user = session('user');
+        $flowerId = $request->input('flower_id');
+
+        // Prevent duplicate
+        $existing = Favorite::where('user_id', $user->id)
+            ->where('flower_id', $flowerId)
+            ->first();
+
+        if (!$existing) {
+            Favorite::create([
+                'user_id' => $user->id,
+                'flower_id' => $flowerId,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Added to favorites!');
+    }
+
+    public function showFavorites()
+    {
+        $user = session('user');
+
+        $favorites = Favorite::with('flower')
+            ->where('user_id', $user->id)
+            ->get();
+
+        return view('favorites', compact('favorites', 'user'));
+    }
+
+    public function deleteFavorite(Request $request)
+{
+    $favoriteId = $request->input('favorite_id');
+    $user = session('user');
+
+    $favorite = Favorite::where('favorite_id', $favoriteId)->firstOrFail();
+
+    if ($favorite->user_id !== $user->id) {
+        return redirect()->route('favorites')->with('error', 'Unauthorized');
+    }
+
+    $favorite->delete();
+
+    return redirect()->route('favorites')->with('success', 'Removed from favorites.');
+}
+
+    
+
+    
+
 }
 

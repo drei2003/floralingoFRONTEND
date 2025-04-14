@@ -167,4 +167,19 @@ class ProductController extends Controller
     
         return response()->json(['message' => 'Product deleted successfully!']);
     }
+
+    //for productView
+    public function viewProduct($id)
+    {
+        $product = Product::findOrFail($id);
+
+        $allProducts = Product::select('ProductName', 'Price', 'Thumbnail_url', 'Description', 'id')
+            ->where('Availability', 'Available')
+            ->where('Category', '!=', 'Unavailable')
+            ->get();
+
+        return view('productView', compact('product', 'allProducts'));
+    }
+    
+
 }

@@ -3,7 +3,7 @@
         "id": 4,
         "PaymentID": "15168",
         "paymentMethod": "Cash on Delivery",
-        "status": "Active"
+        "status": "Disabled"
     },
     {
         "id": 1,
