@@ -10,6 +10,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\FlowerController;
 use App\Http\Controllers\LandingContentController;
 use App\Http\Middleware\CheckRegisteredUser;
+use App\Http\Controllers\CartController;
 
 
 
@@ -66,17 +67,17 @@ Route::middleware([CheckRegisteredUser::class])->group(function () {
         return view('faqs');
     })->name('faqs');
 
-    Route::get('/cart', function () {
-        return view('cart');
-    })->name('cart');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+    Route::delete('/cart/{cartItemId}/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::put('/cart/update/{id}', [CartController::class, 'updateQuantity'])->name('cart.update');
+    Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/cart/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
 
     Route::get('/profile', function () {
         return view('profile');
     })->name('profile');
 
-    Route::get('/checkOut', function () {
-        return view('checkOut');
-    })->name('checkOut');
+    Route::get('/checkOut', [CartController::class, 'checkOutPage'])->name('checkout');
 
     Route::get('/productView', [ProductController::class, 'viewProduct'])->name('allProducts');
     Route::get('/productView/{id}', [ProductController::class, 'viewProduct'])->name('product.view');

@@ -289,9 +289,14 @@
         <div
           class="card-img-overlay d-flex d-sm-flex justify-content-end align-items-end justify-content-md-end align-items-md-end justify-content-xl-end align-items-xl-end pt-4 px-xl-3 py-xl-3 px-md-3 py-md-3 px-sm-3 py-sm-3 px-3"
           style="padding-right: 28px">
-          <button class="btn btn-secondary" type="button"
-          style="border-radius: 82px; height: 55px; border-style: none; box-shadow: 0px 0px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
+          <form action="{{ route('cart.add') }}" method="POST">
+          @csrf
+          <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+          <button class="btn btn-secondary" type="submit"
+            style="border-radius: 82px; height: 55px; border-style: none;">
+            <!-- Add Cart Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
             class="icon icon-tabler icon-tabler-shopping-cart-plus"
             style="font-size: 25px; color: var(--bs-primary)">
@@ -301,8 +306,9 @@
             <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
             <path d="M16 19h6"></path>
             <path d="M19 16v6"></path>
-          </svg>
+            </svg>
           </button>
+          </form>
         </div>
         </div>
         <div class="mt-xl-3" style="padding-left: 16px; padding-right: 16px; margin-top: 12px">
@@ -328,9 +334,9 @@
           </p>
         </div>
         <div class="d-flex justify-content-between mt-3 px-3">
-        <a href="{{ route('product.view', ['id' => $product->id]) }}" class="btn btn-primary w-100">
+          <a href="{{ route('product.view', ['id' => $product->id]) }}" class="btn btn-primary w-100">
           View Product
-        </a>
+          </a>
         </div>
         </div>
       </div>
@@ -367,22 +373,28 @@
         </div>
         <div class="card-img-overlay d-flex justify-content-end align-items-end pt-4 px-xl-3 py-xl-3">
 
+        <form action="{{ route('cart.add') }}" method="POST">
+          @csrf
+          <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-        <button class="btn btn-secondary" type="button"
+          <button class="btn btn-secondary" type="submit"
           style="border-radius: 82px; height: 55px; border-style: none;">
           <!-- Add Cart Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
-          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
-          class="icon icon-tabler icon-tabler-shopping-cart-plus"
-          style="font-size: 25px; color: var(--bs-primary)">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-          <path d="M12.5 17h-6.5v-14h-2"></path>
-          <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
-          <path d="M16 19h6"></path>
-          <path d="M19 16v6"></path>
+            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icon-tabler-shopping-cart-plus"
+            style="font-size: 25px; color: var(--bs-primary)">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+            <path d="M12.5 17h-6.5v-14h-2"></path>
+            <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
+            <path d="M16 19h6"></path>
+            <path d="M19 16v6"></path>
           </svg>
-        </button>
+          </button>
+        </form>
+
+
 
         </div>
       </div>
@@ -447,20 +459,26 @@
           style="max-width: 100%; height: 300px; object-fit: cover;" />
         </div>
         <div class="card-img-overlay d-flex justify-content-end align-items-end pt-4 px-xl-3 py-xl-3">
-        <button class="btn btn-secondary" type="button"
+        <form action="{{ route('cart.add') }}" method="POST">
+          @csrf
+          <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+          <button class="btn btn-secondary" type="submit"
           style="border-radius: 82px; height: 55px; border-style: none;">
+          <!-- Add Cart Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
-          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
-          class="icon icon-tabler icon-tabler-shopping-cart-plus"
-          style="font-size: 25px; color: var(--bs-primary)">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-          <path d="M12.5 17h-6.5v-14h-2"></path>
-          <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
-          <path d="M16 19h6"></path>
-          <path d="M19 16v6"></path>
+            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icon-tabler-shopping-cart-plus"
+            style="font-size: 25px; color: var(--bs-primary)">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+            <path d="M12.5 17h-6.5v-14h-2"></path>
+            <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
+            <path d="M16 19h6"></path>
+            <path d="M19 16v6"></path>
           </svg>
-        </button>
+          </button>
+        </form>
         </div>
       </div>
       <div class="mt-xl-3" style="padding-left: 16px; padding-right: 16px; margin-top: 12px;">
@@ -482,7 +500,7 @@
             stroke-width="0" fill="currentColor"></path>
           </svg>
           4.5 (76)
-        </p>  
+        </p>
 
         </div>
         <div class="d-flex justify-content-between mt-3 px-3">
@@ -1051,6 +1069,42 @@
       window.open(gmailUrl, '_blank');
     }
   </script>
+  {{-- Check if a success message exists in the session --}}
+  @if (session('success'))
+    <div class="modal fade" id="cartSuccessModal" tabindex="-1" aria-labelledby="cartSuccessModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartSuccessModalLabel">Success</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ session('success') }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- Updated button to link to the cart page -->
+        <a href="{{ route('cart') }}" class="btn btn-primary">Go to Cart</a>
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <script>
+    // Automatically show the modal when the page loads if there is a success message
+    var successModal = new bootstrap.Modal(document.getElementById('cartSuccessModal'), {
+      keyboard: false
+    });
+    successModal.show();
+    // Auto-close after 3 seconds
+    setTimeout(() => {
+      successModal.hide();
+      }, 2000);
+    </script>
+  @endif
+
+
 </body>
 
 </html>

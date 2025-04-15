@@ -360,5 +360,38 @@
     <!-- End: Footer Multi Column -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/script.min.js?h=fffa086275a3e9d088e0d86eca965e31"></script>
+
+    @if (session('success'))
+    <div class="modal fade" id="cartSuccessModal" tabindex="-1" aria-labelledby="cartSuccessModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartSuccessModalLabel">Success</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ session('success') }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="{{ route('favorites') }}" class="btn btn-primary">Favorites</a>                                        
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <script>
+    // Automatically show the modal when the page loads if there is a success message
+    var successModal = new bootstrap.Modal(document.getElementById('cartSuccessModal'), {
+      keyboard: false
+    });
+    successModal.show();
+    // Auto-close after 3 seconds
+      setTimeout(() => {
+      successModal.hide();
+      }, 2000);
+    </script>
+  @endif
   </body>
 </html>

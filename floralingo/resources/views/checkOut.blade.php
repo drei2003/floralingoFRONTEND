@@ -18,110 +18,70 @@
   </head>
   <body>
     <!-- Start: Navbar Centered Links -->
-    <nav
-      class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="/userHome "
-          ><span
-            class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center me-2 bs-icon"
-            ><img
-              class="img-fluid"
-              src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span
-          ><span><strong>FLORALINGO</strong></span></a
-        ><button
-          data-bs-toggle="collapse"
-          class="navbar-toggler"
-          data-bs-target="#navcol-3"
-        >
-          <span class="visually-hidden">Toggle navigation</span
-          ><span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navcol-3">
-          <ul class="navbar-nav mx-auto">
-            
+    <nav class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="{{ route('userHome') }}"><span
+          class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center me-2 bs-icon"><img
+            class="img-fluid"
+            src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span><span><strong>FLORALINGO</strong></span></a><button
+        data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3">
+        <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navcol-3">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Categories</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{ route('userHome') }}#NewRelease">New Release</a><a class="dropdown-item"
+                href="{{ route('userHome') }}#BestSellers">Best Sellers</a><a class="dropdown-item"
+                href="{{ route('userHome') }}#AllProducts">All Products</a>
+            </div>
+          </li>
 
-            <li class="nav-item" style="height: 100%">
-              <a class="nav-link" href="/dictionary ">Dictionary</a>
-            </li>
-            <li class="nav-item" style="height: 100%">
-              <a class="nav-link" href="/contactUs ">Contact Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/faqs ">FAQs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex" href="/favorites "
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-heart me-2"
-                  style="font-size: 18px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"
-                  ></path></svg
-                >Favorites</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex" href="/cart "
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-shopping-cart me-2"
-                  style="font-size: 18px; color: var(--bs-primary)"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                  <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                  <path d="M17 17h-11v-14h-2"></path>
-                  <path d="M6 5l14 1l-1 7h-13"></path></svg
-                >Cart</a
-              >
-            </li>
-          </ul>
-          <a
-            class="btn btn-outline-primary btn-lg"
-            role="button"
-            href="/profile "
-            style="height: fit-content; width: fit-content; font-size: inherit"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icon-tabler-user me-2"
-              style="font-size: 18px"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path></svg
-            >Profile</a
-          >
-        </div>
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="{{ route('userHome') }}#AllProducts">Shop</a>
+          </li>
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="/dictionary">Dictionary</a>
+          </li>
+          <li class="nav-item" style="height: 100%">
+            <a class="nav-link" href="/contactUs">Contact Us</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/faqs">FAQs</a></li>
+          <li class="nav-item">
+            <a class="nav-link d-flex" href="/favorites  "><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-heart me-2"
+                style="font-size: 18px; color: var(--bs-primary)">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+              </svg>Favorites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex" href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" class="icon icon-tabler icon-tabler-shopping-cart me-2"
+                style="font-size: 18px; color: var(--bs-primary)">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M17 17h-11v-14h-2"></path>
+                <path d="M6 5l14 1l-1 7h-13"></path>
+              </svg>Cart</a>
+          </li>
+        </ul>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/profile"
+          style="height: fit-content; width: fit-content; font-size: inherit"><svg xmlns="http://www.w3.org/2000/svg"
+            width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user me-2"
+            style="font-size: 18px">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+          </svg>Profile</a>
       </div>
-    </nav>
+    </div>
+  </nav>
     <!-- End: Navbar Centered Links -->
     <section class="bg-body-tertiary mb-5">
       <div class="container py-4 px-4 pt-5">
@@ -266,58 +226,42 @@
                 </div>
               </div>
             </div>
-            <div
-              class="card border-1 mt-sm-4"
-              style="
-                border-radius: 20px;
-                padding-left: 24px;
-                padding-right: 24px;
-                box-shadow: 0px 0px;
-              "
-            >
-              <div
-                class="card-body justify-content-evenly my-4"
-                style="border-bottom-color: rgb(73, 80, 87)"
-              >
-                <div class="table-responsive" style="box-shadow: 0px 0px">
+            <div class="card border-1 mt-sm-4" style="border-radius: 20px; padding-left: 24px; padding-right: 24px;">
+              <div class="card-body justify-content-evenly my-4">
+                <div class="table-responsive">
                   <table class="table table-borderless">
                     <thead>
-                      <tr
-                        style="
-                          border-radius: -1px;
-                          border-width: 1px;
-                          border-style: none;
-                        "
-                      >
+                      <tr>
                         <th class="text-capitalize fw-semibold">Thumbnail</th>
-                        <th class="text-capitalize fw-semibold">
-                          Product name
-                        </th>
+                        <th class="text-capitalize fw-semibold">Product name</th>
                         <th class="text-capitalize fw-semibold">Unit Price</th>
                         <th class="text-capitalize fw-semibold">Quantity</th>
-                        <th class="text-capitalize fw-semibold">
-                          Item Subtotal
-                        </th>
+                        <th class="text-capitalize fw-semibold">Item Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($cartItems as $item)
                       <tr>
                         <td>
-                          <img
-                            src="/assets/img/600_8nQTOou9p1IFQzRlA9foAP2zd.png?h=e584b9ec87ff7a941096bdd0ed7d9143"
-                            width="80"
-                          />
+                        <img src="{{ $item->thumbnail }}" width="80" height="80" style="object-fit: cover; border-radius: 8px;">
+
                         </td>
-                        <td>White Magic (White Rose)</td>
-                        <td>₱1,200</td>
-                        <td>2</td>
-                        <td>₱2,400</td>
+                        <td>{{ $item->product_name }}</td>
+                        <td>₱{{ number_format($item->unit_price, 2) }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>₱{{ number_format($item->unit_price * $item->quantity, 2) }}</td>
                       </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
+                <hr>
+                <div class="d-flex justify-content-end mt-3">
+                  <h5 class="fw-semibold">Subtotal: ₱{{ number_format($subtotal, 2) }}</h5>
+                </div>
               </div>
             </div>
+
           </div>
           <div class="col-xl-5 col-xxl-4 ps-0 pe-0">
             <div
@@ -346,14 +290,16 @@
                     Payment Method
                   </p>
                   <select
+                    name="payment_method"
                     class="bg-primary-subtle border rounded py-2 px-2"
-                    required=""
+                    required
                   >
-                    <option value="undefined">Select Payment method</option>
-                    <option value="COD">Cash on delivery</option>
-                    <option value="e-wallet">E-wallet</option>
-                    <option value="bankTransfer">Bank Transfer</option>
+                    <option value="">Select Payment method</option>
+                    @foreach ($paymentMethods as $method)
+                      <option value="{{ $method->PaymentID }}">{{ $method->paymentMethod }}</option>
+                    @endforeach
                   </select>
+
                 </div>
                 <div
                   class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 py-3"
@@ -407,9 +353,7 @@
                     >
                       Items:
                     </p>
-                    <p style="font-size: 14px" class="mb-0">
-                      <strong>2</strong>
-                    </p>
+                    <p style="font-size: 14px" class="mb-0"><strong>{{ $totalItems }}</strong></p>
                   </div>
                   <div
                     class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0"
@@ -420,9 +364,7 @@
                     >
                       Sub Total:
                     </p>
-                    <p style="font-size: 14px" class="mb-0">
-                      <strong>₱2,400</strong>
-                    </p>
+                    <p style="font-size: 14px" class="mb-0"><strong>₱{{ number_format($subtotal, 2) }}</strong></p>
                   </div>
                   <div
                     class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0"
@@ -433,9 +375,7 @@
                     >
                       Shipping
                     </p>
-                    <p style="font-size: 14px" class="mb-0">
-                      <strong>₱0</strong>
-                    </p>
+                    <p style="font-size: 14px" class="mb-0"><strong>₱{{ number_format($shippingFee, 2) }}</strong></p>
                   </div>
                   <div
                     class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0"
@@ -446,9 +386,7 @@
                     >
                       Voucher Discount
                     </p>
-                    <p style="font-size: 14px" class="mb-0">
-                      <strong>₱400</strong>
-                    </p>
+                    <p style="font-size: 14px" class="mb-0"><strong>-₱{{ number_format($voucherDiscount, 2) }}</strong></p>
                   </div>
                   <div
                     class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0 pt-3"
@@ -460,9 +398,7 @@
                     >
                       Total
                     </p>
-                    <p style="font-size: 14px" class="mb-0">
-                      <strong>₱2,000</strong>
-                    </p>
+                    <p style="font-size: 14px" class="mb-0"><strong>₱{{ number_format($total, 2) }}</strong></p>
                   </div>
                 </div>
                 <div
@@ -492,13 +428,11 @@
           >
             <h3 class="fs-6">Sections</h3>
             <ul class="list-unstyled">
-              <li><a class="link-dark" href="#">Featured Products</a></li>
-              <li><a class="link-dark" href="#">Our Products</a></li>
-              <li>
-                <a class="link-dark" href="/dictionary "
-                  >Flower Dictionary</a
-                >
-              </li>
+            <li><a class="link-dark" href="{{ route('userHome') }}#NewRelease">Featured Products</a></li>
+            <li><a class="link-dark" href="{{ route('userHome') }}#AllProducts">Our Products</a></li>
+            <li>
+              <a class="link-dark" href="/dictionary ">Flower Dictionary</a>
+            </li>
             </ul>
           </div>
           <!-- End: Sections -->
@@ -508,7 +442,7 @@
             <ul class="list-unstyled">
               <li><a class="link-dark" href="/faqs ">FAQs</a></li>
               <li class="text-dark">
-                <a class="link-dark" href="#">About Us</a>
+              <a class="link-dark" href="{{  route('userHome') }}#">About Us</a>
               </li>
               <li class="text-dark">
                 <a class="link-dark" href="/contactUs ">Contact Us</a>

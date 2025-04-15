@@ -157,7 +157,7 @@
             @else
                 @foreach($favorites as $favorite)
                     @php
-                        $flower = $favorite->flower; // Assuming relationship is set in Favorite model
+    $flower = $favorite->flower; // Assuming relationship is set in Favorite model
                     @endphp
                     <div class="card mb-4 shadow-sm" style="border-radius: 10px; overflow: hidden;">
                         <div class="d-md-flex">
@@ -176,7 +176,7 @@
                                             {{ $flower->flower_name }}
                                         </h3>
                                         <!-- Delete Button -->
-                                        <form action="{{ route('favorites.delete') }}" method="POST" onsubmit="return confirm('Are you sure you want to remove this from favorites?');">
+                                        <form action="{{ route('favorites.delete') }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" name="favorite_id" value="{{ $favorite->favorite_id }}">
@@ -325,5 +325,38 @@
     <!-- End: Footer Multi Column -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/script.min.js?h=fffa086275a3e9d088e0d86eca965e31"></script>
+    @if (session('success'))
+    <div class="modal fade" id="actionSuccessModal" tabindex="-1" aria-labelledby="actionSuccessModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="actionSuccessModalLabel">Success</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        {{ session('success') }}
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <script>
+      // Show modal on load
+      const successModal = new bootstrap.Modal(document.getElementById('actionSuccessModal'), {
+      keyboard: false
+      });
+      successModal.show();
+
+      // Auto-close after 3 seconds
+      setTimeout(() => {
+      successModal.hide();
+      }, 1000);
+    </script>
+  @endif
+
   </body>
 </html>
