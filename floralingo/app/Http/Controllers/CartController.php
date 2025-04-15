@@ -99,8 +99,8 @@ class CartController extends Controller
             return $item->quantity * $item->unit_price;
         });
 
-        $voucherDiscount = 0; // Can make this dynamic later
-        $shippingFee = 75;     // Set your logic — e.g., free shipping over certain amount
+        $voucherDiscount = 0;
+        $shippingFee = 75;
 
         $total = $subtotal - $voucherDiscount + $shippingFee;
 
