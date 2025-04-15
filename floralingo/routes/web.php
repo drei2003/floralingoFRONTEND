@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\CartController;
 
 //Public Routes (Accessible to Everyone)
 //landing page new BLADE
-Route::get('/', [LandingContentController::class, 'landingPage'])->name('userlanding'); 
+Route::get('/', [LandingContentController::class, 'landingPage'])->name('userlanding');
 
 
 
@@ -73,9 +74,16 @@ Route::middleware([CheckRegisteredUser::class])->group(function () {
     Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
     Route::post('/cart/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
 
-    Route::get('/profile', function () {
-        return view('profile');
-    })->name('profile');
+    
+    Route::get('/profile', [UserProfileController::class, 'showAddress'])->name('profile');
+    Route::post('/update-profile', [UserProfileController::class, 'updateProfile'])->name('change.profile');
+    Route::post('/address/store', [UserProfileController::class, 'store'])->name('address.store');
+    Route::delete('/address/{id}', [UserProfileController::class, 'delete'])->name('address.delete');
+    Route::put('/profile/address/{address}', [UserProfileController::class, 'update'])->name('address.update');
+
+
+
+
 
     Route::get('/checkOut', [CartController::class, 'checkOutPage'])->name('checkout');
 
@@ -127,9 +135,9 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::resource('flowers', FlowerController::class);
 
     Route::resource('category', CategoryController::class);
-    
+
     Route::resource('paymentOptions', PaymenthMethodController::class);
 });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';

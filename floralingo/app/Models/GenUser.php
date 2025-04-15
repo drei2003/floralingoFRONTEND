@@ -28,4 +28,9 @@ class GenUser extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'user_id');
+    }
 }
