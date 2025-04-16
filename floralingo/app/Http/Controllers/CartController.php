@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\PaymentMethod;
+use App\Models\Address;
 
 class CartController extends Controller
 {
@@ -168,7 +169,9 @@ class CartController extends Controller
         // Fetch active payment methods from DB
         $paymentMethods = PaymentMethod::where('status', 'Active')->get();
 
-        return view('checkout', compact('cartItems', 'subtotal', 'totalItems', 'voucherDiscount', 'shippingFee', 'total', 'paymentMethods'));
+        $addresses = Address::where('user_id', $user->id)->get();
+
+        return view('checkout', compact('cartItems', 'subtotal', 'totalItems', 'voucherDiscount', 'shippingFee', 'total', 'paymentMethods', 'addresses'));
     }
 
 

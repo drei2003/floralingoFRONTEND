@@ -204,26 +204,59 @@
                     ></path></svg
                   >Delivery Address
                 </h5>
+                
+                @php
+                    $mainAddress = $addresses->first();
+                    $otherAddresses = $addresses->skip(1);
+                @endphp
+
                 <div class="row">
-                  <div class="col-lg-2 col-xl-3">
-                    <p>Rouen&nbsp;<span>(+63 909 065 3412)</span></p>
-                  </div>
-                  <div class="col-lg-9 col-xl-7 col-xxl-7">
-                    <p>
-                      Purok 6, Bungkaras Village, Tagaytay, Italian, House No.
-                      3, Camalig, South Luzon, Albay, 4502
-                    </p>
-                  </div>
-                  <div class="col-lg-1 col-xl-2 col-xxl-2">
-                    <a
-                      class="link-primary"
-                      href="#"
-                      data-bs-target="#change-address"
-                      data-bs-toggle="modal"
-                      >Change</a
-                    >
-                  </div>
+                    <!-- Display User's Name and Email -->
+                    <div class="col-lg-12 mb-3">
+                        <h4>{{ session('user')->name ?? '' }}</h4>
+                        <p>{{ session('user')->email ?? '' }}</p>
+                    </div>
+
+                    <!-- Display Main Address -->
+                    <div class="col-lg-11 col-xl-10 col-xxl-10">
+                        <p id="selected-address">
+                            {{ $mainAddress->house_no }}, {{ $mainAddress->barangay }},
+                            {{ $mainAddress->municipality_city }}, {{ $mainAddress->region }},
+                            {{ $mainAddress->postal_code }}
+                        </p>
+                    </div>
+
+                    <!-- Dropdown to Change Address -->
+                    <div class="col-lg-1 col-xl-2 col-xxl-2">
+                        <div class="dropdown">
+                            <a class="link-primary dropdown-toggle" href="#" role="button" id="addressDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Other Addresses
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="addressDropdown">
+                                @foreach ($otherAddresses as $address)
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="#"
+                                            onclick="changeAddress(`{{ $address->house_no }}, {{ $address->barangay }}, {{ $address->municipality_city }}, {{ $address->region }}, {{ $address->postal_code }}`)">
+                                            {{ $address->house_no }}, {{ $address->barangay }},
+                                            {{ $address->municipality_city }}, {{ $address->region }},
+                                            {{ $address->postal_code }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- JavaScript to Update Address Display -->
+                <script>
+                    function changeAddress(newAddress) {
+                        document.getElementById('selected-address').innerText = newAddress;
+                    }
+                </script>
+
               </div>
             </div>
             <div class="card border-1 mt-sm-4" style="border-radius: 20px; padding-left: 24px; padding-right: 24px;">
@@ -273,6 +306,7 @@
                 box-shadow: 0px 0px;
               "
             >
+            <!-- Start: Order Summary -->
               <div class="card-body justify-content-evenly my-4">
                 <div>
                   <h5
@@ -281,6 +315,30 @@
                   >
                     Order Summary&nbsp;
                   </h5>
+                </div>
+                <div
+                  class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 pb-3"
+                  style="border-bottom: 1px dashed var(--bs-gray-300)"
+                >
+                  <p class="d-xl-flex align-items-xl-center me-4 mb-3">
+                    Delivery Address
+                  </p>
+                    <select
+                    name="delivery_address_id"
+                    class="bg-primary-subtle border rounded py-2 px-2 w-100"
+                    required
+                    style="max-width: 100%;"
+                    >
+                    <option value="">Select Delivery Address</option>
+                    @foreach ($addresses as $address)
+                      <option value="{{ $address->id }}">
+                      {{ $address->house_no }}, {{ $address->barangay }},
+                      {{ $address->municipality_city }}, {{ $address->region }},
+                      {{ $address->postal_code }}
+                      </option>
+                    @endforeach
+                    </select>
+
                 </div>
                 <div
                   class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 pb-3"
