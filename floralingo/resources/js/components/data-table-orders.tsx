@@ -58,18 +58,20 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Separator } from '@radix-ui/react-separator';
-
+import { useState } from 'react';
+import axios from 'axios';
 export const schema = z.object({
     id: z.number(),
-    OrderID: z.number(),
+    OrderID: z.string(),
     status: z.string(),
     TotalPrice: z.number(),
-    ProductName: z.string(),
-    dateCreated: z.string(),
+    Name: z.string(),
+    orderedProducts: z.string(),
+    deliveryDate: z.string(),
+    deliveryTime: z.string(),
     paymentMethod: z.string(),
     shippingAdd: z.string(),
     numItems: z.number(),
-    shippingFee: z.number(),
 });
 
 // Create a separate component for the drag handle
@@ -106,10 +108,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
                             <p>
                                 <div className="font-bold">Shipping address:</div> {row.original.shippingAdd}
                             </p>
-                            <p>
-                                <div className="font-bold">Shipping Fee:</div> ₱{row.original.shippingFee}
-                            </p>
-
+                           
                             <p>
                                 <div className="font-bold">Number of items </div> {row.original.numItems}
                             </p>
@@ -121,15 +120,45 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         enableHiding: false,
     },
     {
-        accessorKey: 'ProductName', // Updated to match the SelectItem value
-        header: 'Product Name',
+        accessorKey: 'Name', // Updated to match the SelectItem value
+        header: 'Name',
         cell: ({ row }) => (
             <div className="w-32">
                 <Badge variant="outline" className="text-muted-foreground px-1.5">
-                    {row.original.ProductName}
+                    {row.original.Name}
                 </Badge>
             </div>
         ),
+    },
+    {
+        accessorKey: 'orderedProducts', // Updated to match the SelectItem value
+        header: 'Ordered Products',
+        cell: ({ row }) => (
+            <div className="max-w-xs break-words">
+                <Badge variant="outline" className="text-muted-foreground px-1.5 whitespace-normal break-words">
+                    {row.original.orderedProducts}
+                </Badge>
+            </div>
+
+        ),
+    },
+    {
+        accessorKey: 'shippingAdd', // Updated to match the SelectItem value
+        header: 'Shipping Address',
+        cell: ({ row }) => (
+            <div className="max-w-xs break-words">
+                <Badge variant="outline" className="text-muted-foreground px-1.5 whitespace-normal break-words">
+                    {row.original.shippingAdd}
+                </Badge>
+            </div>
+        ),
+    },
+    {
+        accessorKey: 'numItems', // Updated to match the SelectItem value
+        header: 'Items',
+        cell: ({ row }) => {
+            return <div>{row.original.numItems}</div>;
+        }
     },
     {
         accessorKey: 'paymentMethod', // Updated to match the SelectItem value
@@ -149,13 +178,13 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
             <Badge variant="outline" className="text-muted-foreground flex gap-1 px-1.5 [&_svg]:size-3">
                 {row.original.status === 'Done' ? (
                     <CheckCircle2Icon className="text-green-500 dark:text-green-400" />
-                ) : row.original.status === 'Canceled' ? (
+                ) : row.original.status === 'Cancelled' ? (
                     <CircleX className="text-red-500 dark:text-red-400" />
-                ) : row.original.status === 'Ordered' ? (
+                ) : row.original.status === 'Pending' ? (
                     <ClipboardList className="text-blue-500 dark:text-blue-400" />
                 ) : row.original.status === 'Packed' ? (
                     <Package className="text-yellow-500 dark:text-yellow-400" />
-                ) : row.original.status === 'InTransit' ? (
+                ) : row.original.status === 'Cancelled' ? (
                     <Truck className="text-orange-500 dark:text-orange-400" />
                 ) : row.original.status === 'Delivered' ? (
                     <House className="text-green-500 dark:text-green-400" />
@@ -173,31 +202,42 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     },
 
     {
-        accessorKey: 'dateCreated', // Updated to match the SelectItem value
-        header: 'Date Created',
+        accessorKey: 'deliveryDate', // Updated to match the SelectItem value
+        header: 'Delivery Date',
         cell: ({ row }) => {
-            const date = new Date(row.original.dateCreated);
+            const date = new Date(row.original.deliveryDate);
             const formattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
 
             return <div>{formattedDate}</div>;
         },
-    },
-    {
-        id: 'actions',
-        cell: ({ row }) => (
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="text-muted-foreground data-[state=open]:bg-muted flex size-8" size="icon">
-                        <MoreVerticalIcon />
-                        <span className="sr-only">Open menu</span>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-32">
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-        ),
-    },
+        },
+        {
+        accessorKey: 'deliveryTime', // Updated to match the SelectItem value
+        header: 'Delivery Time',
+        cell: ({ row }) => {
+            const time = new Date(`1970-01-01T${row.original.deliveryTime}`);
+            const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            return <div>{formattedTime}</div>;
+        },
+        },
+
+    //     {
+    //     id: 'actions',
+    //     cell: ({ row }) => (
+    //         <DropdownMenu>
+    //             <DropdownMenuTrigger asChild>
+    //                 <Button variant="ghost" className="text-muted-foreground data-[state=open]:bg-muted flex size-8" size="icon">
+    //                     <MoreVerticalIcon />
+    //                     <span className="sr-only">Open menu</span>
+    //                 </Button>
+    //             </DropdownMenuTrigger>
+    //             <DropdownMenuContent align="end" className="w-32">
+    //                 <DropdownMenuItem>Delete</DropdownMenuItem>
+    //             </DropdownMenuContent>
+    //         </DropdownMenu>
+    //     ),
+    // },
 ];
 
 function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
@@ -290,10 +330,11 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="OrderID">Order ID</SelectItem>
-                            <SelectItem value="ProductName">Product Name</SelectItem>
+                            <SelectItem value="Name">Name</SelectItem>
+                            <SelectItem value="orderedProducts">Products Ordered</SelectItem>
                             <SelectItem value="paymentMethod">Payment Method</SelectItem>
                             <SelectItem value="status">Status</SelectItem>
-                            <SelectItem value="dateCreated">Date Created</SelectItem>
+                            <SelectItem value="deliveryDate">Delivery Date</SelectItem>
                         </SelectContent>
                     </Select>
                     <Input type="text" placeholder={`Search by ${searchColumn}`} onChange={handleSearch} className="w-64" />
@@ -465,7 +506,28 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof schema>[
 }
 
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
-    const isMobile = useIsMobile();
+    // State to manage the status
+    const [status, setStatus] = useState(item.status);
+
+    // Handle status change
+    const handleStatusChange = (newStatus: string) => {
+        setStatus(newStatus);
+    };
+
+    // Handle status update submission
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8000/orders/${item.OrderID}`, {
+                status: status,
+            });
+
+            alert(response.data.message);
+            window.location.reload(); // Reload to see the updated status
+        } catch (error) {
+            console.error('Error updating order status:', error);
+            alert('Failed to update order status.');
+        }
+    };
 
     return (
         <Sheet>
@@ -476,7 +538,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
             </SheetTrigger>
             <SheetContent side="right" className="flex flex-col p-3">
                 <SheetHeader>
-                    <SheetTitle>Edit profile</SheetTitle>
+                    <SheetTitle>Edit Order Status</SheetTitle>
                     <SheetDescription>Make changes here..</SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-7 py-4 text-sm">
@@ -484,70 +546,60 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                         <div className="flex flex-col gap-3">
                             <Label htmlFor="header">Order ID</Label>
                             <div id="header">{item.OrderID}</div>
-                            <Separator />
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="Product Name">Product Name</Label>
-                                <Input id="Product Name" className="w-full" defaultValue={item.ProductName} placeholder="Product Name" />
+                                <Label htmlFor="Name">Name</Label>
+                                <div>{item.Name}</div>
+                            </div>
+                            <div className="flex flex-col gap-3">
+                                <Label htmlFor="orderedProducts">Products Ordered</Label>
+                                <div className="max-w-xs break-words">{item.orderedProducts}</div>
                             </div>
                             <div className="flex flex-col gap-3">
                                 <Label htmlFor="Payment method">Payment method</Label>
-                                <Select defaultValue={item.paymentMethod}>
-                                    <SelectTrigger id="Payment method" className="w-full">
-                                        <SelectValue placeholder="Payment method" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Gcash">Gcash</SelectItem>
-                                        <SelectItem value="MasterCard">MasterCard</SelectItem>
-                                        <SelectItem value="PayPal">PayPal</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <div>{item.paymentMethod}</div>
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-4">
                             <div className="flex flex-col gap-3">
                                 <Label htmlFor="Status">Status</Label>
-                                <Select defaultValue={item.status}>
+                                <Select value={status} onValueChange={handleStatusChange}>
                                     <SelectTrigger id="Status" className="w-full">
                                         <SelectValue placeholder="Status" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="Ordered">Ordered </SelectItem>
-                                        <SelectItem value="Packed">Packed </SelectItem>
-                                        <SelectItem value="InTransit">InTransit</SelectItem>
-                                        <SelectItem value="Delivered">Delivered </SelectItem>
-                                        <SelectItem value="Canceled">Canceled</SelectItem>
+                                        <SelectItem value="Pending">Pending</SelectItem>
+                                        <SelectItem value="Packed">Packed</SelectItem>
+                                        <SelectItem value="Delivered">Delivered</SelectItem>
+                                        <SelectItem value="Cancelled">Cancelled</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
                             <div className="flex flex-col gap-3">
-                                <Label htmlFor="TotalPrice">TotalPrice</Label>
-                                <Input id="TotalPrice" defaultValue={item.TotalPrice} />
+                                <Label htmlFor="TotalPrice">Total Price</Label>
+                                <div>{item.TotalPrice}</div>
                             </div>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label htmlFor="dateCreated">Date Created</Label>
-                            <Input
-                                id="dateCreated"
-                                type="date"
-                                defaultValue={item.dateCreated}
-                                onChange={(e) => {
-                                    item.dateCreated = e.target.value;
-                                }}
-                            />
+                            <Label htmlFor="deliveryDate">Delivery Date</Label>
+                            <div>{item.deliveryDate}</div>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label htmlFor="deliveryTime">Delivery Time</Label>
+                            <div>{item.deliveryTime}</div>
                         </div>
                     </form>
                 </div>
                 <SheetFooter className="mt-auto flex gap-2 sm:flex-col sm:space-x-0">
-                    <Button className="w-full">Submit</Button>
+                    <Button className="w-full" onClick={handleSubmit}>Submit</Button>
                     <SheetClose asChild>
-                        <Button variant="outline" className="w-full">
-                            Done
-                        </Button>
+                        <Button variant="outline" className="w-full">Done</Button>
                     </SheetClose>
                 </SheetFooter>
             </SheetContent>
         </Sheet>
     );
 }
+
+export default TableCellViewer;

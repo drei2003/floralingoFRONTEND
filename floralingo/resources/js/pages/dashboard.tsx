@@ -7,7 +7,13 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 
-import data from './data table/data-orders.json';
+import rawData from './data table/user_orders.json';
+
+const data = rawData.map(order => ({
+    ...order,
+   
+    TotalPrice: Number(order.TotalPrice),
+}));
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

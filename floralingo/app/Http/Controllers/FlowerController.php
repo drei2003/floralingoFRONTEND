@@ -72,7 +72,7 @@ class FlowerController extends Controller
             'scientific_name' => 'required|string|max:255',
             'pronunciation' => 'required|string|max:255',
             'added_at' => 'nullable|date',
-            'Thumbnail_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'Thumbnail_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Handle image upload
@@ -80,10 +80,10 @@ class FlowerController extends Controller
             $file = $request->file('Thumbnail_url');
             $filename = time() . '_' . $file->getClientOriginalName();
             $filePath = 'imgAssets/' . $filename;
-            
+
             // Move file to the public path
             $file->move(public_path('imgAssets'), $filename);
-            
+
             // Set the correct URL
             $validated['Thumbnail_url'] = $filePath;
         }
@@ -93,8 +93,8 @@ class FlowerController extends Controller
 
         return redirect()->route('flowers.index')->with('success', 'Flower created successfully!');
     }
-    
-    
+
+
 
     /**
      * Display the specified resource.
@@ -118,11 +118,11 @@ class FlowerController extends Controller
     public function update(Request $request, $id)
     {
         $flower = Flower::find($id);
-    
+
         if (!$flower) {
             return response()->json(['message' => 'Flower not found'], 404);
         }
-    
+
         // Validate request
         $request->validate([
             'flower_name' => 'required|string|max:255',
@@ -131,7 +131,7 @@ class FlowerController extends Controller
             'pronunciation' => 'required|string|max:255',
             'added_at' => 'required|date',
         ]);
-    
+
         // Update flower details
         $flower->flower_name = $request->flower_name;
         $flower->description = $request->description;
@@ -139,10 +139,10 @@ class FlowerController extends Controller
         $flower->pronunciation = $request->pronunciation;
         $flower->added_at = $request->added_at;
         $flower->save();
-    
+
         return response()->json(['message' => 'Flower updated successfully!']);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -150,13 +150,13 @@ class FlowerController extends Controller
     public function destroy(string $id)
     {
         $category = Flower::find($id);
-    
+
         if (!$category) {
             return response()->json(['message' => 'Category not found'], 404);
         }
-    
+
         $category->delete();
-    
+
         return response()->json(['message' => 'Product Category deleted successfully!']);
     }
 
@@ -164,7 +164,7 @@ class FlowerController extends Controller
     {
         $user = session('user');
         $search = $request->input('search'); // Get the search term from the input field
-    
+
         if ($search) {
             // Filter flowers based on the search term including flower_name, scientific_name, and description
             $Viewdictionary = Flower::where('flower_name', 'like', '%' . $search . '%')
@@ -176,12 +176,12 @@ class FlowerController extends Controller
             // If no search term, fetch all flowers
             $Viewdictionary = Flower::orderBy('added_at', 'desc')->get();
         }
-    
+
         return view('dictionary', compact('user', 'Viewdictionary'));
     }
 
 
-        public function addToFavorites(Request $request)
+    public function addToFavorites(Request $request)
     {
         $user = session('user');
         $flowerId = $request->input('flower_id');
@@ -213,24 +213,24 @@ class FlowerController extends Controller
     }
 
     public function deleteFavorite(Request $request)
-{
-    $favoriteId = $request->input('favorite_id');
-    $user = session('user');
+    {
+        $favoriteId = $request->input('favorite_id');
+        $user = session('user');
 
-    $favorite = Favorite::where('favorite_id', $favoriteId)->firstOrFail();
+        $favorite = Favorite::where('favorite_id', $favoriteId)->firstOrFail();
 
-    if ($favorite->user_id !== $user->id) {
-        return redirect()->route('favorites')->with('error', 'Unauthorized');
+        if ($favorite->user_id !== $user->id) {
+            return redirect()->route('favorites')->with('error', 'Unauthorized');
+        }
+
+        $favorite->delete();
+
+        return redirect()->route('favorites')->with('success', 'Removed from favorites.');
     }
 
-    $favorite->delete();
 
-    return redirect()->route('favorites')->with('success', 'Removed from favorites.');
-}
 
-    
 
-    
 
 }
 

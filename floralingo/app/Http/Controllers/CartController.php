@@ -169,8 +169,12 @@ class CartController extends Controller
         // Fetch active payment methods from DB
         $paymentMethods = PaymentMethod::where('status', 'Active')->get();
 
+        // Fetch user addresses
         $addresses = Address::where('user_id', $user->id)->get();
 
+        if ($addresses->isEmpty()) {
+            return redirect()->route('profile')->with('error', 'You must add an address before proceeding to checkout.');
+        }
         return view('checkout', compact('cartItems', 'subtotal', 'totalItems', 'voucherDiscount', 'shippingFee', 'total', 'paymentMethods', 'addresses'));
     }
 

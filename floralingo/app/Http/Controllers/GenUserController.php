@@ -92,38 +92,38 @@ class GenUserController extends Controller
             'name' => 'required|string|max:255', // Ensure name is required
             'email' => 'required|email|exists:gen_users,email', // Validate email exists in the database
         ]);
-    
+
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-    
+
         // Check if the provided name and email match a user in the database
         $user = GenUser::where('email', $request->email)
-                      ->where('name', $request->name) // Ensure both email and name match
-                      ->first();
-    
+            ->where('name', $request->name) // Ensure both email and name match
+            ->first();
+
         if (!$user) {
             return back()->with('error', 'You are not allowed to change the password. Name and email do not match.');
         }
-    
+
         // If the user is found, show the password reset form
         return view('updatePass', compact('user'));
     }
 
     public function updatePassword(Request $request, $id)
-{
-    // Validate the new password
-    $request->validate([
-        'password' => 'required|min:8|confirmed', // Ensure password is confirmed
-    ]);
+    {
+        // Validate the new password
+        $request->validate([
+            'password' => 'required|min:8|confirmed', // Ensure password is confirmed
+        ]);
 
-    // Find the user by ID and update the password
-    $user = GenUser::findOrFail($id);
-    $user->password = Hash::make($request->password);
-    $user->save();
+        // Find the user by ID and update the password
+        $user = GenUser::findOrFail($id);
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-    return redirect()->route('loginUser')->with('success', 'Password updated successfully! Please log in with your new password.');
-}
+        return redirect()->route('loginUser')->with('success', 'Password updated successfully! Please log in with your new password.');
+    }
 
 
 

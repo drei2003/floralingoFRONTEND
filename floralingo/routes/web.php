@@ -12,6 +12,7 @@ use App\Http\Controllers\FlowerController;
 use App\Http\Controllers\LandingContentController;
 use App\Http\Middleware\CheckRegisteredUser;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -74,7 +75,7 @@ Route::middleware([CheckRegisteredUser::class])->group(function () {
     Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
     Route::post('/cart/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
 
-    
+
     Route::get('/profile', [UserProfileController::class, 'showAddress'])->name('profile');
     Route::post('/update-profile', [UserProfileController::class, 'updateProfile'])->name('change.profile');
     Route::post('/address/store', [UserProfileController::class, 'store'])->name('address.store');
@@ -86,6 +87,12 @@ Route::middleware([CheckRegisteredUser::class])->group(function () {
 
 
     Route::get('/checkOut', [CartController::class, 'checkOutPage'])->name('checkout');
+    Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
+    Route::put('/orders/{orderId}', [OrderController::class, 'update']);
+    Route::get('/user/orders', [OrderController::class, 'allOrders'])->name('user.orders');
+    Route::delete('/orders/{orderId}', [OrderController::class, 'destroy']);
+
+
 
     Route::get('/productView', [ProductController::class, 'viewProduct'])->name('allProducts');
     Route::get('/productView/{id}', [ProductController::class, 'viewProduct'])->name('product.view');
@@ -124,7 +131,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         return Inertia::render('orders');
     })->name('orders');
 
-
+    Route::put('/orders/{orderId}', [OrderController::class, 'update']);
 
     Route::get('/sales', function () {
         return Inertia::render('sales');

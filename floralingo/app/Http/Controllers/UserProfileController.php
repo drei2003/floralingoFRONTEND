@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use App\Models\Address;
 use Illuminate\Validation\Rule;
 use App\Models\GenUser;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserProfileController extends Controller
 {
@@ -12,19 +15,35 @@ class UserProfileController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'region' => ['required', Rule::in([
-                'Region I', 'Region II', 'Region III', 'Region IV-A', 'Region IV-B',
-                'Region V', 'Region VI', 'Region VII', 'Region VIII',
-                'Region IX', 'Region X', 'Region XI', 'Region XII',
-                'CAR', 'BARMM', 'NCR', 'CARAGA'
-            ])],
+            'region' => [
+                'required',
+                Rule::in([
+                    'Region I',
+                    'Region II',
+                    'Region III',
+                    'Region IV-A',
+                    'Region IV-B',
+                    'Region V',
+                    'Region VI',
+                    'Region VII',
+                    'Region VIII',
+                    'Region IX',
+                    'Region X',
+                    'Region XI',
+                    'Region XII',
+                    'CAR',
+                    'BARMM',
+                    'NCR',
+                    'CARAGA'
+                ])
+            ],
             'municipality_city' => 'required|string|max:255',
             'barangay' => 'required|string|max:255',
             'house_no' => 'required|string|max:255',
             'postal_code' => 'required|string|max:10',
         ]);
 
-        $user = session('user'); // Assuming you're storing user in session
+        $user = session('user');
 
         Address::create([
             'user_id' => $user->id,
@@ -39,39 +58,59 @@ class UserProfileController extends Controller
     }
 
     // Show address method
-    public function showAddress()
+    public function showAddress(Request $request)
     {
-        // Fetch the user from the session
-        $user = session('user'); // You can also use auth()->user() if you're using authentication
+      
+        $user = session('user'); 
         $addresses = Address::where('user_id', $user->id)->get();
 
         $regions = [
-            'Region I', 'Region II', 'Region III', 'Region IV-A', 'Region IV-B',
-            'Region V', 'Region VI', 'Region VII', 'Region VIII',
-            'Region IX', 'Region X', 'Region XI', 'Region XII',
-            'CAR', 'BARMM', 'NCR', 'CARAGA'
+            'Region I',
+            'Region II',
+            'Region III',
+            'Region IV-A',
+            'Region IV-B',
+            'Region V',
+            'Region VI',
+            'Region VII',
+            'Region VIII',
+            'Region IX',
+            'Region X',
+            'Region XI',
+            'Region XII',
+            'CAR',
+            'BARMM',
+            'NCR',
+            'CARAGA'
         ];
+        $query = Order::where('gen_user_id', $user->id);
+
+        if ($request->has('status') && in_array($request->status, ['Pending', 'Packed', 'Delivered', 'Cancelled'])) {
+            $query->where('status', $request->status);
+        }
+
+        $orders = $query->get();
 
         // Pass the user, addresses, and regions to the view
-        return view('profile', compact('user', 'addresses', 'regions'));
+        return view('profile', compact('user', 'addresses', 'regions', 'orders'));
     }
 
     // Method to delete an address
     public function delete(Request $request, $id)
     {
         $user = session('user');
-    
+
         $address = Address::where('address_id', $id)->firstOrFail();
-    
+
         if ($address->user_id !== $user->id) {
             return redirect()->route('profile')->with('error', 'Unauthorized access to address.');
         }
-    
+
         $address->delete();
-    
+
         return redirect()->route('profile')->with('success', 'Address deleted!');
     }
-    
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -99,33 +138,33 @@ class UserProfileController extends Controller
     {
         // Get the user ID stored in the session
         $sessionUser = session('user');
-    
+
         $user = GenUser::find($sessionUser->id);
-    
+
         // Validate the request
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:gen_users,email,' . $user->id,
         ]);
-    
+
         // Update the user's details
         $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
         ]);
-    
+
         // Update the session with the latest user data
         session(['user' => $user]);
-    
+
         session()->flash('success', 'Profile updated successfully!');
-    
+
         return redirect()->back();
     }
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 }

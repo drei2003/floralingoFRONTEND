@@ -572,7 +572,8 @@
 
 
           <div class="mt-auto pt-3">
-            <a href="#" class="btn btn-outline-primary rounded-pill d-inline-flex align-items-center">
+            <a href="{{ route('loginUser') }}"
+            class="btn btn-outline-primary rounded-pill d-inline-flex align-items-center">
             Learn More
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2"
               stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="ms-2">

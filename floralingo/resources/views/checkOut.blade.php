@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title>Floralingo-userSide</title>
-    <link
-      rel="stylesheet"
-      href="/assets/bootstrap/css/bootstrap.min.css?h=643a7e2aa853615822bcdb4e74d86ddb"
-    />
-    <link
-      rel="stylesheet"
-      href="/assets/css/styles.min.css?h=4d9d198ba5cb12fc8261e19f52dc4579"
-    />
-  </head>
-  <body>
-    <!-- Start: Navbar Centered Links -->
-    <nav class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Floralingo-userSide</title>
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=643a7e2aa853615822bcdb4e74d86ddb" />
+  <link rel="stylesheet" href="/assets/css/styles.min.css?h=4d9d198ba5cb12fc8261e19f52dc4579" />
+</head>
+
+<body>
+  <!-- Start: Navbar Centered Links -->
+  <nav class="navbar navbar-expand-md sticky-top bg-secondary bg-gradient d-md-flex py-3 px-0 px-xl-5">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="{{ route('userHome') }}"><span
           class="bs-icon-md bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center me-2 bs-icon"><img
@@ -82,570 +75,399 @@
       </div>
     </div>
   </nav>
-    <!-- End: Navbar Centered Links -->
-    <section class="bg-body-tertiary mb-5">
-      <div class="container py-4 px-4 pt-5">
-        <h1 class="display-3 fw-bold d-xxl-flex justify-content-xxl-start mb-0">
-          Check out
-        </h1>
-        <ol
-          class="breadcrumb d-xxl-flex px-0"
-          style="border-style: none; box-shadow: 0px 0px"
-        >
-          <li class="breadcrumb-item">
-            <a href="/userHome "
-              ><span
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icon-tabler-home fs-5 pe-0 me-2"
-                >
+  <!-- End: Navbar Centered Links -->
+  <section class="bg-body-tertiary mb-5">
+    <div class="container py-4 px-4 pt-5">
+      <h1 class="display-3 fw-bold d-xxl-flex justify-content-xxl-start mb-0">
+        Check out
+      </h1>
+      <ol class="breadcrumb d-xxl-flex px-0" style="border-style: none; box-shadow: 0px 0px">
+        <li class="breadcrumb-item">
+          <a href="/userHome "><span><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" class="icon icon-tabler icon-tabler-home fs-5 pe-0 me-2">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l-2 0l9 -9l9 9l-2 0"></path>
+                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
+                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
+              </svg>Home</span></a>
+        </li>
+
+        <li class="breadcrumb-item">
+          <a href="/cart"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icon-tabler-shopping-cart fs-5 pe-0 me-2">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+              <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+              <path d="M17 17h-11v-14h-2"></path>
+              <path d="M6 5l14 1l-1 7h-13"></path>
+            </svg><span>Cart</span></a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="/checkOut"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
+              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icon-tabler-credit-card-pay fs-5 pe-0 me-2">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M12 19h-6a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5"></path>
+              <path d="M3 10h18"></path>
+              <path d="M16 19h6"></path>
+              <path d="M19 16l3 3l-3 3"></path>
+              <path d="M7.005 15h.005"></path>
+              <path d="M11 15h2"></path>
+            </svg><span>Check out</span></a>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <section>
+    <div class="container mb-4 px-3">
+      <div class="row">
+        <div class="col-xl-7 col-xxl-8 mb-3 px-0">
+          <div class="card border-1 mb-3" style="
+                border-radius: 20px;
+                padding-left: 24px;
+                padding-right: 24px;
+                box-shadow: 0px 0px;
+              ">
+            <div class="card-body justify-content-evenly my-4">
+              <h5 class="fw-bold text-primary card-title mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                  class="icon icon-tabler icon-tabler-map-pin-filled me-2">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M5 12l-2 0l9 -9l9 9l-2 0"></path>
-                  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
                   <path
-                    d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
-                  ></path></svg
-                >Home</span
-              ></a
-            >
-          </li>
-          
-          <li class="breadcrumb-item">
-            <a href="/cart"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="icon icon-tabler icon-tabler-shopping-cart fs-5 pe-0 me-2"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                <path d="M17 17h-11v-14h-2"></path>
-                <path d="M6 5l14 1l-1 7h-13"></path></svg
-              ><span>Cart</span></a
-            >
-          </li>
-          <li class="breadcrumb-item">
-            <a href="/checkOut"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="icon icon-tabler icon-tabler-credit-card-pay fs-5 pe-0 me-2"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path
-                  d="M12 19h-6a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5"
-                ></path>
-                <path d="M3 10h18"></path>
-                <path d="M16 19h6"></path>
-                <path d="M19 16l3 3l-3 3"></path>
-                <path d="M7.005 15h.005"></path>
-                <path d="M11 15h2"></path></svg
-              ><span>Check out</span></a
-            >
-          </li>
-        </ol>
-      </div>
-    </section>
-    <section>
-      <div class="container mb-4 px-3">
-        <div class="row">
-          <div class="col-xl-7 col-xxl-8 mb-3 px-0">
-            <div
-              class="card border-1 mb-3"
-              style="
-                border-radius: 20px;
-                padding-left: 24px;
-                padding-right: 24px;
-                box-shadow: 0px 0px;
-              "
-            >
-              <div class="card-body justify-content-evenly my-4">
-                <h5 class="fw-bold text-primary card-title mb-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icon-tabler-map-pin-filled me-2"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path
-                      d="M18.364 4.636a9 9 0 0 1 .203 12.519l-.203 .21l-4.243 4.242a3 3 0 0 1 -4.097 .135l-.144 -.135l-4.244 -4.243a9 9 0 0 1 12.728 -12.728zm-6.364 3.364a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z"
-                      stroke-width="0"
-                      fill="currentColor"
-                    ></path></svg
-                  >Delivery Address
-                </h5>
-                
-                @php
-                    $mainAddress = $addresses->first();
-                    $otherAddresses = $addresses->skip(1);
-                @endphp
+                    d="M18.364 4.636a9 9 0 0 1 .203 12.519l-.203 .21l-4.243 4.242a3 3 0 0 1 -4.097 .135l-.144 -.135l-4.244 -4.243a9 9 0 0 1 12.728 -12.728zm-6.364 3.364a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z"
+                    stroke-width="0" fill="currentColor"></path>
+                </svg>Delivery Address
+              </h5>
 
-                <div class="row">
-                    <!-- Display User's Name and Email -->
-                    <div class="col-lg-12 mb-3">
-                        <h4>{{ session('user')->name ?? '' }}</h4>
-                        <p>{{ session('user')->email ?? '' }}</p>
-                    </div>
+              @php
+        $mainAddress = $addresses->first();
+        $otherAddresses = $addresses->skip(1);
+      @endphp
 
-                    <!-- Display Main Address -->
-                    <div class="col-lg-11 col-xl-10 col-xxl-10">
-                        <p id="selected-address">
-                            {{ $mainAddress->house_no }}, {{ $mainAddress->barangay }},
-                            {{ $mainAddress->municipality_city }}, {{ $mainAddress->region }},
-                            {{ $mainAddress->postal_code }}
-                        </p>
-                    </div>
-
-                    <!-- Dropdown to Change Address -->
-                    <div class="col-lg-1 col-xl-2 col-xxl-2">
-                        <div class="dropdown">
-                            <a class="link-primary dropdown-toggle" href="#" role="button" id="addressDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Other Addresses
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="addressDropdown">
-                                @foreach ($otherAddresses as $address)
-                                    <li>
-                                        <a
-                                            class="dropdown-item"
-                                            href="#"
-                                            onclick="changeAddress(`{{ $address->house_no }}, {{ $address->barangay }}, {{ $address->municipality_city }}, {{ $address->region }}, {{ $address->postal_code }}`)">
-                                            {{ $address->house_no }}, {{ $address->barangay }},
-                                            {{ $address->municipality_city }}, {{ $address->region }},
-                                            {{ $address->postal_code }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
+              <div class="row">
+                <!-- Display User's Name and Email -->
+                <div class="col-lg-12 mb-3">
+                  <h4>{{ session('user')->name ?? '' }}</h4>
+                  <p>{{ session('user')->email ?? '' }}</p>
                 </div>
 
-                <!-- JavaScript to Update Address Display -->
-                <script>
-                    function changeAddress(newAddress) {
-                        document.getElementById('selected-address').innerText = newAddress;
-                    }
-                </script>
-
-              </div>
-            </div>
-            <div class="card border-1 mt-sm-4" style="border-radius: 20px; padding-left: 24px; padding-right: 24px;">
-              <div class="card-body justify-content-evenly my-4">
-                <div class="table-responsive">
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th class="text-capitalize fw-semibold">Thumbnail</th>
-                        <th class="text-capitalize fw-semibold">Product name</th>
-                        <th class="text-capitalize fw-semibold">Unit Price</th>
-                        <th class="text-capitalize fw-semibold">Quantity</th>
-                        <th class="text-capitalize fw-semibold">Item Subtotal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($cartItems as $item)
-                      <tr>
-                        <td>
-                        <img src="{{ $item->thumbnail }}" width="80" height="80" style="object-fit: cover; border-radius: 8px;">
-
-                        </td>
-                        <td>{{ $item->product_name }}</td>
-                        <td>₱{{ number_format($item->unit_price, 2) }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>₱{{ number_format($item->unit_price * $item->quantity, 2) }}</td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-end mt-3">
-                  <h5 class="fw-semibold">Subtotal: ₱{{ number_format($subtotal, 2) }}</h5>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="col-xl-5 col-xxl-4 ps-0 pe-0">
-            <div
-              class="card bg-primary-subtle border-primary-subtle border-1"
-              style="
-                border-radius: 20px;
-                padding-left: 24px;
-                padding-right: 24px;
-                box-shadow: 0px 0px;
-              "
-            >
-            <!-- Start: Order Summary -->
-              <div class="card-body justify-content-evenly my-4">
-                <div>
-                  <h5
-                    class="fw-bold pb-3"
-                    style="border-bottom: 1px dashed var(--bs-gray-300)"
-                  >
-                    Order Summary&nbsp;
-                  </h5>
-                </div>
-                <div
-                  class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 pb-3"
-                  style="border-bottom: 1px dashed var(--bs-gray-300)"
-                >
-                  <p class="d-xl-flex align-items-xl-center me-4 mb-3">
-                    Delivery Address
+                <!-- Display Main Address -->
+                <div class="col-lg-11 col-xl-10 col-xxl-10">
+                  <p id="selected-address">
+                    {{ $mainAddress->house_no }}, {{ $mainAddress->barangay }},
+                    {{ $mainAddress->municipality_city }}, {{ $mainAddress->region }},
+                    {{ $mainAddress->postal_code }}
                   </p>
-                    <select
-                    name="delivery_address_id"
-                    class="bg-primary-subtle border rounded py-2 px-2 w-100"
-                    required
-                    style="max-width: 100%;"
-                    >
+                </div>
+
+                <!-- Dropdown to Change Address -->
+
+              </div>
+
+              <!-- JavaScript to Update Address Display -->
+              <script>
+                function changeAddress(newAddress) {
+                  document.getElementById('selected-address').innerText = newAddress;
+                }
+              </script>
+
+            </div>
+          </div>
+          <div class="card border-1 mt-sm-4" style="border-radius: 20px; padding-left: 24px; padding-right: 24px;">
+            <div class="card-body justify-content-evenly my-4">
+              <div class="table-responsive">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th class="text-capitalize fw-semibold">Thumbnail</th>
+                      <th class="text-capitalize fw-semibold">Product name</th>
+                      <th class="text-capitalize fw-semibold">Unit Price</th>
+                      <th class="text-capitalize fw-semibold">Quantity</th>
+                      <th class="text-capitalize fw-semibold">Item Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($cartItems as $item)
+            <tr>
+              <td>
+              <img src="{{ $item->thumbnail }}" width="80" height="80"
+                style="object-fit: cover; border-radius: 8px;">
+
+              </td>
+              <td>{{ $item->product_name }}</td>
+              <td>₱{{ number_format($item->unit_price, 2) }}</td>
+              <td>{{ $item->quantity }}</td>
+              <td>₱{{ number_format($item->unit_price * $item->quantity, 2) }}</td>
+            </tr>
+          @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-end mt-3">
+                <h5 class="fw-semibold">Subtotal: ₱{{ number_format($subtotal, 2) }}</h5>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xl-5 col-xxl-4 ps-0 pe-0">
+          <div class="card bg-primary-subtle border-primary-subtle border-1" style="
+                border-radius: 20px;
+                padding-left: 24px;
+                padding-right: 24px;
+                box-shadow: 0px 0px;
+              ">
+            <!-- Start: Order Summary -->
+            <form method="POST" action="{{ route('placeOrder') }}">
+              @csrf
+              <div class="card-body justify-content-evenly my-4">
+
+                <!-- Order Summary Title -->
+                <div>
+                  <h5 class="fw-bold pb-3" style="border-bottom: 1px dashed var(--bs-gray-300)">Order Summary&nbsp;</h5>
+                </div>
+
+                <!-- Delivery Address -->
+                <div class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 pb-3"
+                  style="border-bottom: 1px dashed var(--bs-gray-300)">
+                  <p class="d-xl-flex align-items-xl-center me-4 mb-3">Delivery Address</p>
+                  <select name="shippingAdd" class="bg-primary-subtle border rounded py-2 px-2 w-100" required>
                     <option value="">Select Delivery Address</option>
                     @foreach ($addresses as $address)
-                      <option value="{{ $address->id }}">
-                      {{ $address->house_no }}, {{ $address->barangay }},
-                      {{ $address->municipality_city }}, {{ $address->region }},
-                      {{ $address->postal_code }}
-                      </option>
-                    @endforeach
-                    </select>
-
+            <option
+              value="{{ $address->house_no }}, {{ $address->barangay }}, {{ $address->municipality_city }}, {{ $address->region }}, {{ $address->postal_code }}">
+              {{ $address->house_no }}, {{ $address->barangay }},
+              {{ $address->municipality_city }}, {{ $address->region }},
+              {{ $address->postal_code }}
+            </option>
+          @endforeach
+                  </select>
                 </div>
-                <div
-                  class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 pb-3"
-                  style="border-bottom: 1px dashed var(--bs-gray-300)"
-                >
-                  <p class="d-xl-flex align-items-xl-center me-4 mb-3">
-                    Payment Method
-                  </p>
-                  <select
-                    name="payment_method"
-                    class="bg-primary-subtle border rounded py-2 px-2"
-                    required
-                  >
+
+                <!-- Payment Method -->
+                <div class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 pb-3"
+                  style="border-bottom: 1px dashed var(--bs-gray-300)">
+                  <p class="d-xl-flex align-items-xl-center me-4 mb-3">Payment Method</p>
+                  <select name="paymentMethod" class="bg-primary-subtle border rounded py-2 px-2" required>
                     <option value="">Select Payment method</option>
                     @foreach ($paymentMethods as $method)
-                      <option value="{{ $method->PaymentID }}">{{ $method->paymentMethod }}</option>
-                    @endforeach
+            <option value="{{ $method->paymentMethod }}">{{ $method->paymentMethod }}</option>
+          @endforeach
                   </select>
+                </div>
 
+                <!-- Delivery Date -->
+                <div class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 py-3"
+                  style="border-bottom: 1px dashed var(--bs-gray-300)">
+                  <p class="d-xl-flex align-items-xl-center me-4 mb-3 mb-xl-0 py-xl-2">Select delivery date:</p>
+                  <input class="bg-transparent form-control-sm d-xxl-flex px-3 py-2" id="date" type="date"
+                  name="deliveryDate" min="{{ date('Y-m-d') }}" required />
                 </div>
-                <div
-                  class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 py-3"
-                  style="border-bottom: 1px dashed var(--bs-gray-300)"
-                >
-                  <p
-                    class="d-xl-flex align-items-xl-center me-4 mb-3 mb-xl-0 py-xl-2"
-                  >
-                    Select delivery date:
-                  </p>
-                  <input
-                    class="bg-transparent form-control-sm d-xxl-flex px-3 py-2"
-                    id="date"
-                    type="date"
-                    style="
-                      color: rgb(137, 137, 137);
-                      border-style: solid;
-                      border-color: var(--bs-gray-200);
-                      border-radius: 7px;
-                    "
-                  />
+
+                <!-- Delivery Time -->
+                <div class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 py-3"
+                  style="border-bottom: 1px dashed var(--bs-gray-300)">
+                  <p class="d-xl-flex align-items-xl-center me-4 mb-3 mb-xl-0 py-xl-3">Select delivery Time:</p>
+                  <input class="bg-transparent form-control-sm d-xxl-flex px-3 py-2" id="date-1" type="time"
+                  name="deliveryTime" min="{{ now()->format('H:i') }}" required />
                 </div>
-                <div
-                  class="d-grid d-md-flex justify-content-between align-items-xxl-center mb-0 py-3"
-                  style="border-bottom: 1px dashed var(--bs-gray-300)"
-                >
-                  <p
-                    class="d-xl-flex align-items-xl-center me-4 mb-3 mb-xl-0 py-xl-3"
-                  >
-                    Select delivery Time:
-                  </p>
-                  <input
-                    class="bg-transparent form-control-sm d-xxl-flex px-3 py-2"
-                    id="date-1"
-                    type="time"
-                    style="
-                      color: rgb(137, 137, 137);
-                      border-style: solid;
-                      border-color: var(--bs-gray-200);
-                      border-radius: 7px;
-                    "
-                  />
-                </div>
+
+                <!-- Order Totals -->
                 <div>
-                  <div
-                    class="fw-semibold d-flex justify-content-between mt-3 py-2 pe-0"
-                  >
-                    <p
-                      class="fw-semibold text-black-50 me-3 mb-0"
-                      style="font-size: 14px"
-                    >
-                      Items:
-                    </p>
+                  <div class="fw-semibold d-flex justify-content-between mt-3 py-2 pe-0">
+                    <p class="fw-semibold text-black-50 me-3 mb-0" style="font-size: 14px">Items:</p>
                     <p style="font-size: 14px" class="mb-0"><strong>{{ $totalItems }}</strong></p>
                   </div>
-                  <div
-                    class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0"
-                  >
-                    <p
-                      class="fw-semibold text-black-50 me-3 mb-0"
-                      style="font-size: 14px"
-                    >
-                      Sub Total:
-                    </p>
+                  <div class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0">
+                    <p class="fw-semibold text-black-50 me-3 mb-0" style="font-size: 14px">Sub Total:</p>
                     <p style="font-size: 14px" class="mb-0"><strong>₱{{ number_format($subtotal, 2) }}</strong></p>
                   </div>
-                  <div
-                    class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0"
-                  >
-                    <p
-                      class="fw-semibold text-black-50 me-3 mb-0"
-                      style="font-size: 14px"
-                    >
-                      Shipping
-                    </p>
+                  <div class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0">
+                    <p class="fw-semibold text-black-50 me-3 mb-0" style="font-size: 14px">Shipping</p>
                     <p style="font-size: 14px" class="mb-0"><strong>₱{{ number_format($shippingFee, 2) }}</strong></p>
                   </div>
-                  <div
-                    class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0"
-                  >
-                    <p
-                      class="fw-semibold text-black-50 me-3 mb-0"
-                      style="font-size: 14px"
-                    >
-                      Voucher Discount
+                  <div class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0">
+                    <p class="fw-semibold text-black-50 me-3 mb-0" style="font-size: 14px">Voucher Discount</p>
+                    <p style="font-size: 14px" class="mb-0"><strong>-₱{{ number_format($voucherDiscount, 2) }}</strong>
                     </p>
-                    <p style="font-size: 14px" class="mb-0"><strong>-₱{{ number_format($voucherDiscount, 2) }}</strong></p>
                   </div>
-                  <div
-                    class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0 pt-3"
-                    style="border-top: 1px dashed var(--bs-gray-300)"
-                  >
-                    <p
-                      class="fw-semibold text-black-50 me-3 mb-0"
-                      style="font-size: 14px"
-                    >
-                      Total
-                    </p>
+                  <div class="fw-semibold d-flex justify-content-between py-2 pe-0 mt-0 pt-3"
+                    style="border-top: 1px dashed var(--bs-gray-300)">
+                    <p class="fw-semibold text-black-50 me-3 mb-0" style="font-size: 14px">Total</p>
                     <p style="font-size: 14px" class="mb-0"><strong>₱{{ number_format($total, 2) }}</strong></p>
                   </div>
                 </div>
-                <div
-                  class="fw-bolder d-flex justify-content-between justify-content-xl-end pt-0 mt-3"
-                >
-                  <button
-                    class="btn btn-primary border rounded"
-                    type="button"
-                    style="width: 100%"
-                  >
+                <input type="hidden" name="TotalPrice" value="{{ $total }}">
+                <input type="hidden" name="numItems" value="{{ $totalItems }}">
+                <input type="hidden" name="status" value="Pending">
+                <input type="hidden" name="Name" value="{{ session('user')->name ?? '' }}">
+                <input type="hidden" name="orderedProducts"
+                  value="{{ $cartItems->pluck('product_name')->implode(', ') }}">
+                <input type="hidden" name="userId" value="{{ session('user') ? session('user')->id : 'default_id' }}">
+
+
+                <!-- Submit Button -->
+                <div class="fw-bolder d-flex justify-content-between justify-content-xl-end pt-0 mt-3">
+                  <button class="btn btn-primary border rounded" type="submit" style="width: 100%">
                     Place Order
                   </button>
                 </div>
               </div>
-            </div>
+            </form>
+
+
+
           </div>
         </div>
       </div>
-    </section>
-    <!-- Start: Footer Multi Column -->
-    <footer>
-      <div class="container py-4 py-lg-5">
-        <div class="row justify-content-center">
-          <!-- Start: Sections -->
-          <div
-            class="col-sm-5 col-md-5 col-lg-4 text-center text-lg-start d-flex flex-column item"
-          >
-            <h3 class="fs-6">Sections</h3>
-            <ul class="list-unstyled">
+    </div>
+  </section>
+  <!-- Start: Footer Multi Column -->
+  <footer>
+    <div class="container py-4 py-lg-5">
+      <div class="row justify-content-center">
+        <!-- Start: Sections -->
+        <div class="col-sm-5 col-md-5 col-lg-4 text-center text-lg-start d-flex flex-column item">
+          <h3 class="fs-6">Sections</h3>
+          <ul class="list-unstyled">
             <li><a class="link-dark" href="{{ route('userHome') }}#NewRelease">Featured Products</a></li>
             <li><a class="link-dark" href="{{ route('userHome') }}#AllProducts">Our Products</a></li>
             <li>
               <a class="link-dark" href="/dictionary ">Flower Dictionary</a>
             </li>
-            </ul>
-          </div>
-          <!-- End: Sections -->
-          <div
-            class="col-sm-5 col-md-5 col-lg-4 text-center text-lg-start d-flex flex-column item"
-          >
-            <ul class="list-unstyled">
-              <li><a class="link-dark" href="/faqs ">FAQs</a></li>
-              <li class="text-dark">
-              <a class="link-dark" href="{{  route('userHome') }}#">About Us</a>
-              </li>
-              <li class="text-dark">
-                <a class="link-dark" href="/contactUs ">Contact Us</a>
-              </li>
-            </ul>
-          </div>
-          <!-- Start: Social Icons -->
-          <div
-            class="col-lg-3 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last item social"
-          >
-            <div class="fw-bold d-flex align-items-center mb-2">
-              <span
-                class="bs-icon-sm bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center bs-icon me-2"
-                ><img
-                  class="img-fluid"
-                  src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span
-              ><span>Brand</span>
-            </div>
-            <p class="text-muted copyright">
-              FloraLingo: Where Every Bloom Tells a Story
-            </p>
-          </div>
-          <!-- End: Social Icons -->
+          </ul>
         </div>
-        <hr />
-        <div class="d-flex justify-content-between align-items-center pt-3">
-          <p class="text-muted mb-0">Copyright © 2025 FLORALINGO</p>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                class="bi bi-facebook"
-              >
-                <path
-                  d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"
-                ></path>
-              </svg>
+        <!-- End: Sections -->
+        <div class="col-sm-5 col-md-5 col-lg-4 text-center text-lg-start d-flex flex-column item">
+          <ul class="list-unstyled">
+            <li><a class="link-dark" href="/faqs ">FAQs</a></li>
+            <li class="text-dark">
+              <a class="link-dark" href="{{  route('userHome') }}#">About Us</a>
             </li>
-            <li class="list-inline-item">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                class="bi bi-twitter"
-              >
-                <path
-                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15"
-                ></path>
-              </svg>
-            </li>
-            <li class="list-inline-item">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                class="bi bi-instagram"
-              >
-                <path
-                  d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
-                ></path>
-              </svg>
+            <li class="text-dark">
+              <a class="link-dark" href="/contactUs ">Contact Us</a>
             </li>
           </ul>
         </div>
+        <!-- Start: Social Icons -->
+        <div
+          class="col-lg-3 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last item social">
+          <div class="fw-bold d-flex align-items-center mb-2">
+            <span
+              class="bs-icon-sm bs-icon-rounded bs-icon-semi-white d-flex justify-content-center align-items-center bs-icon me-2"><img
+                class="img-fluid"
+                src="/assets/img/FloraLingo%20Logo.png?h=4dbc432d3ae0beccfe73b2897643447d" /></span><span>Brand</span>
+          </div>
+          <p class="text-muted copyright">
+            FloraLingo: Where Every Bloom Tells a Story
+          </p>
+        </div>
+        <!-- End: Social Icons -->
       </div>
-    </footer>
-    <!-- End: Footer Multi Column -->
-    <div class="modal fade" role="dialog" tabindex="-1" id="change-address">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header px-4">
-            <h4 class="modal-title">Change Address</h4>
-            <button
-              class="btn-close"
-              type="button"
-              aria-label="Close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body px-4">
-            <form>
-              <div class="d-flex mb-1">
-                <input
-                  class="form-control me-2"
-                  type="text"
-                  id="fullName"
-                  placeholder="Full name"
-                /><input
-                  class="form-control"
-                  type="number"
-                  id="phoneNo"
-                  placeholder="Phone Number"
-                />
-              </div>
-              <div class="mb-1">
-                <input
-                  class="form-control mb-1"
-                  type="text"
-                  id="province"
-                  placeholder="Province"
-                /><input
-                  class="form-control mb-1"
-                  type="text"
-                  id="region"
-                  placeholder="Region"
-                /><input
-                  class="form-control mb-0"
-                  type="text"
-                  id="barangay"
-                  placeholder="Barangay"
-                />
-              </div>
-              <div class="d-flex">
-                <input
-                  class="form-control me-2"
-                  type="text"
-                  id="stName"
-                  placeholder="Street name, House no."
-                /><input
-                  class="form-control mb-0"
-                  type="number"
-                  id="postalCode"
-                  placeholder="Postal Code"
-                  style="width: 128px"
-                />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-light" type="button" data-bs-dismiss="modal">
-              Close</button
-            ><button class="btn btn-primary" type="button">Save</button>
-          </div>
+      <hr />
+      <div class="d-flex justify-content-between align-items-center pt-3">
+        <p class="text-muted mb-0">Copyright © 2025 FLORALINGO</p>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
+              class="bi bi-facebook">
+              <path
+                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951">
+              </path>
+            </svg>
+          </li>
+          <li class="list-inline-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
+              class="bi bi-twitter">
+              <path
+                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15">
+              </path>
+            </svg>
+          </li>
+          <li class="list-inline-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
+              class="bi bi-instagram">
+              <path
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334">
+              </path>
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <!-- End: Footer Multi Column -->
+  <div class="modal fade" role="dialog" tabindex="-1" id="change-address">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header px-4">
+          <h4 class="modal-title">Change Address</h4>
+          <button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body px-4">
+          <form>
+            <div class="d-flex mb-1">
+              <input class="form-control me-2" type="text" id="fullName" placeholder="Full name" /><input
+                class="form-control" type="number" id="phoneNo" placeholder="Phone Number" />
+            </div>
+            <div class="mb-1">
+              <input class="form-control mb-1" type="text" id="province" placeholder="Province" /><input
+                class="form-control mb-1" type="text" id="region" placeholder="Region" /><input
+                class="form-control mb-0" type="text" id="barangay" placeholder="Barangay" />
+            </div>
+            <div class="d-flex">
+              <input class="form-control me-2" type="text" id="stName" placeholder="Street name, House no." /><input
+                class="form-control mb-0" type="number" id="postalCode" placeholder="Postal Code"
+                style="width: 128px" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-light" type="button" data-bs-dismiss="modal">
+            Close</button><button class="btn btn-primary" type="button">Save</button>
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/script.min.js?h=fffa086275a3e9d088e0d86eca965e31"></script>
-  </body>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/script.min.js?h=fffa086275a3e9d088e0d86eca965e31"></script>
+  @if (session('success'))
+    <div class="modal fade" id="cartSuccessModal" tabindex="-1" aria-labelledby="cartSuccessModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartSuccessModalLabel">Success</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ session('success') }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <script></script>
+    <script>
+    // Automatically show the modal when the page loads if there is a success message
+    var successModal = new bootstrap.Modal(document.getElementById('cartSuccessModal'), {
+      keyboard: false
+    });
+    successModal.show();
+    // Auto-close after 3 seconds
+    setTimeout(() => {
+      successModal.hide();
+    }, 2000);
+    </script>
+  @endif
+
+</body>
+
 </html>
